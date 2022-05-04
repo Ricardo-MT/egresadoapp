@@ -1,0 +1,33 @@
+name: FIREBASE
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v2
+      - name: Build Flutter Web
+        run:
+          flutter config --enable-web &&
+          flutter pub get &&
+          flutter build web --release --web-renderer canvaskit
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EGRESADOAPP }}'
+          projectId: egresadoapp
+          channelId: live
+
+      
+        
+      # - name: Install npm
+      #   run:
+      #     sudo npm install -g firebase-tools
+
+      # - name: Firebase Deploy
+      #   run:
+      #     firebase deploy --token ${{secrets.FIREBASE_TOKEN}}
