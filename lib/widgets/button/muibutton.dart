@@ -12,7 +12,7 @@ class MuiButton extends StatelessWidget {
       {Key? key,
       required this.onPressed,
       required this.text,
-      this.fontSize = 18,
+      this.fontSize = 16,
       this.variant = MuiButtonVariant.CONTAINED})
       : super(key: key);
 

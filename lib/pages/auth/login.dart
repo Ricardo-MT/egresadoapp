@@ -28,7 +28,7 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset(
                     "assets/images/egresadologopng.png",
-                    height: 140,
+                    height: 120,
                   ),
                 )),
           )),
@@ -45,16 +45,15 @@ class LoginPage extends StatelessWidget {
                     width: 320,
                     child: Column(
                       children: [
-                        spacerXL,
+                        spacerS,
                         Text(
                           "BIENVENID@",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 40,
+                              fontSize: 35,
                               color: MuiPalette.FONT,
                               fontWeight: FontWeight.bold),
                         ),
-                        spacerXL,
                         spacerXL,
                         MuiInput(
                           label: "EMAIL",
@@ -66,7 +65,7 @@ class LoginPage extends StatelessWidget {
                           },
                           inputType: TextInputType.text,
                         ),
-                        spacerXL,
+                        spacerS,
                         MuiInput(
                           label: "CONTRASEÑA",
                           onChanged: (p0) {
@@ -77,7 +76,7 @@ class LoginPage extends StatelessWidget {
                           },
                           inputType: TextInputType.text,
                         ),
-                        spacerXL,
+                        spacerS,
                         MuiButton(
                           onPressed: () async {
                             // handleLogin(context, userProvider);
@@ -93,7 +92,7 @@ class LoginPage extends StatelessWidget {
                           text: "¿Aún no tienes cuenta?",
                           variant: MuiButtonVariant.LINK,
                         ),
-                        spacerXL,
+                        spacerS,
                       ],
                     ),
                   ),

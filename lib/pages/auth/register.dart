@@ -29,16 +29,15 @@ class RegisterPage extends StatelessWidget {
                     width: 320,
                     child: Column(
                       children: [
-                        spacerXL,
+                        spacerS,
                         Text(
                           "ÚNETE A LA COMUNIDAD",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 40,
+                              fontSize: 35,
                               color: MuiPalette.FONT,
                               fontWeight: FontWeight.bold),
                         ),
-                        spacerXL,
                         spacerXL,
                         MuiInput(
                           label: "EMAIL",
@@ -50,7 +49,7 @@ class RegisterPage extends StatelessWidget {
                           },
                           inputType: TextInputType.text,
                         ),
-                        spacerXL,
+                        spacerS,
                         MuiInput(
                           label: "CONTRASEÑA",
                           onChanged: (p0) {
@@ -61,7 +60,7 @@ class RegisterPage extends StatelessWidget {
                           },
                           inputType: TextInputType.text,
                         ),
-                        spacerXL,
+                        spacerS,
                         MuiInput(
                           label: "CONFIRMA TU CONTRASEÑA",
                           onChanged: (p0) {
@@ -88,7 +87,7 @@ class RegisterPage extends StatelessWidget {
                           text: "¿Ya tienes cuenta?",
                           variant: MuiButtonVariant.LINK,
                         ),
-                        spacerXL,
+                        spacerS,
                       ],
                     ),
                   ),
@@ -109,7 +108,7 @@ class RegisterPage extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Image.asset(
                     "assets/images/egresadologopng.png",
-                    height: 140,
+                    height: 120,
                   ),
                 )),
           )),
