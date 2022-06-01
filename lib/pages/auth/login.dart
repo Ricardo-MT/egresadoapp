@@ -86,6 +86,8 @@ class LoginPage extends StatelessWidget {
                             MuiButton(
                               onPressed: () async {
                                 // handleLogin(context, userProvider);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.home);
                               },
                               text: "ENTRAR",
                               variant: MuiButtonVariant.CONTAINED,

@@ -81,6 +81,8 @@ class RegisterPage extends StatelessWidget {
                             MuiButton(
                               onPressed: () async {
                                 // handleLogin(context, userProvider);
+                                Navigator.of(context)
+                                    .pushReplacementNamed(Routes.home);
                               },
                               text: "REGÍSTRATE",
                               variant: MuiButtonVariant.CONTAINED,
