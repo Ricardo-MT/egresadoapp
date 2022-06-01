@@ -19,6 +19,11 @@ class HomePage extends StatelessWidget {
                 child: const Text("MI PERFIL")),
             TextButton(
                 onPressed: () {
+                  Navigator.of(context).pushNamed(Routes.users);
+                },
+                child: const Text("USUARIOS")),
+            TextButton(
+                onPressed: () {
                   Navigator.of(context).pushNamed(Routes.offers);
                 },
                 child: const Text("OFERTAS")),

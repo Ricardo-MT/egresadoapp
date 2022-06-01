@@ -19,6 +19,7 @@ import 'package:egresadoapp/pages/politica/privacy.dart';
 import 'package:egresadoapp/pages/politica/terms.dart';
 import 'package:egresadoapp/pages/usuario/usuario_detalle.dart';
 import 'package:egresadoapp/pages/usuario/usuario_editar.dart';
+import 'package:egresadoapp/pages/usuario/usuarios.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
@@ -57,6 +58,7 @@ class Routes {
   static String collaborationDetail = "/ver_colaboracion:id";
 
   // USUARIO
+  static String users = "/users";
   static String userProfile = "/profile:id";
   static String userProfileEdit = "/profileEdit:id";
 
@@ -126,6 +128,8 @@ class MuiRouter {
         transitionType: _getTransitionType());
 
     // USUARIO
+    router.define(Routes.users,
+        handler: MuiHandlers._users, transitionType: _getTransitionType());
     router.define(Routes.userProfile,
         handler: MuiHandlers._userProfile,
         transitionType: _getTransitionType());
@@ -221,6 +225,9 @@ class MuiHandlers {
   }));
 
   // USUARIO
+  static final Handler _users = Handler(handlerFunc: ((context, parameters) {
+    return const UsuariosPage();
+  }));
   static final Handler _userProfile =
       Handler(handlerFunc: ((context, parameters) {
     return const UsuarioDetalle();
