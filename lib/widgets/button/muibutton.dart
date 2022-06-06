@@ -29,6 +29,10 @@ class MuiButton extends StatelessWidget {
         style = link;
         inset = _minimalPadding;
         break;
+      case MuiButtonVariant.LIGHT_LINK:
+        style = light_link;
+        inset = _minimalPadding;
+        break;
       default:
         style = contained;
         break;
@@ -50,10 +54,12 @@ class MuiButton extends StatelessWidget {
 enum MuiButtonVariant {
   CONTAINED,
   LINK,
+  LIGHT_LINK,
 }
 
 final contained = ContainedButtonStyles();
 final link = LinkButtonStyles();
+final light_link = LightLinkButtonStyles();
 
 const _padding = EdgeInsets.symmetric(horizontal: 32, vertical: 16);
 const _minimalPadding = EdgeInsets.symmetric(horizontal: 2, vertical: 2);

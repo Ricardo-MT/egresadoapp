@@ -84,7 +84,7 @@ class _MuiInputState extends State<MuiInput> {
               fontSize: 14,
               // letterSpacing: 1.2,
               fontWeight: FontWeight.bold,
-              color: MuiPalette.FONT),
+              color: MuiPalette.WHITE),
         ),
         spacerS,
         TextFormField(

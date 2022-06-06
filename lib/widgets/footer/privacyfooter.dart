@@ -9,6 +9,7 @@ class PrivacyFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
       children: [
         MuiButton(
             onPressed: () {
@@ -16,21 +17,21 @@ class PrivacyFooter extends StatelessWidget {
             },
             text: "Términos y condiciones",
             fontSize: 14,
-            variant: MuiButtonVariant.LINK),
+            variant: MuiButtonVariant.LIGHT_LINK),
         MuiButton(
             onPressed: () {
               Navigator.of(context).pushNamed(Routes.privacy);
             },
             text: "Política de privacidad",
             fontSize: 14,
-            variant: MuiButtonVariant.LINK),
+            variant: MuiButtonVariant.LIGHT_LINK),
         MuiButton(
             onPressed: () {
               Navigator.of(context).pushNamed(Routes.cookies);
             },
             text: "Cookies",
             fontSize: 14,
-            variant: MuiButtonVariant.LINK),
+            variant: MuiButtonVariant.LIGHT_LINK),
       ],
     );
   }

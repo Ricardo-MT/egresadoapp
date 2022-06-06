@@ -30,3 +30,12 @@ class LinkButtonStyles extends MuiButtonStyles {
   ButtonStyle buttonStyle(BuildContext context) => ElevatedButton.styleFrom(
       primary: Colors.transparent, onPrimary: MuiPalette.FONT);
 }
+
+class LightLinkButtonStyles extends MuiButtonStyles {
+  @override
+  TextStyle textStyle(BuildContext context) =>
+      TextStyle(fontWeight: FontWeight.bold, color: MuiPalette.WHITE);
+  @override
+  ButtonStyle buttonStyle(BuildContext context) => ElevatedButton.styleFrom(
+      primary: Colors.transparent, onPrimary: MuiPalette.WHITE);
+}
