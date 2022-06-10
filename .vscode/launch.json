@@ -1,12 +1,21 @@
 {
     "version": "0.2.0",
     "configurations": [
-        
         {
             "program": "lib/main.dart",
-           "name": "Flutter (web)",
-           "request": "launch",
-           "type": "dart",
-           "args": ["-d", "chrome","--web-port", "8000", "--web-renderer", "canvaskit"],
-       }
-   ]}
+            "name": "Flutter (web)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "8000",
+                "--web-renderer",
+                "canvaskit",
+                "--dart-define",
+                "target=http://localhost:5000"
+            ],
+        }
+    ]
+}

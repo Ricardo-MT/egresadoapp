@@ -10,8 +10,9 @@ final cardDecoration = ShapeDecoration(shape: semiRoundedShape, shadows: const [
       offset: Offset(0, 4))
 ]);
 
-final cardPadding = EdgeInsets.all(Dimensions.cardLargeSpacing)
-    .copyWith(right: 2, left: Dimensions.cardLargeSpacing * 1.1, bottom: 2);
+final cardPadding = EdgeInsets.all(Dimensions.cardSmallSpacing).copyWith(
+    top: Dimensions.cardSmallSpacing * 2,
+    left: Dimensions.cardSmallSpacing * 2);
 
 const centerAlignment = Alignment.center;
 const rightAlignment = Alignment.centerRight;

@@ -20,3 +20,11 @@ formatUnixDateToString(int timestamp) {
 
   return "$d/$m/$y";
 }
+
+String toCapitalCase(String s) {
+  return s[0].toUpperCase() + s.substring(1).toLowerCase();
+}
+
+String toCapitalCaseSentence(String s) {
+  return s.split(" ").map((e) => toCapitalCase(e)).join(" ");
+}

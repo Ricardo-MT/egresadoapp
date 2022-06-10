@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/dimensions.dart';
 import '../../../utils/palette.dart';
 
 abstract class MuiButtonStyles {
@@ -9,8 +8,8 @@ abstract class MuiButtonStyles {
   ButtonStyle buttonStyle(BuildContext context);
 }
 
-final semiRoundedShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(Dimensions.borderRadiusControllers));
+final semiRoundedShape =
+    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
 const stadiumShape = StadiumBorder();
 
 class ContainedButtonStyles extends MuiButtonStyles {
