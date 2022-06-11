@@ -1,3 +1,11 @@
+import 'package:egresadoapp/api/endpoints/api_colaboracion.dart';
+import 'package:egresadoapp/api/endpoints/api_eventos.dart';
+import 'package:egresadoapp/api/endpoints/api_ofertas.dart';
+import 'package:egresadoapp/api/endpoints/api_usuario.dart';
+import 'package:egresadoapp/api/models/colaboracion.dart';
+import 'package:egresadoapp/api/models/evento.dart';
+import 'package:egresadoapp/api/models/oferta.dart';
+import 'package:egresadoapp/api/models/user.dart';
 import 'package:egresadoapp/pages/auth/authcheck.dart';
 import 'package:egresadoapp/pages/auth/login.dart';
 import 'package:egresadoapp/pages/auth/register.dart';
@@ -20,51 +28,13 @@ import 'package:egresadoapp/pages/politica/terms.dart';
 import 'package:egresadoapp/pages/usuario/usuario_detalle.dart';
 import 'package:egresadoapp/pages/usuario/usuario_editar.dart';
 import 'package:egresadoapp/pages/usuario/usuarios.dart';
+import 'package:egresadoapp/router/routes.dart';
+import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
+import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
 final _router = FluroRouter();
-
-class Routes {
-  // ACUERDOS LEGALES Y POLÍTICA DE USO
-  static String terms = "/terminos";
-  static String privacy = "/privacidad";
-  static String cookies = "/cookies";
-
-  // AUTENTICACIÓN
-  static String authCheck = "/";
-  static String login = "/login";
-  static String register = "/registro";
-
-  // HOME
-  static String home = "/inicio";
-
-  // OFERTAS LABORALES
-  static String offers = "/ofertas";
-  static String offerCreate = "/crear_oferta";
-  static String offerEdit = "/editar_oferta";
-  static String offerDetail = "/ver_oferta:id";
-
-  // EVENTOS
-  static String events = "/eventos";
-  static String eventCreate = "/crear_evento";
-  static String eventEdit = "/editar_evento";
-  static String eventDetail = "/ver_evento:id";
-
-  // COLABORACIONES
-  static String collaboration = "/colaboraciones";
-  static String collaborationCreate = "/crear_colaboracion";
-  static String collaborationEdit = "/editar_colaboracion";
-  static String collaborationDetail = "/ver_colaboracion:id";
-
-  // USUARIO
-  static String users = "/users";
-  static String userProfile = "/profile:id";
-  static String userProfileEdit = "/profileEdit:id";
-
-  // ACERCA DE
-  static String about = "/conocenos";
-}
 
 class MuiRouter {
   static final FluroRouter router = _router;
@@ -140,6 +110,8 @@ class MuiRouter {
     // ACERCA DE
     router.define(Routes.about,
         handler: MuiHandlers._about, transitionType: _getTransitionType());
+
+    router.notFoundHandler = MuiHandlers.notFound;
   }
 }
 
@@ -186,7 +158,21 @@ class MuiHandlers {
   }));
   static final Handler _offerDetail =
       Handler(handlerFunc: ((context, parameters) {
-    return const OfertaDetalle();
+    String id = parameters["id"]!.first;
+
+    return FutureBuilder(
+        future: ApiOfertas.fetchById(id),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Loading();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          return OfertaDetalle(
+            oferta: snapshot.data as Oferta,
+          );
+        }));
   }));
 
   // EVENTOS
@@ -203,7 +189,21 @@ class MuiHandlers {
   }));
   static final Handler _eventDetail =
       Handler(handlerFunc: ((context, parameters) {
-    return const EventoDetalle();
+    String id = parameters["id"]!.first;
+
+    return FutureBuilder(
+        future: ApiEventos.fetchById(id),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Loading();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          return EventoDetalle(
+            evento: snapshot.data as Evento,
+          );
+        }));
   }));
 
   // COLABORACIONES
@@ -221,7 +221,21 @@ class MuiHandlers {
   }));
   static final Handler _collaborationDetail =
       Handler(handlerFunc: ((context, parameters) {
-    return const ColaboracionDetalle();
+    String id = parameters["id"]!.first;
+
+    return FutureBuilder(
+        future: ApiColaboracion.fetchById(id),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Loading();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          return ColaboracionDetalle(
+            colaboracion: snapshot.data as Colaboracion,
+          );
+        }));
   }));
 
   // USUARIO
@@ -230,7 +244,28 @@ class MuiHandlers {
   }));
   static final Handler _userProfile =
       Handler(handlerFunc: ((context, parameters) {
-    return const UsuarioDetalle();
+    String id = parameters["id"]!.first;
+
+    return FutureBuilder(
+        future: ApiUsuario.fetchById(id),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Loading();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          try {
+            if (!(snapshot.data as User).publico) {
+              return const Text("Este usuario no es público");
+            }
+          } catch (e) {
+            return const MuiErrorWidget();
+          }
+          return UsuarioDetalle(
+            usuario: snapshot.data as User,
+          );
+        }));
   }));
   static final Handler _userProfileEdit =
       Handler(handlerFunc: ((context, parameters) {
@@ -241,8 +276,13 @@ class MuiHandlers {
   static final Handler _about = Handler(handlerFunc: ((context, parameters) {
     return Container();
   }));
+
+  // NOT FOUND
+  static final Handler notFound = Handler(handlerFunc: ((context, parameters) {
+    return const MuiErrorWidget();
+  }));
 }
 
 TransitionType _getTransitionType() {
-  return TransitionType.none;
+  return TransitionType.fadeIn;
 }

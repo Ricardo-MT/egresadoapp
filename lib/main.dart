@@ -3,6 +3,7 @@ import 'package:egresadoapp/providers/eventos_provider.dart';
 import 'package:egresadoapp/providers/ofertas_provider.dart';
 import 'package:egresadoapp/providers/usuario_provider.dart';
 import 'package:egresadoapp/router/router.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,9 +24,14 @@ class MyProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     precacheImage(const AssetImage("assets/images/login.png"), context);
     precacheImage(const AssetImage("assets/images/register.png"), context);
+
     precacheImage(const AssetImage("assets/images/leader.png"), context);
     precacheImage(const AssetImage("assets/images/people.png"), context);
     precacheImage(const AssetImage("assets/images/team.png"), context);
+
+    precacheImage(const AssetImage("assets/images/cookies.png"), context);
+    precacheImage(const AssetImage("assets/images/privacidad.png"), context);
+    precacheImage(const AssetImage("assets/images/terminos.png"), context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UsuariosProvider()),

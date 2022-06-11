@@ -27,7 +27,7 @@ extension RolExtension on Rol {
 
 String getLabelByRol(String rol) {
   if (rol == Rol.egresado.value) {
-    return "Egresado";
+    return "Egresad@";
   }
   if (rol == Rol.colaborador.value) {
     return "Colaborador";

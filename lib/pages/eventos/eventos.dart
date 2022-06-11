@@ -2,6 +2,7 @@ import 'package:egresadoapp/api/endpoints/api_eventos.dart';
 import 'package:egresadoapp/api/models/evento.dart';
 import 'package:egresadoapp/pages/eventos/eventos_filter.dart';
 import 'package:egresadoapp/providers/eventos_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
@@ -86,6 +87,11 @@ class _EventosPageState extends State<EventosPage> {
                               Evento evento = items[index];
                               return MuiDefaultCard(
                                   entidad: DefaultCardModel(
+                                      onPress: () {
+                                        Navigator.of(context).pushNamed(
+                                            NavigatorRoutes.eventDetail(
+                                                evento.id));
+                                      },
                                       autor: evento.autor.nombre,
                                       descripcion: evento.descripcion,
                                       titulo: evento.titulo,

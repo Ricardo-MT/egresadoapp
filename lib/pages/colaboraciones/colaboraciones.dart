@@ -2,6 +2,7 @@ import 'package:egresadoapp/api/endpoints/api_colaboracion.dart';
 import 'package:egresadoapp/api/models/colaboracion.dart';
 import 'package:egresadoapp/pages/colaboraciones/colaboraciones_filter.dart';
 import 'package:egresadoapp/providers/colaboraciones_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
@@ -87,14 +88,19 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                     return SliverLayoutBody(
                         gridGenerator: (items) =>
                             List.generate(items.length, (index) {
-                              Colaboracion evento = items[index];
+                              Colaboracion colaboracion = items[index];
                               return MuiDefaultCard(
                                   entidad: DefaultCardModel(
-                                      autor: evento.autor.nombre,
-                                      descripcion: evento.descripcion,
-                                      titulo: evento.titulo,
+                                      onPress: () {
+                                        Navigator.of(context).pushNamed(
+                                            NavigatorRoutes.collaborationDetail(
+                                                colaboracion.id));
+                                      },
+                                      autor: colaboracion.autor.nombre,
+                                      descripcion: colaboracion.descripcion,
+                                      titulo: colaboracion.titulo,
                                       fecha: formatUnixDateToString(
-                                          evento.fechaPublicacion)));
+                                          colaboracion.fechaPublicacion)));
                             }),
                         future: ApiColaboracion.fetchColaboraciones(
                             searchText: provider.getSearch(),

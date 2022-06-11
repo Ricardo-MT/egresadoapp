@@ -26,6 +26,11 @@ class ApiOfertas {
     return ofertas;
   }
 
+  static Future<Oferta> fetchById(String id) async {
+    dynamic res = await Api.GET_REQUEST(Api.OFERTAS + "/$id");
+    return Oferta.fromJson(res["oferta"]);
+  }
+
   static Future<User> edit(User user) async {
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
 

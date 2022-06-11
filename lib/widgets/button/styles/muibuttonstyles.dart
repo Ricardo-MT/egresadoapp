@@ -9,7 +9,7 @@ abstract class MuiButtonStyles {
 }
 
 final semiRoundedShape =
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
+    RoundedRectangleBorder(borderRadius: BorderRadius.circular(6));
 const stadiumShape = StadiumBorder();
 
 class ContainedButtonStyles extends MuiButtonStyles {

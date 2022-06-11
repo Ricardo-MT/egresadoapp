@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:egresadoapp/router/routes.dart';
 import 'package:flutter/material.dart';
 
-import '../../router/router.dart';
 import '../../utils/palette.dart';
 import '../../widgets/button/muibutton.dart';
 import '../../widgets/footer/privacyfooter.dart';

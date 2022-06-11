@@ -2,6 +2,7 @@ import 'package:egresadoapp/api/endpoints/api_ofertas.dart';
 import 'package:egresadoapp/api/models/oferta.dart';
 import 'package:egresadoapp/pages/ofertas/ofertas_filter.dart';
 import 'package:egresadoapp/providers/ofertas_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
@@ -86,6 +87,11 @@ class _OfertasPageState extends State<OfertasPage> {
                               Oferta oferta = items[index];
                               return MuiDefaultCard(
                                   entidad: DefaultCardModel(
+                                      onPress: () {
+                                        Navigator.of(context).pushNamed(
+                                            NavigatorRoutes.offerDetail(
+                                                oferta.id));
+                                      },
                                       autor: oferta.autor.nombre,
                                       descripcion: oferta.descripcion,
                                       titulo: oferta.titulo,

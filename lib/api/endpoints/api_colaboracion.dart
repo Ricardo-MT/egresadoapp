@@ -28,6 +28,11 @@ class ApiColaboracion {
     return colaboraciones;
   }
 
+  static Future<Colaboracion> fetchById(String id) async {
+    dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/$id");
+    return Colaboracion.fromJson(res["colaboracion"]);
+  }
+
   static Future<User> edit(User user) async {
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
 

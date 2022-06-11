@@ -28,6 +28,11 @@ class ApiEventos {
     return eventos;
   }
 
+  static Future<Evento> fetchById(String id) async {
+    dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/$id");
+    return Evento.fromJson(res["evento"]);
+  }
+
   static Future<User> edit(User user) async {
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
 

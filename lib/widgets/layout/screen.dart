@@ -1,5 +1,6 @@
 import 'package:egresadoapp/widgets/filters/filter_model.dart';
 import 'package:egresadoapp/widgets/header/app_header.dart';
+import 'package:egresadoapp/widgets/layout/navigation_drawer.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,13 @@ class _MuiScreenState extends State<MuiScreen> {
     return Scaffold(
       key: widget.filter?.scaffoldKey,
       drawer: widget.filter?.child,
+      endDrawerEnableOpenDragGesture: false,
+      endDrawer: const NavigationDrawer(),
       appBar: AppBar(
         automaticallyImplyLeading: !kIsWeb,
         title: const MuiAppHeader(),
-        actions: const [spacerZero],
+        actions:
+            MediaQuery.of(context).size.width < 700 ? null : const [spacerZero],
       ),
       body: widget.child,
     );

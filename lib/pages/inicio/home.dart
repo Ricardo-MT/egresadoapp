@@ -4,15 +4,17 @@ import 'package:egresadoapp/api/endpoints/api_ofertas.dart';
 import 'package:egresadoapp/api/models/colaboracion.dart';
 import 'package:egresadoapp/api/models/evento.dart';
 import 'package:egresadoapp/api/models/oferta.dart';
-import 'package:egresadoapp/router/router.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/debouncer.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/carrousel/landing_carrousel.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/footer/privacyfooter.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
+import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:egresadoapp/widgets/logo/logo.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
@@ -61,15 +63,19 @@ class _HomePageState extends State<HomePage> {
                 },
                 controller: controller,
                 children: const [
-                  CarrouselLanding(
-                      img: "assets/images/leader.png",
-                      text: "Descubre personas con habilidades locas"),
+                  FadeInWrapper(
+                    index: 1,
+                    child: CarrouselLanding(
+                        img: "assets/images/leader.png",
+                        text: "Conecta con otros profesionales del sector"),
+                  ),
                   CarrouselLanding(
                       img: "assets/images/team.png",
-                      text: "Descubre personas con habilidades locas"),
+                      text: "Asiste a eventos de interés de la comunidad"),
                   CarrouselLanding(
                       img: "assets/images/people.png",
-                      text: "Descubre personas con habilidades locas"),
+                      text:
+                          "Consulta ofertas de trabajo, colaboraciones, y mucho más ..."),
                 ],
               ),
               Positioned(
@@ -90,6 +96,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 spacerXL,
+                spacerXL,
                 Center(
                   child: Text("Entérate de qué se cuece",
                       textAlign: TextAlign.center,
@@ -99,11 +106,12 @@ class _HomePageState extends State<HomePage> {
                           color: MuiPalette.BROWN)),
                 ),
                 spacerXL,
+                spacerXL,
                 FutureBuilder(
                     future: ApiOfertas.fetchOfertas(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return spacerM;
+                        return const Loading();
                       }
                       if (snapshot.hasError) {
                         return const MuiErrorWidget();
@@ -122,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                                       e.fechaPublicacion)))
                               .toList());
                     })),
+                spacerXL,
                 spacerXL,
                 FutureBuilder(
                     future: ApiEventos.fetchEventos(),
@@ -145,6 +154,7 @@ class _HomePageState extends State<HomePage> {
                                   fecha: formatUnixDateToString(e.fecha)))
                               .toList());
                     })),
+                spacerXL,
                 spacerXL,
                 FutureBuilder(
                     future: ApiColaboracion.fetchColaboraciones(),
@@ -171,6 +181,7 @@ class _HomePageState extends State<HomePage> {
                               .toList());
                     })),
                 spacerXL,
+                spacerXL,
                 Container(
                   width: double.infinity,
                   color: MuiPalette.BROWN,
@@ -179,14 +190,13 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Logo(
-                        height: 30,
+                        height: 50,
                       ),
                       spacerS,
                       const PrivacyFooter(),
                     ],
                   ),
                 ),
-                spacerM,
               ],
             ),
           )
@@ -230,16 +240,22 @@ class _CarrouselIndicatorState extends State<CarrouselIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        AnimatedCircle(marked: page == 0),
-        AnimatedCircle(marked: page == 1),
-        AnimatedCircle(marked: page == 2),
-      ],
+    return SizedBox(
+      height: _bigSize,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedCircle(marked: page == 0),
+          AnimatedCircle(marked: page == 1),
+          AnimatedCircle(marked: page == 2),
+        ],
+      ),
     );
   }
 }
+
+const _smallSize = 12.0;
+const _bigSize = 18.0;
 
 class AnimatedCircle extends StatelessWidget {
   bool marked;
@@ -247,14 +263,15 @@ class AnimatedCircle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double size = marked ? _bigSize : _smallSize;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 400),
+      curve: Curves.ease,
       decoration: BoxDecoration(
-          color: marked ? MuiPalette.BROWN : MuiPalette.BACKGROUND,
-          borderRadius: BorderRadius.circular(8)),
+          color: MuiPalette.BROWN, borderRadius: BorderRadius.circular(8)),
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      width: 16,
-      height: 16,
+      width: size,
+      height: size,
     );
   }
 }

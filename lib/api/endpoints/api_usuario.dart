@@ -25,6 +25,11 @@ class ApiUsuario {
     return usuarios;
   }
 
+  static Future<User> fetchById(String id) async {
+    dynamic res = await Api.GET_REQUEST(Api.USUARIOS + "/$id");
+    return User.fromJson(res["usuario"]);
+  }
+
   static Future<User> edit(User user) async {
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
 

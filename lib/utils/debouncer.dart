@@ -17,4 +17,4 @@ class Debouncer {
 }
 
 final searchDebouncer = Debouncer();
-final automaticScrollerDebouncer = Debouncer(milliseconds: 3000);
+final automaticScrollerDebouncer = Debouncer(milliseconds: 5000);

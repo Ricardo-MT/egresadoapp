@@ -1,11 +1,11 @@
 import 'dart:math';
 
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/footer/privacyfooter.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 
-import '../../router/router.dart';
 import '../../widgets/button/muibutton.dart';
 import '../../widgets/input/muiinput.dart';
 

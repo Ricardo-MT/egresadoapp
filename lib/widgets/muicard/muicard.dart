@@ -7,22 +7,18 @@ import 'package:flutter/material.dart';
 
 class MuiCard extends StatelessWidget {
   final Widget child;
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
   final VoidCallback? onPress;
   const MuiCard(
-      {Key? key,
-      required this.child,
-      required this.height,
-      this.onPress,
-      required this.width})
+      {Key? key, required this.child, this.height, this.onPress, this.width})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      elevation: 1,
+      elevation: 4,
       shadowColor: Colors.black,
       shape: semiRoundedShape,
       clipBehavior: Clip.hardEdge,
@@ -57,10 +53,7 @@ class MuiDefaultCard extends StatelessWidget {
               entidad.titulo,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: MuiPalette.BROWN,
-                  fontWeight: FontWeight.bold),
+              style: defaultCardTitleStyle,
             ),
             spacerS,
             Expanded(
@@ -119,3 +112,6 @@ class DefaultCardModel {
       required this.titulo,
       this.onPress});
 }
+
+final defaultCardTitleStyle = TextStyle(
+    fontSize: 18, color: MuiPalette.BROWN, fontWeight: FontWeight.bold);

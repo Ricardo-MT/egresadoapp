@@ -11,7 +11,7 @@ class CarrouselLanding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover)),
+          image: DecorationImage(image: AssetImage(img), fit: BoxFit.contain)),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -21,11 +21,11 @@ class CarrouselLanding extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 40),
             child: Container(
               color: MuiPalette.BROWN,
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 30),
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: MuiPalette.WHITE),
               ),

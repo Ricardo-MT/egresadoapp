@@ -1,3 +1,4 @@
+import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/palette.dart';
@@ -144,3 +145,40 @@ class _MuiInputState extends State<MuiInput> {
     );
   }
 }
+
+class MuiLabeledText extends StatelessWidget {
+  final String label;
+  final String text;
+  final Widget? child;
+  const MuiLabeledText(
+      {Key? key, required this.label, required this.text, this.child})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: labelStyles,
+        ),
+        child == null
+            ? SelectableText(text, style: inputFormFieldStyles)
+            : child!
+      ],
+    );
+  }
+}
+
+final labelStyles = TextStyle(
+    fontSize: Dimensions.labelFontSize + 2,
+    letterSpacing: 1.1,
+    fontWeight: FontWeight.bold,
+    color: MuiPalette.BROWN);
+
+final inputFormFieldStyles = TextStyle(
+    color: MuiPalette.BLACK,
+    fontSize: Dimensions.labelFontSize + 2,
+    fontWeight: FontWeight.normal);

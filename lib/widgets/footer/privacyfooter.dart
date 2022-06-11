@@ -1,4 +1,4 @@
-import 'package:egresadoapp/router/router.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:flutter/material.dart';
 

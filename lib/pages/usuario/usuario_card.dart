@@ -1,4 +1,5 @@
 import 'package:egresadoapp/api/models/user.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/decorations.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
@@ -13,7 +14,10 @@ class UsuarioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MuiCard(
-      onPress: () {},
+      onPress: () {
+        Navigator.of(context)
+            .pushNamed(NavigatorRoutes.userProfile(usuario.id));
+      },
       width: userCardWidth,
       height: userCardHeight,
       child: Row(
@@ -29,9 +33,9 @@ class UsuarioCard extends StatelessWidget {
                 usuario.nombre,
                 style: firstCellStyles,
               ),
-              Text(
-                getLabelByEstado(usuario.estado),
-                style: _rolStyles,
+              Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: EstadoTag(estado: usuario.estado),
               ),
               Tupla(
                 icon: Icons.email_outlined,
