@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Egresad@',
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.users,
+      initialRoute: Routes.home,
       onGenerateRoute: MuiRouter.router.generator,
       theme: ThemeData(
           textTheme: GoogleFonts.notoSansTextTheme(),
