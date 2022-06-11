@@ -20,28 +20,11 @@ class OutLinedInputStyles extends MuiInputStyles {
         fillColor: MuiPalette.GREY,
         hoverColor: MuiPalette.GREY,
         focusedBorder: OutlineInputBorder(
-            // borderRadius:
-            //     BorderRadius.circular(Dimensions.borderRadiusControllers),
             borderSide:
                 BorderSide(color: color, width: Dimensions.borderWidth)),
         enabledBorder: OutlineInputBorder(
-            // borderRadius:
-            //     BorderRadius.circular(Dimensions.borderRadiusControllers),
             borderSide: BorderSide(
                 color: MuiPalette.FONT, width: Dimensions.borderWidth)),
-        // border: OutlineInputBorder(
-        //     borderRadius:
-        //         BorderRadius.circular(Dimensions.borderRadiusControllers),
-        //     borderSide:
-        //         BorderSide(color: color, width: Dimensions.borderWidth)),
-        // hintStyle: TextStyle(color: MuiPalette.DARK_BLUE),
-        // suffixIcon: IconButton(
-        // icon: Icon(
-        //   Icons.remove_red_eye,
-        //   color: color,
-        // ),
-        //   onPressed: () {},
-        // ),
         labelStyle: TextStyle(color: color, fontWeight: FontWeight.bold));
   }
 }

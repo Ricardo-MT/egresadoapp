@@ -78,51 +78,16 @@ class Api {
     return res;
   }
 
-  static dynamic MULTIPART_REQUEST(String url,
-      {Map<String, dynamic>? params,
-      List<http.MultipartFile>? files,
-      String method = "POST"}) async {
-    Uri parsedUrl = Uri.parse(url);
-    if (params != null) {
-      parsedUrl = parsedUrl.replace(queryParameters: params);
-    }
-
-    http.MultipartRequest request = http.MultipartRequest(method, parsedUrl);
-
-    if (files != null && files.isNotEmpty) {
-      request.files.addAll(files);
-    }
-    final sent = await _getHttpClient().send(request);
-
-    final response = await http.Response.fromStream(sent);
-    final code = response.statusCode;
-
-    final rawJsonString = response.body;
-    dynamic res = jsonDecode(rawJsonString);
-
-    if (code >= 400) {
-      String message = res["message"] ?? defaultErrorMessage;
-
-      LoadingHandler.showToastWithoutContext(message, isError: true);
-      throw ApiException(code: code, message: message);
-    } else {
-      String? message = res["message"];
-      if (message != null) {
-        LoadingHandler.showToastWithoutContext(message, isError: false);
-      }
-    }
-
-    return res;
-  }
-
   static dynamic PUT_REQUEST(String url,
       {Map<String, dynamic>? params, Object? body}) async {
     Uri parsedUrl = Uri.parse(url);
     if (params != null) {
       parsedUrl = parsedUrl.replace(queryParameters: params);
     }
-    final response =
-        await _getHttpClient().put(parsedUrl, headers: allHeaders, body: body);
+
+    final response = await _getHttpClient().put(parsedUrl,
+        headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
+
     final code = response.statusCode;
     final rawJsonString = response.body;
 
@@ -164,6 +129,43 @@ class Api {
         LoadingHandler.showToastWithoutContext(message, isError: false);
       }
     }
+    return res;
+  }
+
+  static dynamic MULTIPART_REQUEST(String url,
+      {Map<String, dynamic>? params,
+      List<http.MultipartFile>? files,
+      String method = "POST"}) async {
+    Uri parsedUrl = Uri.parse(url);
+    if (params != null) {
+      parsedUrl = parsedUrl.replace(queryParameters: params);
+    }
+
+    http.MultipartRequest request = http.MultipartRequest(method, parsedUrl);
+
+    if (files != null && files.isNotEmpty) {
+      request.files.addAll(files);
+    }
+    final sent = await _getHttpClient().send(request);
+
+    final response = await http.Response.fromStream(sent);
+    final code = response.statusCode;
+
+    final rawJsonString = response.body;
+    dynamic res = jsonDecode(rawJsonString);
+
+    if (code >= 400) {
+      String message = res["message"] ?? defaultErrorMessage;
+
+      LoadingHandler.showToastWithoutContext(message, isError: true);
+      throw ApiException(code: code, message: message);
+    } else {
+      String? message = res["message"];
+      if (message != null) {
+        LoadingHandler.showToastWithoutContext(message, isError: false);
+      }
+    }
+
     return res;
   }
 }

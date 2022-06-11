@@ -1,5 +1,6 @@
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../utils/palette.dart';
 import '../spacer/spacer.dart';
@@ -13,6 +14,8 @@ final outlinedStyles = OutLinedInputStyles();
 final filledStyles = OutLinedInputStyles();
 
 class MuiInput extends StatefulWidget {
+  TextEditingController? controller;
+  String? initialValue;
   String label;
   bool hideInput;
   MuiInputVariant variant;
@@ -21,6 +24,9 @@ class MuiInput extends StatefulWidget {
   VoidCallback? onPressed;
   Function(String?)? onChanged;
   Function(String?)? onFieldSubmitted;
+  List<String>? autofillHints;
+  String? Function(String?)? validator;
+  bool finishAutofillContext;
   MuiInput(
       {Key? key,
       this.hideInput = false,
@@ -28,6 +34,10 @@ class MuiInput extends StatefulWidget {
       required this.label,
       this.onChanged,
       this.onFieldSubmitted,
+      this.autofillHints,
+      this.controller,
+      this.validator,
+      this.finishAutofillContext = false,
       this.inputType = TextInputType.text,
       this.variant = MuiInputVariant.OUTLINED,
       this.color = MuiInputColor.MAIN})
@@ -81,15 +91,18 @@ class _MuiInputState extends State<MuiInput> {
       children: [
         Text(
           widget.label,
-          style: TextStyle(
-              fontSize: 14,
-              // letterSpacing: 1.2,
-              fontWeight: FontWeight.bold,
-              color: MuiPalette.WHITE),
+          style: labelStyles.copyWith(color: _color),
         ),
         spacerS,
         TextFormField(
+          validator: widget.validator,
+          controller: widget.controller,
+          onEditingComplete: widget.finishAutofillContext
+              ? () => TextInput.finishAutofillContext()
+              : null,
+          initialValue: widget.initialValue,
           onFieldSubmitted: widget.onFieldSubmitted,
+          autofillHints: widget.autofillHints,
           style: TextStyle(
               color: MuiPalette.FONT,
               fontSize: 16,

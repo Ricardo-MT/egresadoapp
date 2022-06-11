@@ -1,8 +1,10 @@
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/logo/logo.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MuiAppHeader extends StatefulWidget {
   const MuiAppHeader({
@@ -72,11 +74,20 @@ class _MuiAppHeader extends State<MuiAppHeader> {
             variant: MuiButtonVariant.LIGHT_LINK,
           ),
           spacerM,
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(NavigatorRoutes.register);
-              },
-              icon: const Icon(Icons.person)),
+          Consumer<UsuarioProvider>(
+            builder: (context, provider, child) {
+              return IconButton(
+                  onPressed: () {
+                    if (provider.user == null) {
+                      Navigator.of(context).pushNamed(NavigatorRoutes.login);
+                    } else {
+                      Navigator.of(context).pushNamed(
+                          NavigatorRoutes.userProfile(provider.user!.id));
+                    }
+                  },
+                  icon: const Icon(Icons.person));
+            },
+          ),
         ],
       );
     }

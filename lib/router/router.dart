@@ -28,11 +28,13 @@ import 'package:egresadoapp/pages/politica/terms.dart';
 import 'package:egresadoapp/pages/usuario/usuario_detalle.dart';
 import 'package:egresadoapp/pages/usuario/usuario_editar.dart';
 import 'package:egresadoapp/pages/usuario/usuarios.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 final _router = FluroRouter();
 
@@ -258,7 +260,10 @@ class MuiHandlers {
             return const MuiErrorWidget();
           }
           try {
-            if (!(snapshot.data as User).publico) {
+            User user = snapshot.data as User;
+            User? myUser =
+                Provider.of<UsuarioProvider>(context, listen: false).user;
+            if (!user.publico && (myUser == null || myUser.id != user.id)) {
               return const Text("Este usuario no es público");
             }
           } catch (e) {

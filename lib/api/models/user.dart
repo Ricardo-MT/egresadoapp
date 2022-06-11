@@ -1,3 +1,79 @@
+class User {
+  String id;
+  String email;
+  String nombre;
+  String? telefono;
+  bool publico;
+  String rol;
+  String estado;
+  String? descripcion;
+  List<String> skills;
+  List<String> idiomas;
+  Map<String, String?>? socialLinks;
+  User(
+      {required this.id,
+      required this.nombre,
+      required this.email,
+      this.telefono,
+      required this.rol,
+      required this.estado,
+      required this.publico,
+      this.descripcion,
+      required this.skills,
+      required this.idiomas,
+      this.socialLinks});
+  factory User.fromJson(Map<String, dynamic> map) {
+    return User(
+        id: map["_id"],
+        nombre: map["nombre"],
+        email: map["email"],
+        telefono: map["telefono"],
+        rol: map["rol"],
+        estado: map["estado"],
+        publico: map["publico"],
+        descripcion: map["descripcion"],
+        skills: ((map["skills"] ?? []) as List<dynamic>)
+            .map((e) => e.toString())
+            .toList(),
+        idiomas: ((map["idiomas"] ?? []) as List<dynamic>)
+            .map((e) => e.toString())
+            .toList(),
+        socialLinks: map["socialLinks"] != null
+            ? Map<String, String?>.from(map["socialLinks"])
+            : {});
+  }
+  factory User.fromCopy(User user) {
+    return User(
+        id: user.id,
+        nombre: user.nombre,
+        email: user.email,
+        telefono: user.telefono,
+        rol: user.rol,
+        estado: user.estado,
+        publico: user.publico,
+        descripcion: user.descripcion,
+        skills: user.skills.toList(),
+        idiomas: user.idiomas.toList(),
+        socialLinks: user.socialLinks);
+  }
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      "_id": id,
+      "nombre": nombre,
+      "email": email,
+      "telefono": telefono,
+      "rol": rol,
+      "estado": estado,
+      "publico": publico.toString(),
+      "descripcion": descripcion,
+      "skills": skills,
+      "idiomas": idiomas,
+      "socialLinks": socialLinks
+    };
+    return map;
+  }
+}
+
 enum Rol { egresado, colaborador, admin }
 
 enum Estados {
@@ -9,6 +85,18 @@ enum Estados {
   trabajando,
   abiertoColaboraciones
 }
+
+const listaRoles = ["egresado", "colaborador", "admin"];
+
+const listaEstados = [
+  "desactivado",
+  "buscaTrabajo",
+  "buscaMejora",
+  "freelance",
+  "estudiante",
+  "trabajando",
+  "abiertoColaboraciones"
+];
 
 extension RolExtension on Rol {
   String get value {
@@ -84,80 +172,4 @@ String getLabelByEstado(String estado) {
     return "Abierto a colaborar";
   }
   return "-";
-}
-
-class User {
-  String id;
-  String email;
-  String nombre;
-  String? telefono;
-  bool publico;
-  String? descripcion;
-  String rol;
-  String estado;
-  List<String> skills;
-  List<String> idiomas;
-  Map<String, String>? socialLinks;
-  User(
-      {required this.id,
-      required this.nombre,
-      required this.email,
-      this.telefono,
-      required this.rol,
-      required this.estado,
-      required this.publico,
-      this.descripcion,
-      required this.skills,
-      required this.idiomas,
-      this.socialLinks});
-  factory User.fromJson(Map<String, dynamic> map) {
-    return User(
-        id: map["_id"],
-        nombre: map["nombre"],
-        email: map["email"],
-        telefono: map["telefono"],
-        rol: map["rol"],
-        estado: map["estado"],
-        publico: map["publico"],
-        descripcion: map["descripcion"],
-        skills: ((map["skills"] ?? []) as List<dynamic>)
-            .map((e) => e.toString())
-            .toList(),
-        idiomas: ((map["idiomas"] ?? []) as List<dynamic>)
-            .map((e) => e.toString())
-            .toList(),
-        socialLinks: map["socialLinks"] != null
-            ? Map<String, String>.from(map["socialLinks"])
-            : null);
-  }
-  factory User.fromCopy(User user) {
-    return User(
-        id: user.id,
-        nombre: user.nombre,
-        email: user.email,
-        telefono: user.telefono,
-        rol: user.rol,
-        estado: user.estado,
-        publico: user.publico,
-        descripcion: user.descripcion,
-        skills: user.skills.toList(),
-        idiomas: user.idiomas.toList(),
-        socialLinks: user.socialLinks);
-  }
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> map = {
-      "_id": id,
-      "nombre": nombre,
-      "email": email,
-      "telefono": telefono,
-      "rol": rol,
-      "estado": estado,
-      "publico": publico,
-      "descripcion": descripcion,
-      "skills": skills,
-      "idiomas": idiomas,
-      "socialLinks": socialLinks
-    };
-    return map;
-  }
 }

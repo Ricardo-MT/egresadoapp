@@ -1,3 +1,4 @@
+import 'package:egresadoapp/api/models/auth.dart';
 import 'package:egresadoapp/api/models/filters.dart';
 import 'package:egresadoapp/api/models/user.dart';
 
@@ -27,6 +28,16 @@ class ApiUsuario {
 
   static Future<User> fetchById(String id) async {
     dynamic res = await Api.GET_REQUEST(Api.USUARIOS + "/$id");
+    return User.fromJson(res["usuario"]);
+  }
+
+  static Future<User> register(RegisterUser credentials) async {
+    dynamic res = await Api.POST_REQUEST(Api.USUARIOS, {
+      "email": credentials.email,
+      "nombre": credentials.nombre,
+      "password": credentials.password
+    });
+
     return User.fromJson(res["usuario"]);
   }
 

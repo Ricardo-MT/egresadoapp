@@ -1,15 +1,22 @@
+import 'package:egresadoapp/api/endpoints/api_auth.dart';
 import 'package:egresadoapp/api/models/user.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
+import 'package:egresadoapp/utils/deeplinking.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
+import 'package:egresadoapp/widgets/modals/confirmationmodal.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/muiicon/muiicon.dart';
 import 'package:egresadoapp/widgets/skills/skill_tag.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:egresadoapp/widgets/tupla/tupla.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UsuarioDetalle extends StatelessWidget {
   final User usuario;
@@ -34,6 +41,54 @@ class UsuarioDetalle extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Consumer<UsuarioProvider>(
+                        builder: (context, provider, child) {
+                          User? myUsuario = provider.user;
+                          bool visible =
+                              myUsuario != null && myUsuario.id == usuario.id;
+                          return Visibility(
+                              visible: visible,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  MuiButton(
+                                      variant: MuiButtonVariant.LINK,
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return ConfirmationModal(
+                                                  title: "Cerrando sesión",
+                                                  text:
+                                                      "Estás a punto de cerrar sesión. ¿Continuar?",
+                                                  callback: () async {
+                                                    try {
+                                                      await ApiAuth.logout();
+                                                    } catch (e) {}
+                                                    Navigator.of(context)
+                                                        .pushReplacementNamed(
+                                                            Routes.home);
+                                                  });
+                                            });
+                                      },
+                                      text: "Cerrar sesión"),
+                                  IconButton(
+                                    tooltip: "Editar perfil",
+                                    icon: Icon(
+                                      Icons.border_color,
+                                      color: MuiPalette.BROWN,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          NavigatorRoutes.userProfileEdit(
+                                              myUsuario!.id));
+                                    },
+                                  )
+                                ],
+                              ));
+                        },
+                      ),
                       Center(
                         child: Icon(
                           Icons.account_circle_rounded,
@@ -63,17 +118,12 @@ class UsuarioDetalle extends StatelessWidget {
                           children: [
                             Visibility(
                               visible: usuario.socialLinks != null &&
-                                  usuario.socialLinks!["discord"] != null,
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: const MuiIcon(
-                                      icon: MuiIconVariant.discord)),
-                            ),
-                            Visibility(
-                              visible: usuario.socialLinks != null &&
                                   usuario.socialLinks!["linkedin"] != null,
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    openExternally(
+                                        usuario.socialLinks!["linkedin"]!);
+                                  },
                                   icon: const MuiIcon(
                                       icon: MuiIconVariant.linkedin)),
                             ),
@@ -81,7 +131,10 @@ class UsuarioDetalle extends StatelessWidget {
                               visible: usuario.socialLinks != null &&
                                   usuario.socialLinks!["telegram"] != null,
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    openExternally(
+                                        usuario.socialLinks!["telegram"]!);
+                                  },
                                   icon: const MuiIcon(
                                       icon: MuiIconVariant.telegram)),
                             ),
@@ -89,7 +142,10 @@ class UsuarioDetalle extends StatelessWidget {
                               visible: usuario.socialLinks != null &&
                                   usuario.socialLinks!["twitter"] != null,
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    openExternally(
+                                        usuario.socialLinks!["twitter"]!);
+                                  },
                                   icon: const MuiIcon(
                                       icon: MuiIconVariant.twitter)),
                             ),
@@ -97,7 +153,10 @@ class UsuarioDetalle extends StatelessWidget {
                               visible: usuario.socialLinks != null &&
                                   usuario.socialLinks!["whatsapp"] != null,
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    openExternally(
+                                        usuario.socialLinks!["whatsapp"]!);
+                                  },
                                   icon: const MuiIcon(
                                       icon: MuiIconVariant.whatsapp)),
                             ),
@@ -105,7 +164,10 @@ class UsuarioDetalle extends StatelessWidget {
                               visible: usuario.socialLinks != null &&
                                   usuario.socialLinks!["github"] != null,
                               child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    openExternally(
+                                        usuario.socialLinks!["github"]!);
+                                  },
                                   icon: const MuiIcon(
                                       icon: MuiIconVariant.github)),
                             ),
@@ -135,7 +197,7 @@ class UsuarioDetalle extends StatelessWidget {
                         text: "",
                         child: usuario.skills.isEmpty
                             ? const EmptyList()
-                            : Wrap(spacing: 20, children: [
+                            : Wrap(spacing: 20, runSpacing: 10, children: [
                                 for (var i = 0; i < usuario.skills.length; i++)
                                   SkillTag(skill: usuario.skills[i])
                               ]),
@@ -147,9 +209,9 @@ class UsuarioDetalle extends StatelessWidget {
                         text: "",
                         child: usuario.idiomas.isEmpty
                             ? const EmptyList()
-                            : Wrap(spacing: 20, children: [
+                            : Wrap(spacing: 20, runSpacing: 10, children: [
                                 for (var i = 0; i < usuario.idiomas.length; i++)
-                                  SkillTag(skill: usuario.skills[i])
+                                  SkillTag(skill: usuario.idiomas[i])
                               ]),
                       ),
                       spacerXL

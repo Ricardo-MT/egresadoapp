@@ -1,6 +1,7 @@
 import 'package:egresadoapp/providers/colaboraciones_provider.dart';
 import 'package:egresadoapp/providers/eventos_provider.dart';
 import 'package:egresadoapp/providers/ofertas_provider.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/providers/usuario_provider.dart';
 import 'package:egresadoapp/router/router.dart';
 import 'package:egresadoapp/router/routes.dart';
@@ -25,6 +26,7 @@ class MyProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => UsuarioProvider()),
         ChangeNotifierProvider(create: (context) => UsuariosProvider()),
         ChangeNotifierProvider(create: (context) => ColaboracionesProvider()),
         ChangeNotifierProvider(create: (context) => OfertasProvider()),
@@ -52,7 +54,11 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.authCheck,
       onGenerateRoute: MuiRouter.router.generator,
       theme: ThemeData(
+          primaryColor: Colors.green,
           textTheme: GoogleFonts.notoSansTextTheme(),
+          switchTheme: SwitchThemeData(
+              trackColor: MaterialStateProperty.all<Color>(MuiPalette.MID_GREY),
+              thumbColor: MaterialStateProperty.all<Color>(Colors.green)),
           appBarTheme: AppBarTheme(backgroundColor: MuiPalette.BROWN),
           scaffoldBackgroundColor: const Color(0xFFEFEBDE)),
     );

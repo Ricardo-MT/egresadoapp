@@ -52,6 +52,7 @@ dependencies:
   flutter_localizations: 
     sdk: flutter
     version: ^0.0.0
+  multi_select_flutter: ^4.1.2
 
 dev_dependencies:
   flutter_test:

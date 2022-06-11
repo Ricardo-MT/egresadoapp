@@ -1,6 +1,10 @@
+import 'package:egresadoapp/api/endpoints/api_auth.dart';
+import 'package:egresadoapp/api/models/user.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthCheckPage extends StatelessWidget {
   final bool shouldRedirect;
@@ -9,19 +13,20 @@ class AuthCheckPage extends StatelessWidget {
   handleAuthCheck(BuildContext context) async {
     try {
       await preconfigureApp(context);
-      // User user = await ApiAuth.checkUser();
-      // Provider.of<UserProvider>(context, listen: false).set(user);
+      User user = await ApiAuth.checkUser();
+
+      Provider.of<UsuarioProvider>(context, listen: false).set(user);
       // await DataHandlers.handleUserLogin(context, user);
       if (shouldRedirect) {
         Navigator.of(context).pushNamed(NavigatorRoutes.home);
       }
     } catch (e) {
-      // if (Navigator.of(context).canPop()) {
-      //   Navigator.of(context).popUntil((route) => route.isFirst);
-      //   Navigator.of(context).pushReplacementNamed(NavigatorRoutes.login);
-      // } else {
-      //   Navigator.of(context).pushNamed(NavigatorRoutes.login);
-      // }
+      print("HAY USER");
+      print(e);
+
+      if (shouldRedirect) {
+        Navigator.of(context).pushNamed(NavigatorRoutes.home);
+      }
     }
   }
 
@@ -30,11 +35,7 @@ class AuthCheckPage extends StatelessWidget {
     return FutureBuilder(
         future: handleAuthCheck(context),
         builder: ((context, snapshot) {
-          return const Scaffold(
-            body: Center(
-              child: Loading(),
-            ),
-          );
+          return const LoadingPage();
         }));
   }
 }
