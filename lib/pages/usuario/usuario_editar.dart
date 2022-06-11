@@ -163,200 +163,202 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
   @override
   Widget build(BuildContext context) {
     return MuiDataScreen(
+        pageTitle: "Editando perfil",
         child: Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          Center(
-            child: Icon(
-              Icons.account_circle_rounded,
-              size: 200,
-              color: MuiPalette.BROWN,
-            ),
-          ),
-          Center(child: RolTag(rol: edited.rol)),
-          spacerS,
-          MuiInput(
-            validator: Validators.validateIsEmpty,
-            color: MuiInputColor.DARK,
-            controller: nameController,
-            label: "Nombre",
-          ),
-          spacerS,
-          MuiInput(
-            color: MuiInputColor.DARK,
-            controller: descripcionController,
-            label: "Descripción",
-          ),
-          spacerS,
-          const Divider(),
-          spacerS,
-          Row(
+          key: _formKey,
+          child: Column(
             children: [
-              Expanded(
-                  child: Text("Perfil público",
-                      style: labelStyles.copyWith(color: MuiPalette.BLACK))),
-              Switch(
-                  inactiveThumbColor: MuiPalette.GREY,
-                  value: edited.publico,
-                  onChanged: (v) {
-                    edited.publico = v;
-                    nextState();
-                  })
-            ],
-          ),
-          const Text(
-              "Si tu perfil no es público, los únicos que podrán contactarte a través de la plataforma serán los colaboradores."),
-          spacerS,
-          const Divider(),
-          spacerS,
-          MuiSelect(
-            label: "Estado",
-            transformer: getLabelByEstado,
-            validator: Validators.validateIsEmpty,
-            hint: "Desactivado, Abierto a colaborar ...",
-            values: listaEstados,
-            value: edited.estado,
-            onChanged: (v) {
-              if (v != null) {}
-            },
-          ),
-          spacerS,
-          MuiInput(
-            validator: Validators.validateEmail,
-            controller: emailController,
-            color: MuiInputColor.DARK,
-            label: "Email",
-          ),
-          spacerS,
-          MuiInput(
-            controller: telefonoController,
-            color: MuiInputColor.DARK,
-            label: "Teléfono",
-          ),
-          spacerS,
-          const Divider(),
-          spacerS,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const MuiIcon(
-                icon: MuiIconVariant.linkedin,
-                size: MuiIconSize.m,
-              ),
-              spacerS,
-              Expanded(
-                child: MuiInput(
-                  controller: linkedinController,
-                  color: MuiInputColor.DARK,
-                  label: "Tu perfil en LinkedIn",
+              Center(
+                child: Icon(
+                  Icons.account_circle_rounded,
+                  size: 200,
+                  color: MuiPalette.BROWN,
                 ),
               ),
-            ],
-          ),
-          spacerS,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const MuiIcon(
-                icon: MuiIconVariant.telegram,
-                size: MuiIconSize.m,
+              Center(child: RolTag(rol: edited.rol)),
+              spacerS,
+              MuiInput(
+                validator: Validators.validateIsEmpty,
+                color: MuiInputColor.DARK,
+                controller: nameController,
+                label: "Nombre",
               ),
               spacerS,
-              Expanded(
-                child: MuiInput(
-                  controller: telegramController,
-                  color: MuiInputColor.DARK,
-                  label: "Tu número de Telegram",
-                ),
-              ),
-            ],
-          ),
-          spacerS,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const MuiIcon(
-                icon: MuiIconVariant.twitter,
-                size: MuiIconSize.m,
+              MuiInput(
+                color: MuiInputColor.DARK,
+                controller: descripcionController,
+                label: "Descripción",
               ),
               spacerS,
-              Expanded(
-                child: MuiInput(
-                  controller: twitterController,
-                  color: MuiInputColor.DARK,
-                  label: "Tu perfil en Twitter",
-                ),
-              ),
-            ],
-          ),
-          spacerS,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const MuiIcon(
-                icon: MuiIconVariant.whatsapp,
-                size: MuiIconSize.m,
-              ),
+              const Divider(),
               spacerS,
-              Expanded(
-                child: MuiInput(
-                  controller: whatsappController,
-                  color: MuiInputColor.DARK,
-                  label: "Tu número en Whatsapp",
-                ),
+              Row(
+                children: [
+                  Expanded(
+                      child: Text("Perfil público",
+                          style:
+                              labelStyles.copyWith(color: MuiPalette.BLACK))),
+                  Switch(
+                      inactiveThumbColor: MuiPalette.GREY,
+                      value: edited.publico,
+                      onChanged: (v) {
+                        edited.publico = v;
+                        nextState();
+                      })
+                ],
               ),
-            ],
-          ),
-          spacerS,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const MuiIcon(
-                icon: MuiIconVariant.github,
-                size: MuiIconSize.m,
-              ),
+              const Text(
+                  "Si tu perfil no es público, los únicos que podrán contactarte a través de la plataforma serán los colaboradores."),
               spacerS,
-              Expanded(
-                child: MuiInput(
-                  controller: githubController,
-                  color: MuiInputColor.DARK,
-                  label: "Tu perfil en Github",
-                ),
-              ),
-            ],
-          ),
-          spacerS,
-          const Divider(),
-          spacerS,
-          Align(
-              alignment: Alignment.centerLeft,
-              child: MuiSelectTags(
-                label: "Skills",
-                list: widget.skills,
-                selected: edited.skills,
-                onConfirm: (newList) {
-                  edited.skills = newList;
-                  nextState();
+              const Divider(),
+              spacerS,
+              MuiSelect(
+                label: "Estado",
+                transformer: getLabelByEstado,
+                validator: Validators.validateIsEmpty,
+                hint: "Desactivado, Abierto a colaborar ...",
+                values: listaEstados,
+                value: edited.estado,
+                onChanged: (v) {
+                  if (v != null) {}
                 },
-              )),
-          spacerS,
-          Align(
-              alignment: Alignment.centerLeft,
-              child: MuiSelectTags(
-                label: "Idiomas",
-                list: widget.idiomas,
-                selected: edited.idiomas,
-                onConfirm: (newList) {
-                  edited.idiomas = newList;
-                  nextState();
-                },
-              )),
-          spacerXL,
-          MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
-          spacerXL,
-        ],
-      ),
-    ));
+              ),
+              spacerS,
+              MuiInput(
+                validator: Validators.validateEmail,
+                controller: emailController,
+                color: MuiInputColor.DARK,
+                label: "Email",
+              ),
+              spacerS,
+              MuiInput(
+                controller: telefonoController,
+                color: MuiInputColor.DARK,
+                label: "Teléfono",
+              ),
+              spacerS,
+              const Divider(),
+              spacerS,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MuiIcon(
+                    icon: MuiIconVariant.linkedin,
+                    size: MuiIconSize.m,
+                  ),
+                  spacerS,
+                  Expanded(
+                    child: MuiInput(
+                      controller: linkedinController,
+                      color: MuiInputColor.DARK,
+                      label: "Tu perfil en LinkedIn",
+                    ),
+                  ),
+                ],
+              ),
+              spacerS,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MuiIcon(
+                    icon: MuiIconVariant.telegram,
+                    size: MuiIconSize.m,
+                  ),
+                  spacerS,
+                  Expanded(
+                    child: MuiInput(
+                      controller: telegramController,
+                      color: MuiInputColor.DARK,
+                      label: "Tu número de Telegram",
+                    ),
+                  ),
+                ],
+              ),
+              spacerS,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MuiIcon(
+                    icon: MuiIconVariant.twitter,
+                    size: MuiIconSize.m,
+                  ),
+                  spacerS,
+                  Expanded(
+                    child: MuiInput(
+                      controller: twitterController,
+                      color: MuiInputColor.DARK,
+                      label: "Tu perfil en Twitter",
+                    ),
+                  ),
+                ],
+              ),
+              spacerS,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MuiIcon(
+                    icon: MuiIconVariant.whatsapp,
+                    size: MuiIconSize.m,
+                  ),
+                  spacerS,
+                  Expanded(
+                    child: MuiInput(
+                      controller: whatsappController,
+                      color: MuiInputColor.DARK,
+                      label: "Tu número en Whatsapp",
+                    ),
+                  ),
+                ],
+              ),
+              spacerS,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const MuiIcon(
+                    icon: MuiIconVariant.github,
+                    size: MuiIconSize.m,
+                  ),
+                  spacerS,
+                  Expanded(
+                    child: MuiInput(
+                      controller: githubController,
+                      color: MuiInputColor.DARK,
+                      label: "Tu perfil en Github",
+                    ),
+                  ),
+                ],
+              ),
+              spacerS,
+              const Divider(),
+              spacerS,
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: MuiSelectTags(
+                    label: "Skills",
+                    list: widget.skills,
+                    selected: edited.skills,
+                    onConfirm: (newList) {
+                      edited.skills = newList;
+                      nextState();
+                    },
+                  )),
+              spacerS,
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: MuiSelectTags(
+                    label: "Idiomas",
+                    list: widget.idiomas,
+                    selected: edited.idiomas,
+                    onConfirm: (newList) {
+                      edited.idiomas = newList;
+                      nextState();
+                    },
+                  )),
+              spacerXL,
+              MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
+              spacerXL,
+            ],
+          ),
+        ));
   }
 }

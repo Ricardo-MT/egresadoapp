@@ -6,6 +6,8 @@ import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/utils/permissions.dart';
+import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/filters/filter_model.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
@@ -64,7 +66,18 @@ class _EventosPageState extends State<EventosPage> {
                   onType: Provider.of<EventosProvider>(context, listen: false)
                       .setSearch),
               spacerExpanded,
+              Visibility(
+                  visible: puedeCrearEvento(context),
+                  child: MuiButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(NavigatorRoutes.eventCreate);
+                      },
+                      text: "Crear evento"))
             ],
+          ),
+          const SliverToBoxAdapter(
+            child: Center(child: MuiPageTitle(label: "Eventos")),
           ),
           FutureBuilder(
               future: Provider.of<EventosProvider>(context, listen: false)

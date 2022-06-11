@@ -30,6 +30,7 @@ import 'package:egresadoapp/pages/usuario/usuario_editar.dart';
 import 'package:egresadoapp/pages/usuario/usuarios.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
+import 'package:egresadoapp/utils/permissions.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:fluro/fluro.dart';
@@ -154,10 +155,16 @@ class MuiHandlers {
   }));
   static final Handler _offerCreate =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeCrearOferta(context)) {
+      return const Text("NO TIENES PERMISOS PARA CREAR OFERTAS");
+    }
     return const OfertaCrear();
   }));
   static final Handler _offerEdit =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeEditarOferta(context)) {
+      return const Text("NO TIENES PERMISOS PARA CREAR OFERTAS");
+    }
     return const OfertaEditar();
   }));
   static final Handler _offerDetail =
@@ -185,10 +192,16 @@ class MuiHandlers {
   }));
   static final Handler _eventCreate =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeCrearEvento(context)) {
+      return const Text("NO TIENES PERMISOS PARA CREAR EVENTOS");
+    }
     return const EventoCrear();
   }));
   static final Handler _eventEdit =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeEditarEvento(context)) {
+      return const Text("NO TIENES PERMISOS PARA EDITAR EVENTOS");
+    }
     return const EventoEditar();
   }));
   static final Handler _eventDetail =
@@ -217,10 +230,16 @@ class MuiHandlers {
   }));
   static final Handler _collaborationCreate =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeCrearColaboracion(context)) {
+      return const Text("NO TIENES PERMISOS PARA CREAR COLABORACIONES");
+    }
     return const ColaboracionCrear();
   }));
   static final Handler _collaborationEdit =
       Handler(handlerFunc: ((context, parameters) {
+    if (!puedeEditarColaboracion(context)) {
+      return const Text("NO TIENES PERMISOS PARA EDITAR COLABORACIONES");
+    }
     return const ColaboracionEditar();
   }));
   static final Handler _collaborationDetail =

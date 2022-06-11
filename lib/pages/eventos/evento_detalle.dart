@@ -2,6 +2,7 @@ import 'package:egresadoapp/api/models/evento.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
+import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/touchable.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
@@ -24,7 +25,15 @@ class EventoDetalle extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(Dimensions.pageInsetGap),
           child: Center(
-              child: MuiCard(
+              child: Column(
+            children: [
+              Text("Evento",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: MuiPalette.BLACK,
+                      fontSize: 26)),
+              spacerS,
+              MuiCard(
                   width: 700,
                   child: Center(
                     child: Padding(
@@ -107,7 +116,9 @@ class EventoDetalle extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ))),
+                  ))
+            ],
+          )),
         ),
       ),
     );

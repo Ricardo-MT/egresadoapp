@@ -24,7 +24,11 @@ class OfertaDetalle extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(Dimensions.pageInsetGap),
           child: Center(
-              child: MuiCard(
+              child: Column(
+            children: [
+              const MuiPageTitle(label: "Oferta laboral"),
+              spacerS,
+              MuiCard(
                   width: 700,
                   child: Center(
                     child: Padding(
@@ -123,7 +127,9 @@ class OfertaDetalle extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ))),
+                  ))
+            ],
+          )),
         ),
       ),
     );

@@ -1,17 +1,40 @@
+import 'package:flutter/material.dart';
 
+// OFERTAS LABORALES
+bool puedeCrearOferta(BuildContext? context) {
+  return true;
+}
 
-// bool puedeRevisarEquipo(User? user) {
-//   return user != null &&
-//       (user.rol == Rol.tecnicoIturri.value ||
-//           user.rol == Rol.coordinadorIturri.value);
-// }
+bool puedeEditarOferta(BuildContext? context) {
+  return true;
+}
 
-// bool puedeCambiarDeCliente(User? user) {
-//   return user != null &&
-//       (user.rol == Rol.tecnicoIturri.value ||
-//           user.rol == Rol.coordinadorIturri.value);
-// }
+bool puedeEliminarOferta(BuildContext? context) {
+  return true;
+}
 
-// bool puedeCambiarDeCentral(User? user) {
-//   return user != null && (user.rol != Rol.tecnicoCliente.value);
-// }
+// EVENTOS
+bool puedeCrearEvento(BuildContext? context) {
+  return true;
+}
+
+bool puedeEditarEvento(BuildContext? context) {
+  return true;
+}
+
+bool puedeEliminarEvento(BuildContext? context) {
+  return true;
+}
+
+// COLABORACIONES
+bool puedeCrearColaboracion(BuildContext? context) {
+  return true;
+}
+
+bool puedeEditarColaboracion(BuildContext? context) {
+  return true;
+}
+
+bool puedeEliminarColaboracion(BuildContext? context) {
+  return true;
+}
