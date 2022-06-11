@@ -10,11 +10,13 @@ class Tupla extends StatelessWidget {
   final String text;
   final MuiTuplaSize size;
   final bool bold;
+  final bool selectable;
   const Tupla(
       {Key? key,
       required this.icon,
       this.size = MuiTuplaSize.l,
       required this.text,
+      this.selectable = true,
       this.bold = false})
       : super(key: key);
 
@@ -46,12 +48,19 @@ class Tupla extends StatelessWidget {
             color: MuiPalette.BROWN,
           ),
         ),
-        SelectableText(
-          text,
-          style: _textStyles.copyWith(
-              fontSize: fontSize,
-              fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-        )
+        selectable
+            ? SelectableText(
+                text,
+                style: _textStyles.copyWith(
+                    fontSize: fontSize,
+                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+              )
+            : Text(
+                text,
+                style: _textStyles.copyWith(
+                    fontSize: fontSize,
+                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+              )
       ],
     );
   }

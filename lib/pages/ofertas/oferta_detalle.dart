@@ -1,6 +1,8 @@
 import 'package:egresadoapp/api/models/oferta.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
+import 'package:egresadoapp/widgets/button/touchable.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
@@ -50,9 +52,17 @@ class OfertaDetalle extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Tupla(
-                                        icon: Icons.person,
-                                        text: oferta.autor.nombre),
+                                    MuiTouchable(
+                                      onPress: () {
+                                        Navigator.of(context).pushNamed(
+                                            NavigatorRoutes.userProfile(
+                                                oferta.autor.id));
+                                      },
+                                      child: Tupla(
+                                          icon: Icons.person,
+                                          selectable: false,
+                                          text: oferta.autor.nombre),
+                                    ),
                                     Tupla(
                                         icon: Icons.location_on,
                                         text: oferta.localizacion),

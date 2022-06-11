@@ -16,56 +16,69 @@ class MuiAppHeader extends StatefulWidget {
 class _MuiAppHeader extends State<MuiAppHeader> {
   @override
   Widget build(BuildContext context) {
-    return MediaQuery.of(context).size.width < 700
-        ? Logo(
+    if (MediaQuery.of(context).size.width < 700) {
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () {
+            Navigator.of(context).pushNamed(NavigatorRoutes.home);
+          },
+          child: Logo(
             height: 40,
-          )
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              spacerExpanded,
-              MuiButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.home);
-                },
-                text: "Inicio",
-                variant: MuiButtonVariant.LIGHT_LINK,
-              ),
-              MuiButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.events);
-                },
-                text: "Eventos",
-                variant: MuiButtonVariant.LIGHT_LINK,
-              ),
-              MuiButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.collaboration);
-                },
-                text: "Colaboraciones",
-                variant: MuiButtonVariant.LIGHT_LINK,
-              ),
-              MuiButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.offers);
-                },
-                text: "Ofertas laborales",
-                variant: MuiButtonVariant.LIGHT_LINK,
-              ),
-              MuiButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Routes.users);
-                },
-                text: "Usuarios",
-                variant: MuiButtonVariant.LIGHT_LINK,
-              ),
-              spacerM,
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(NavigatorRoutes.register);
-                  },
-                  icon: const Icon(Icons.person)),
-            ],
-          );
+          ),
+        ),
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          spacerExpanded,
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.home);
+            },
+            text: "Inicio",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.events);
+            },
+            text: "Eventos",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.collaboration);
+            },
+            text: "Colaboraciones",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.offers);
+            },
+            text: "Ofertas laborales",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.users);
+            },
+            text: "Usuarios",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
+          spacerM,
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(NavigatorRoutes.register);
+              },
+              icon: const Icon(Icons.person)),
+        ],
+      );
+    }
   }
 }

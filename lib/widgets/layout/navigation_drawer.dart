@@ -10,70 +10,76 @@ class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
-          DrawerHeader(
-              decoration: BoxDecoration(
-                color: MuiPalette.BROWN,
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Icon(
-                      Icons.account_circle,
-                      color: MuiPalette.WHITE,
-                      size: 60,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/background.png"),
+                fit: BoxFit.cover)),
+        child: ListView(
+          children: [
+            DrawerHeader(
+                decoration: BoxDecoration(
+                  color: MuiPalette.BROWN,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Icon(
+                        Icons.account_circle,
+                        color: MuiPalette.WHITE,
+                        size: 60,
+                      ),
                     ),
-                  ),
-                  MuiButton(
-                    onPressed: () {},
-                    text: "Tu usuario",
-                    variant: MuiButtonVariant.LIGHT_LINK,
-                  )
-                ],
-              )),
-          spacerM,
-          MuiButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(Routes.home);
-            },
-            text: "Inicio",
-            fontSize: 24,
-            variant: MuiButtonVariant.LINK,
-          ),
-          MuiButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(Routes.events);
-            },
-            text: "Eventos",
-            fontSize: 24,
-            variant: MuiButtonVariant.LINK,
-          ),
-          MuiButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(Routes.collaboration);
-            },
-            text: "Colaboraciones",
-            fontSize: 24,
-            variant: MuiButtonVariant.LINK,
-          ),
-          MuiButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(Routes.offers);
-            },
-            text: "Ofertas laborales",
-            fontSize: 24,
-            variant: MuiButtonVariant.LINK,
-          ),
-          MuiButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(Routes.users);
-            },
-            text: "Usuarios",
-            fontSize: 24,
-            variant: MuiButtonVariant.LINK,
-          )
-        ],
+                    MuiButton(
+                      onPressed: () {},
+                      text: "Tu usuario",
+                      variant: MuiButtonVariant.LIGHT_LINK,
+                    )
+                  ],
+                )),
+            spacerM,
+            MuiButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.home);
+              },
+              text: "Inicio",
+              fontSize: 24,
+              variant: MuiButtonVariant.LINK,
+            ),
+            MuiButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.events);
+              },
+              text: "Eventos",
+              fontSize: 24,
+              variant: MuiButtonVariant.LINK,
+            ),
+            MuiButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.collaboration);
+              },
+              text: "Colaboraciones",
+              fontSize: 24,
+              variant: MuiButtonVariant.LINK,
+            ),
+            MuiButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.offers);
+              },
+              text: "Ofertas laborales",
+              fontSize: 24,
+              variant: MuiButtonVariant.LINK,
+            ),
+            MuiButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(Routes.users);
+              },
+              text: "Usuarios",
+              fontSize: 24,
+              variant: MuiButtonVariant.LINK,
+            )
+          ],
+        ),
       ),
     );
   }

@@ -28,6 +28,19 @@ class ApiEventos {
     return eventos;
   }
 
+  static Future<List<Evento>> fetchRecientes(
+      {String? searchText, FiltroEventos? filtros}) async {
+    List<Evento> eventos = [];
+
+    dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/recientes");
+
+    List<dynamic> fetched = res["eventos"];
+    for (var item in fetched) {
+      eventos.add(Evento.fromJson(item));
+    }
+    return eventos;
+  }
+
   static Future<Evento> fetchById(String id) async {
     dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/$id");
     return Evento.fromJson(res["evento"]);

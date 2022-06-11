@@ -130,7 +130,9 @@ class MuiHandlers {
   // AUTENTICACIÓN
   static final Handler _authCheck =
       Handler(handlerFunc: ((context, parameters) {
-    return const AuthCheckPage();
+    return AuthCheckPage(
+      shouldRedirect: Uri.base.path == "/",
+    );
   }));
   static final Handler _login = Handler(handlerFunc: ((context, parameters) {
     return const LoginPage();
@@ -164,7 +166,7 @@ class MuiHandlers {
         future: ApiOfertas.fetchById(id),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
+            return const LoadingPage();
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
@@ -195,7 +197,7 @@ class MuiHandlers {
         future: ApiEventos.fetchById(id),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
+            return const LoadingPage();
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
@@ -227,7 +229,7 @@ class MuiHandlers {
         future: ApiColaboracion.fetchById(id),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
+            return const LoadingPage();
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
@@ -250,7 +252,7 @@ class MuiHandlers {
         future: ApiUsuario.fetchById(id),
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Loading();
+            return const LoadingPage();
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();

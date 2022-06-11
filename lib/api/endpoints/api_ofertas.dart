@@ -26,6 +26,19 @@ class ApiOfertas {
     return ofertas;
   }
 
+  static Future<List<Oferta>> fetchRecientes(
+      {String? searchText, FiltroOfertas? filtros}) async {
+    List<Oferta> ofertas = [];
+
+    dynamic res = await Api.GET_REQUEST(Api.OFERTAS + "/recientes");
+
+    List<dynamic> fetched = res["ofertas"];
+    for (var item in fetched) {
+      ofertas.add(Oferta.fromJson(item));
+    }
+    return ofertas;
+  }
+
   static Future<Oferta> fetchById(String id) async {
     dynamic res = await Api.GET_REQUEST(Api.OFERTAS + "/$id");
     return Oferta.fromJson(res["oferta"]);

@@ -28,6 +28,18 @@ class ApiColaboracion {
     return colaboraciones;
   }
 
+  static Future<List<Colaboracion>> fetchRecientes() async {
+    List<Colaboracion> colaboraciones = [];
+
+    dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/recientes");
+
+    List<dynamic> fetched = res["colaboraciones"];
+    for (var item in fetched) {
+      colaboraciones.add(Colaboracion.fromJson(item));
+    }
+    return colaboraciones;
+  }
+
   static Future<Colaboracion> fetchById(String id) async {
     dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/$id");
     return Colaboracion.fromJson(res["colaboracion"]);

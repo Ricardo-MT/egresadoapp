@@ -15,7 +15,6 @@ import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/footer/privacyfooter.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
-import 'package:egresadoapp/widgets/logo/logo.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       return;
     }
     controller.animateToPage(p,
-        duration: const Duration(milliseconds: 1200), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds: 1200), curve: Curves.ease);
   }
 
   @override
@@ -52,6 +51,7 @@ class _HomePageState extends State<HomePage> {
     return MuiScreen(
       child: PageView(
         scrollDirection: Axis.vertical,
+        controller: PageController(),
         children: [
           Stack(
             children: [
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 controller: controller,
                 children: const [
                   FadeInWrapper(
-                    index: 1,
+                    index: 3,
                     child: CarrouselLanding(
                         img: "assets/images/leader.png",
                         text: "Conecta con otros profesionales del sector"),
@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
-                    future: ApiOfertas.fetchOfertas(),
+                    future: ApiOfertas.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Loading();
@@ -123,6 +123,10 @@ class _HomePageState extends State<HomePage> {
                           },
                           list: (snapshot.data as List<Oferta>)
                               .map((e) => DefaultCardModel(
+                                  onPress: () {
+                                    Navigator.of(context).pushNamed(
+                                        NavigatorRoutes.offerDetail(e.id));
+                                  },
                                   autor: e.autor.nombre,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
@@ -133,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
-                    future: ApiEventos.fetchEventos(),
+                    future: ApiEventos.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return spacerM;
@@ -148,6 +152,10 @@ class _HomePageState extends State<HomePage> {
                           },
                           list: (snapshot.data as List<Evento>)
                               .map((e) => DefaultCardModel(
+                                  onPress: () {
+                                    Navigator.of(context).pushNamed(
+                                        NavigatorRoutes.eventDetail(e.id));
+                                  },
                                   autor: e.autor.nombre,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
@@ -157,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
-                    future: ApiColaboracion.fetchColaboraciones(),
+                    future: ApiColaboracion.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return spacerM;
@@ -173,6 +181,11 @@ class _HomePageState extends State<HomePage> {
                           },
                           list: (snapshot.data as List<Colaboracion>)
                               .map((e) => DefaultCardModel(
+                                  onPress: () {
+                                    Navigator.of(context).pushNamed(
+                                        NavigatorRoutes.collaborationDetail(
+                                            e.id));
+                                  },
                                   autor: e.autor.nombre,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
@@ -180,23 +193,7 @@ class _HomePageState extends State<HomePage> {
                                       e.fechaPublicacion)))
                               .toList());
                     })),
-                spacerXL,
-                spacerXL,
-                Container(
-                  width: double.infinity,
-                  color: MuiPalette.BROWN,
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Logo(
-                        height: 50,
-                      ),
-                      spacerS,
-                      const PrivacyFooter(),
-                    ],
-                  ),
-                ),
+                const FullFooter()
               ],
             ),
           )
