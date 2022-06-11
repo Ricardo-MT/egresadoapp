@@ -1,3 +1,4 @@
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
@@ -33,31 +34,41 @@ class NavigationDrawer extends StatelessWidget {
               )),
           spacerM,
           MuiButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.home);
+            },
             text: "Inicio",
             fontSize: 24,
             variant: MuiButtonVariant.LINK,
           ),
           MuiButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.events);
+            },
             text: "Eventos",
             fontSize: 24,
             variant: MuiButtonVariant.LINK,
           ),
           MuiButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.collaboration);
+            },
             text: "Colaboraciones",
             fontSize: 24,
             variant: MuiButtonVariant.LINK,
           ),
           MuiButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.offers);
+            },
             text: "Ofertas laborales",
             fontSize: 24,
             variant: MuiButtonVariant.LINK,
           ),
           MuiButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.users);
+            },
             text: "Usuarios",
             fontSize: 24,
             variant: MuiButtonVariant.LINK,
