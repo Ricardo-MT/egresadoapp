@@ -6,21 +6,6 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [
-      {
-        "source": "^https://firebasestorage.googleapis.com",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, PUT, DELETE, OPTIONS, HEAD"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Origin, X-Requested-With, Content-Type, Accept"
-          }
-        ]
-      }
-    ],
     "rewrites": [
       {
         "source": "**",
