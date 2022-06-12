@@ -1,4 +1,3 @@
-import 'package:egresadoapp/api/endpoints/api.dart';
 import 'package:flutter/material.dart';
 
 enum MuiAvatarImageSize { s, m, l }
@@ -45,7 +44,13 @@ class AvatarImage extends StatelessWidget {
               )
             : Image.network(
                 url!,
-                headers: {"Origin": Api.URL},
+                headers: const {
+                  "Origin": "https://egresadoapp.web.app",
+                  "Access-Control-Allow-Origin": "*",
+                  "Accept": "*/*",
+                  "Access-Control-Allow-Methods":
+                      "GET, POST, PUT, DELETE, OPTIONS, HEAD"
+                },
                 errorBuilder: (context, object, tr) {
                   return Image.asset(
                     "assets/images/user.png",
