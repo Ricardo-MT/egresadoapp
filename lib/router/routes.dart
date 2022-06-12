@@ -34,6 +34,7 @@ class Routes {
   static String users = "/usuarios";
   static String userProfile = "/perfil/:id";
   static String userProfileEdit = "/editar_perfil/:id";
+  static String userRolEdit = "/editar_rol/:id";
 
   // ACERCA DE
   static String about = "/conocenos";
@@ -75,6 +76,7 @@ class NavigatorRoutes {
   static String users = Routes.users;
   static String userProfile(id) => "/perfil/$id";
   static String userProfileEdit(id) => "/editar_perfil/$id";
+  static String userRolEdit(id) => "/editar_rol/$id";
 
   // ACERCA DE
   static String about = Routes.about;

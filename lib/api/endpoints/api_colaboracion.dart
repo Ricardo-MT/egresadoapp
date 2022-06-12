@@ -58,7 +58,21 @@ class ApiColaboracion {
     return Colaboracion.fromJson(res["colaboracion"]);
   }
 
-  static Future<void> delete(Colaboracion colaboracion) async {
-    await Api.DELETE_REQUEST(Api.COLABORACIONES + "/${colaboracion.id}");
+  static Future<void> delete(Colaboracion colaboracion) =>
+      Api.DELETE_REQUEST(Api.COLABORACIONES + "/${colaboracion.id}");
+
+  static Future<bool> canCreate() async {
+    dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/puede_crear");
+    return res["allowed"].runtimeType == bool && res["allowed"];
+  }
+
+  static Future<bool> canEdit() async {
+    dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/puede_editar");
+    return res["allowed"].runtimeType == bool && res["allowed"];
+  }
+
+  static Future<bool> canDelete() async {
+    dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/puede_eliminar");
+    return res["allowed"].runtimeType == bool && res["allowed"];
   }
 }

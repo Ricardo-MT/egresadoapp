@@ -39,40 +39,34 @@ class OfertaDetalle extends StatelessWidget {
                     constraints: const BoxConstraints(maxWidth: 700),
                     child: Row(
                       children: [
-                        FutureBuilder(
-                            future: puedeEliminarColaboracion(context),
-                            builder: ((context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return spacerExpanded;
-                              }
-                              return IconButton(
-                                tooltip: "Eliminar oferta laboral",
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: MuiPalette.BROWN,
-                                ),
-                                onPressed: () async {
-                                  bool? res = await showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return const ConfirmationModal(
-                                          title: "Eliminando oferta laboral",
-                                          text:
-                                              "Estás a punto de eliminar esta oferta laboral. ¿Continuar?",
-                                        );
-                                      });
+                        MuiConditionalWidget(
+                            child: IconButton(
+                              tooltip: "Eliminar oferta laboral",
+                              icon: Icon(
+                                Icons.delete,
+                                color: MuiPalette.BROWN,
+                              ),
+                              onPressed: () async {
+                                bool? res = await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const ConfirmationModal(
+                                        title: "Eliminando oferta laboral",
+                                        text:
+                                            "Estás a punto de eliminar esta oferta laboral. ¿Continuar?",
+                                      );
+                                    });
 
-                                  if (res == true) {
-                                    try {
-                                      await ApiOfertas.delete(oferta);
-                                    } catch (e) {}
-                                    Navigator.of(context)
-                                        .pushReplacementNamed(Routes.offers);
-                                  }
-                                },
-                              );
-                            })),
+                                if (res == true) {
+                                  try {
+                                    await ApiOfertas.delete(oferta);
+                                  } catch (e) {}
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(Routes.offers);
+                                }
+                              },
+                            ),
+                            permision: puedeEliminarOferta(context)),
                         spacerExpanded,
                         const MuiPageTitle(label: "Oferta laboral"),
                         spacerExpanded,

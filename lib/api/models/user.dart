@@ -114,6 +114,9 @@ extension RolExtension on Rol {
 }
 
 String getLabelByRol(String rol) {
+  print("LLEGA");
+  print(rol);
+
   if (rol == Rol.egresado.value) {
     return "Egresad@";
   }

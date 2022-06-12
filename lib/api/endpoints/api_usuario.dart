@@ -43,7 +43,17 @@ class ApiUsuario {
 
   static Future<User> edit(User user) async {
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
-
     return User.fromJson(res["usuario"]);
+  }
+
+  static Future<User> editRol(User user) async {
+    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS + "/editar_rol",
+        body: {"_id": user.id, "rol": user.rol});
+    return User.fromJson(res["usuario"]);
+  }
+
+  static Future<bool> canEditRol() async {
+    dynamic res = await Api.GET_REQUEST(Api.USUARIOS + "/puede_editar_rol");
+    return res["allowed"].runtimeType == bool && res["allowed"];
   }
 }

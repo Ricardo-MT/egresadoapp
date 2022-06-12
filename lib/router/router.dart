@@ -27,6 +27,7 @@ import 'package:egresadoapp/pages/politica/privacy.dart';
 import 'package:egresadoapp/pages/politica/terms.dart';
 import 'package:egresadoapp/pages/usuario/usuario_detalle.dart';
 import 'package:egresadoapp/pages/usuario/usuario_editar.dart';
+import 'package:egresadoapp/pages/usuario/usuario_editar_rol.dart';
 import 'package:egresadoapp/pages/usuario/usuarios.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
@@ -108,6 +109,9 @@ class MuiRouter {
         transitionType: _getTransitionType());
     router.define(Routes.userProfileEdit,
         handler: MuiHandlers._userProfileEdit,
+        transitionType: _getTransitionType());
+    router.define(Routes.userRolEdit,
+        handler: MuiHandlers._userRolEdit,
         transitionType: _getTransitionType());
 
     // ACERCA DE
@@ -370,6 +374,39 @@ class MuiHandlers {
   static final Handler _userProfileEdit =
       Handler(handlerFunc: ((context, parameters) {
     return const UsuarioEditar();
+  }));
+  static final Handler _userRolEdit =
+      Handler(handlerFunc: ((context, parameters) {
+    String id = parameters["id"]!.first;
+    User? user;
+    bool allowed = false;
+    return FutureBuilder(
+        future: Future.wait([
+          ApiUsuario.fetchById(id).then((value) {
+            user = value;
+          }),
+          puedeEditarRol(context).then((value) {
+            allowed = value;
+          })
+        ]),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          if (user == null) {
+            return const Text("Ese usuario no existe");
+          }
+          if (!allowed) {
+            return const Text(
+                "No tienes permiso para editar el rol de este usuario");
+          }
+          return UsuarioEditarRol(
+            original: user!,
+          );
+        }));
   }));
 
   // ACERCA DE

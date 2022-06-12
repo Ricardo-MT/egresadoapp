@@ -59,4 +59,19 @@ class ApiEventos {
 
   static Future<void> delete(Evento evento) =>
       Api.DELETE_REQUEST(Api.EVENTOS + "/${evento.id}");
+
+  static Future<bool> canCreate() async {
+    dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/puede_crear");
+    return res["allowed"].runtimeType == bool && res["allowed"];
+  }
+
+  static Future<bool> canEdit() async {
+    dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/puede_editar");
+    return res["allowed"].runtimeType == bool && res["allowed"];
+  }
+
+  static Future<bool> canDelete() async {
+    dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/puede_eliminar");
+    return res["allowed"].runtimeType == bool && res["allowed"];
+  }
 }
