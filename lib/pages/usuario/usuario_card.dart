@@ -3,6 +3,7 @@ import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/decorations.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/widgets/images/avatar_image.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/tupla/tupla.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,13 @@ class UsuarioCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _userIcon,
+          Padding(
+            padding: EdgeInsets.zero.copyWith(right: cardPadding.left),
+            child: AvatarImage(
+              url: usuario.avatar,
+              customSize: 30,
+            ),
+          ),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

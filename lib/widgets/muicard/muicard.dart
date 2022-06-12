@@ -1,3 +1,4 @@
+import 'package:egresadoapp/api/models/user.dart';
 import 'package:egresadoapp/utils/decorations.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/styles/muibuttonstyles.dart';
@@ -72,15 +73,18 @@ class MuiDefaultCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Tupla(
-                      icon: Icons.person,
-                      text: entidad.autor,
-                      size: MuiTuplaSize.m,
-                    ),
-                    Tupla(
-                      icon: Icons.calendar_today_rounded,
-                      text: entidad.fecha,
-                      size: MuiTuplaSize.m,
+                    TuplaImage(
+                        url: entidad.autor.avatar,
+                        selectable: false,
+                        withHero: false,
+                        text: entidad.autor.nombre),
+                    Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: Tupla(
+                        icon: Icons.calendar_today_rounded,
+                        text: entidad.fecha,
+                        size: MuiTuplaSize.m,
+                      ),
                     )
                   ],
                 ),
@@ -96,13 +100,13 @@ class MuiDefaultCard extends StatelessWidget {
 }
 
 const defaultCardWidth = 340.0;
-const defaultCardHeight = 200.0;
+const defaultCardHeight = 210.0;
 const defaultCardAspectRatio = defaultCardWidth / defaultCardHeight;
 
 class DefaultCardModel {
   String titulo;
   String descripcion;
-  String autor;
+  User autor;
   String fecha;
   VoidCallback? onPress;
   DefaultCardModel(

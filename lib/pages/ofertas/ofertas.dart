@@ -106,7 +106,7 @@ class _OfertasPageState extends State<OfertasPage> {
                                             NavigatorRoutes.offerDetail(
                                                 oferta.id));
                                       },
-                                      autor: oferta.autor.nombre,
+                                      autor: oferta.autor,
                                       descripcion: oferta.descripcion,
                                       titulo: oferta.titulo,
                                       fecha: formatUnixDateToString(

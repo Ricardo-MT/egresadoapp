@@ -119,9 +119,10 @@ class EventoDetalle extends StatelessWidget {
                                           NavigatorRoutes.userProfile(
                                               evento.autor.id));
                                     },
-                                    child: Tupla(
-                                        icon: Icons.person,
+                                    child: TuplaImage(
+                                        url: evento.autor.avatar,
                                         selectable: false,
+                                        withHero: true,
                                         text: evento.autor.nombre),
                                   ),
                                 ),

@@ -106,7 +106,7 @@ class _EventosPageState extends State<EventosPage> {
                                             NavigatorRoutes.eventDetail(
                                                 evento.id));
                                       },
-                                      autor: evento.autor.nombre,
+                                      autor: evento.autor,
                                       descripcion: evento.descripcion,
                                       titulo: evento.titulo,
                                       fecha: formatUnixDateToString(

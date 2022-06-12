@@ -123,9 +123,10 @@ class ColaboracionDetalle extends StatelessWidget {
                                             NavigatorRoutes.userProfile(
                                                 colaboracion.autor.id));
                                       },
-                                      child: Tupla(
-                                          icon: Icons.person,
+                                      child: TuplaImage(
+                                          url: colaboracion.autor.avatar,
                                           selectable: false,
+                                          withHero: true,
                                           text: colaboracion.autor.nombre),
                                     ),
                                   ],

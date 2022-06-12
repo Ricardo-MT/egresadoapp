@@ -65,6 +65,9 @@ class UsuarioDetalle extends StatelessWidget {
                                       } catch (e) {}
                                       Navigator.of(context)
                                           .pushReplacementNamed(Routes.home);
+                                      Provider.of<UsuarioProvider>(context,
+                                              listen: false)
+                                          .set(null);
                                     }
                                   },
                                   text: "Cerrar sesión"),

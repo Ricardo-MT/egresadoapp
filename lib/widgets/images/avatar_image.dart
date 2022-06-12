@@ -4,10 +4,15 @@ enum MuiAvatarImageSize { s, m, l }
 
 class AvatarImage extends StatelessWidget {
   double? customSize;
+  bool withHero;
   MuiAvatarImageSize size;
   String? url;
   AvatarImage(
-      {Key? key, this.size = MuiAvatarImageSize.s, this.customSize, this.url})
+      {Key? key,
+      this.size = MuiAvatarImageSize.s,
+      this.withHero = false,
+      this.customSize,
+      this.url})
       : super(key: key);
 
   @override
@@ -26,16 +31,13 @@ class AvatarImage extends StatelessWidget {
       default:
     }
     s = customSize ?? s;
-    return SizedBox(
+    Widget component = SizedBox(
       width: s,
       height: s,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(s / 2),
         clipBehavior: Clip.hardEdge,
         child: url == null
-            // https://egresadoapp.web.app
-            // https://egresadoapp.firebaseapp.com
-            // http://localhost:8000
             ? Image.asset(
                 "assets/images/user.png",
                 fit: BoxFit.cover,
@@ -45,11 +47,11 @@ class AvatarImage extends StatelessWidget {
             : Image.network(
                 url!,
                 headers: const {
-                  "Origin": "https://egresadoapp.web.app",
                   "Access-Control-Allow-Origin": "*",
-                  "Accept": "*/*",
                   "Access-Control-Allow-Methods":
-                      "GET, POST, PUT, DELETE, OPTIONS, HEAD"
+                      "GET, POST, PUT, DELETE, OPTIONS, HEAD",
+                  "Access-Control-Allow-Headers":
+                      "Origin, X-Requested-With, Content-Type, Accept"
                 },
                 errorBuilder: (context, object, tr) {
                   return Image.asset(
@@ -65,5 +67,6 @@ class AvatarImage extends StatelessWidget {
               ),
       ),
     );
+    return withHero ? Hero(tag: "avatar$url", child: component) : component;
   }
 }

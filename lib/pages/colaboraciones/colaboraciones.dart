@@ -110,7 +110,7 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                                             NavigatorRoutes.collaborationDetail(
                                                 colaboracion.id));
                                       },
-                                      autor: colaboracion.autor.nombre,
+                                      autor: colaboracion.autor,
                                       descripcion: colaboracion.descripcion,
                                       titulo: colaboracion.titulo,
                                       fecha: formatUnixDateToString(

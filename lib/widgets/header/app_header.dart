@@ -1,6 +1,7 @@
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
+import 'package:egresadoapp/widgets/images/avatar_image.dart';
 import 'package:egresadoapp/widgets/logo/logo.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,10 @@ class _MuiAppHeader extends State<MuiAppHeader> {
                           NavigatorRoutes.userProfile(provider.user!.id));
                     }
                   },
-                  icon: const Icon(Icons.person));
+                  icon: AvatarImage(
+                    url: provider.user?.avatar,
+                    customSize: 50,
+                  ));
             },
           ),
         ],

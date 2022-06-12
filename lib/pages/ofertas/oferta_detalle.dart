@@ -123,9 +123,10 @@ class OfertaDetalle extends StatelessWidget {
                                             NavigatorRoutes.userProfile(
                                                 oferta.autor.id));
                                       },
-                                      child: Tupla(
-                                          icon: Icons.person,
+                                      child: TuplaImage(
+                                          url: oferta.autor.avatar,
                                           selectable: false,
+                                          withHero: true,
                                           text: oferta.autor.nombre),
                                     ),
                                     Tupla(

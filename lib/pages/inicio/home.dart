@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.of(context).pushNamed(
                                         NavigatorRoutes.offerDetail(e.id));
                                   },
-                                  autor: e.autor.nombre,
+                                  autor: e.autor,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
                                   fecha: formatUnixDateToString(
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.of(context).pushNamed(
                                         NavigatorRoutes.eventDetail(e.id));
                                   },
-                                  autor: e.autor.nombre,
+                                  autor: e.autor,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
                                   fecha: formatUnixDateToString(e.fecha)))
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                                         NavigatorRoutes.collaborationDetail(
                                             e.id));
                                   },
-                                  autor: e.autor.nombre,
+                                  autor: e.autor,
                                   descripcion: e.descripcion,
                                   titulo: e.titulo,
                                   fecha: formatUnixDateToString(

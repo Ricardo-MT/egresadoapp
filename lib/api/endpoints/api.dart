@@ -9,7 +9,7 @@ import '../../utils/errors.dart';
 const current = String.fromEnvironment("target");
 final allHeaders = {
   "Accept": "*/*",
-  "Access-Control-Allow-Origin": "http://localhost:8000",
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD"
 };
 final allHeadersWithContentType = {
