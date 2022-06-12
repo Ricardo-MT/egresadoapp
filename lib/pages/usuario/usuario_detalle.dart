@@ -54,23 +54,24 @@ class UsuarioDetalle extends StatelessWidget {
                                 children: [
                                   MuiButton(
                                       variant: MuiButtonVariant.LINK,
-                                      onPressed: () {
-                                        showDialog(
+                                      onPressed: () async {
+                                        bool? res = await showDialog(
                                             context: context,
                                             builder: (context) {
-                                              return ConfirmationModal(
-                                                  title: "Cerrando sesión",
-                                                  text:
-                                                      "Estás a punto de cerrar sesión. ¿Continuar?",
-                                                  callback: () async {
-                                                    try {
-                                                      await ApiAuth.logout();
-                                                    } catch (e) {}
-                                                    Navigator.of(context)
-                                                        .pushReplacementNamed(
-                                                            Routes.home);
-                                                  });
+                                              return const ConfirmationModal(
+                                                title: "Cerrando sesión",
+                                                text:
+                                                    "Estás a punto de cerrar sesión. ¿Continuar?",
+                                              );
                                             });
+                                        if (res == true) {
+                                          try {
+                                            await ApiAuth.logout();
+                                          } catch (e) {}
+                                          Navigator.of(context)
+                                              .pushReplacementNamed(
+                                                  Routes.home);
+                                        }
                                       },
                                       text: "Cerrar sesión"),
                                   IconButton(

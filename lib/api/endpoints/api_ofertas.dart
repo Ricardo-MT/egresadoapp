@@ -1,6 +1,5 @@
 import 'package:egresadoapp/api/models/filters.dart';
 import 'package:egresadoapp/api/models/oferta.dart';
-import 'package:egresadoapp/api/models/user.dart';
 
 import 'api.dart';
 
@@ -44,9 +43,18 @@ class ApiOfertas {
     return Oferta.fromJson(res["oferta"]);
   }
 
-  static Future<User> edit(User user) async {
-    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
+  static Future<Oferta> create(OfertaCreating oferta) async {
+    dynamic res = await Api.POST_REQUEST(Api.OFERTAS, oferta.toJson());
 
-    return User.fromJson(res["usuario"]);
+    return Oferta.fromJson(res["oferta"]);
   }
+
+  static Future<Oferta> edit(OfertaEditing oferta) async {
+    dynamic res = await Api.PUT_REQUEST(Api.OFERTAS, body: oferta.toJson());
+
+    return Oferta.fromJson(res["oferta"]);
+  }
+
+  static Future<void> delete(Oferta oferta) =>
+      Api.DELETE_REQUEST(Api.OFERTAS + "/${oferta.id}");
 }

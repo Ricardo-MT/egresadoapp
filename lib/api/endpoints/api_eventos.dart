@@ -1,6 +1,5 @@
 import 'package:egresadoapp/api/models/evento.dart';
 import 'package:egresadoapp/api/models/filters.dart';
-import 'package:egresadoapp/api/models/user.dart';
 
 import 'api.dart';
 
@@ -46,9 +45,18 @@ class ApiEventos {
     return Evento.fromJson(res["evento"]);
   }
 
-  static Future<User> edit(User user) async {
-    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
+  static Future<Evento> create(EventoCreating evento) async {
+    dynamic res = await Api.POST_REQUEST(Api.EVENTOS, evento.toJson());
 
-    return User.fromJson(res["usuario"]);
+    return Evento.fromJson(res["evento"]);
   }
+
+  static Future<Evento> edit(EventoEditing evento) async {
+    dynamic res = await Api.PUT_REQUEST(Api.EVENTOS, body: evento.toJson());
+
+    return Evento.fromJson(res["evento"]);
+  }
+
+  static Future<void> delete(Evento evento) =>
+      Api.DELETE_REQUEST(Api.EVENTOS + "/${evento.id}");
 }

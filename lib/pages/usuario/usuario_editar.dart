@@ -2,6 +2,7 @@ import 'package:egresadoapp/api/endpoints/api_idioma.dart';
 import 'package:egresadoapp/api/endpoints/api_skills.dart';
 import 'package:egresadoapp/api/endpoints/api_usuario.dart';
 import 'package:egresadoapp/api/models/user.dart';
+import 'package:egresadoapp/pages/ofertas/oferta_crear.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
@@ -189,9 +190,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
                 controller: descripcionController,
                 label: "Descripción",
               ),
-              spacerS,
-              const Divider(),
-              spacerS,
+              formDivider,
               Row(
                 children: [
                   Expanded(
@@ -209,9 +208,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
               ),
               const Text(
                   "Si tu perfil no es público, los únicos que podrán contactarte a través de la plataforma serán los colaboradores."),
-              spacerS,
-              const Divider(),
-              spacerS,
+              formDivider,
               MuiSelect(
                 label: "Estado",
                 transformer: getLabelByEstado,
@@ -220,7 +217,9 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
                 values: listaEstados,
                 value: edited.estado,
                 onChanged: (v) {
-                  if (v != null) {}
+                  if (v != null) {
+                    estadoController.text = v;
+                  }
                 },
               ),
               spacerS,
@@ -328,9 +327,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
                   ),
                 ],
               ),
-              spacerS,
-              const Divider(),
-              spacerS,
+              formDivider,
               Align(
                   alignment: Alignment.centerLeft,
                   child: MuiSelectTags(

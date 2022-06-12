@@ -1,17 +1,23 @@
+import 'package:egresadoapp/api/endpoints/api_eventos.dart';
 import 'package:egresadoapp/api/models/evento.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/utils/permissions.dart';
+import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
 import 'package:egresadoapp/widgets/button/touchable.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
+import 'package:egresadoapp/widgets/modals/confirmationmodal.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/skills/skill_tag.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:egresadoapp/widgets/tupla/tupla.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EventoDetalle extends StatelessWidget {
   Evento evento;
@@ -27,11 +33,60 @@ class EventoDetalle extends StatelessWidget {
           child: Center(
               child: Column(
             children: [
-              Text("Evento",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: MuiPalette.BLACK,
-                      fontSize: 26)),
+              Consumer<UsuarioProvider>(
+                builder: (context, provider, child) {
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 700),
+                    child: Row(
+                      children: [
+                        MuiConditionalWidget(
+                            child: IconButton(
+                              tooltip: "Eliminar evento",
+                              icon: Icon(
+                                Icons.delete,
+                                color: MuiPalette.BROWN,
+                              ),
+                              onPressed: () async {
+                                bool? res = await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const ConfirmationModal(
+                                        title: "Eliminando evento",
+                                        text:
+                                            "Estás a punto de eliminar este evento. ¿Continuar?",
+                                      );
+                                    });
+                                if (res == true) {
+                                  try {
+                                    await ApiEventos.delete(evento);
+                                  } catch (e) {}
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(Routes.events);
+                                }
+                              },
+                            ),
+                            permision: puedeEliminarEvento(context)),
+                        spacerExpanded,
+                        const MuiPageTitle(label: "Evento"),
+                        spacerExpanded,
+                        MuiConditionalWidget(
+                            child: IconButton(
+                              tooltip: "Editar oferta laboral",
+                              icon: Icon(
+                                Icons.border_color,
+                                color: MuiPalette.BROWN,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                    NavigatorRoutes.eventEdit(evento.id));
+                              },
+                            ),
+                            permision: puedeEditarEvento(context))
+                      ],
+                    ),
+                  );
+                },
+              ),
               spacerS,
               MuiCard(
                   width: 700,
@@ -57,30 +112,33 @@ class EventoDetalle extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MuiTouchable(
-                                      onPress: () {
-                                        Navigator.of(context).pushNamed(
-                                            NavigatorRoutes.userProfile(
-                                                evento.autor.id));
-                                      },
-                                      child: Tupla(
-                                          icon: Icons.person,
-                                          selectable: false,
-                                          text: evento.autor.nombre),
-                                    ),
-                                    Tupla(
-                                        icon: Icons.location_on,
-                                        text: evento.localizacion),
-                                  ],
+                                Expanded(
+                                  child: MuiTouchable(
+                                    onPress: () {
+                                      Navigator.of(context).pushNamed(
+                                          NavigatorRoutes.userProfile(
+                                              evento.autor.id));
+                                    },
+                                    child: Tupla(
+                                        icon: Icons.person,
+                                        selectable: false,
+                                        text: evento.autor.nombre),
+                                  ),
                                 ),
                                 Tupla(
                                     icon: Icons.calendar_today_rounded,
                                     text: formatUnixDateTimeToString(
                                         evento.fecha)),
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Tupla(
+                                    icon: Icons.location_on,
+                                    text: evento.localizacion),
                               ],
                             ),
                             spacerS,

@@ -7,6 +7,7 @@ import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/utils/permissions.dart';
+import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/filters/filter_model.dart';
@@ -69,14 +70,14 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                           listen: false)
                       .setSearch),
               spacerExpanded,
-              Visibility(
-                  visible: puedeCrearColaboracion(context),
+              MuiConditionalWidget(
                   child: MuiButton(
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(NavigatorRoutes.collaborationCreate);
                       },
-                      text: "Crear colaboración"))
+                      text: "Crear colaboración"),
+                  permision: puedeCrearColaboracion(context))
             ],
           ),
           const SliverToBoxAdapter(

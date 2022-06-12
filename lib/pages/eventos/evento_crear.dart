@@ -1,5 +1,9 @@
+import 'package:egresadoapp/api/endpoints/api_eventos.dart';
 import 'package:egresadoapp/api/endpoints/api_skills.dart';
+import 'package:egresadoapp/api/models/evento.dart';
+import 'package:egresadoapp/pages/ofertas/oferta_crear.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
 import 'package:egresadoapp/utils/validators.dart';
 import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
@@ -12,8 +16,8 @@ import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class EventoCrear extends StatelessWidget {
-  const EventoCrear({Key? key}) : super(key: key);
+class EventoCrearPage extends StatelessWidget {
+  const EventoCrearPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +35,33 @@ class EventoCrear extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingPage();
                 }
+                EventoCreating evento = EventoCreating(
+                    titulo: "",
+                    descripcion: "",
+                    skills: [],
+                    fecha: DateTime.now().millisecondsSinceEpoch,
+                    localizacion: "");
+
                 return FadeInWrapper(
                     index: 2,
-                    child: _EventoCrear(
+                    child: EventoCrear(
+                      pageTitle: "Creando evento",
+                      eventoOriginal: evento,
                       skills: skills,
+                      handleSave: (EventoCreating nuevoEvento) async {
+                        LoadingHandler.showLoading(context);
+                        String? target;
+                        try {
+                          Evento eventoCreated =
+                              await ApiEventos.create(nuevoEvento);
+                          target =
+                              NavigatorRoutes.eventDetail(eventoCreated.id);
+                        } catch (e) {}
+                        LoadingHandler.hideLoading(context);
+                        if (target != null) {
+                          Navigator.of(context).pushReplacementNamed(target);
+                        }
+                      },
                     ));
               }));
         },
@@ -43,57 +70,68 @@ class EventoCrear extends StatelessWidget {
   }
 }
 
-class _EventoCrear extends StatefulWidget {
+class EventoCrear extends StatefulWidget {
+  final String pageTitle;
   final List<String> skills;
-  const _EventoCrear({Key? key, required this.skills}) : super(key: key);
+  final Function(EventoCreating nuevoEvento) handleSave;
+  final EventoCreating eventoOriginal;
+  const EventoCrear(
+      {Key? key,
+      required this.skills,
+      required this.eventoOriginal,
+      required this.handleSave,
+      required this.pageTitle})
+      : super(key: key);
 
   @override
-  State<_EventoCrear> createState() => _EventoCrearInnerState();
+  State<EventoCrear> createState() => EventoCrearInnerState();
 }
 
-class _EventoCrearInnerState extends State<_EventoCrear> {
-  late final _formKey;
+class EventoCrearInnerState extends State<EventoCrear> {
+  late final GlobalKey<FormState> _formKey;
+  late EventoCreating evento;
   late TextEditingController tituloController;
   late TextEditingController descripcionController;
-  late TextEditingController presencialidadController;
+
   late TextEditingController localizacionController;
-  late TextEditingController empleadorController;
-  late TextEditingController expController;
+  late TextEditingController hostsController;
+  late TextEditingController contactoController;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    tituloController = TextEditingController();
-    descripcionController = TextEditingController();
-    presencialidadController = TextEditingController();
-    localizacionController = TextEditingController();
-    empleadorController = TextEditingController();
-    expController = TextEditingController();
+
+    evento = EventoCreating.fromCopy(widget.eventoOriginal);
+
+    tituloController = TextEditingController(text: evento.titulo);
+    descripcionController = TextEditingController(text: evento.descripcion);
+
+    localizacionController = TextEditingController(text: evento.localizacion);
+    hostsController = TextEditingController(text: evento.hosts);
+    contactoController = TextEditingController(text: evento.contacto);
   }
 
   void nextState() {
     setState(() {});
   }
 
-  Future<void> handleSave() async {
+  handleSave() {
     if (_formKey.currentState!.validate()) {
-      LoadingHandler.showLoading(context);
-      String? target;
-      try {
-        // API CALL, ACTUALIZAR TARGET
-        target = "";
-      } catch (e) {}
-      LoadingHandler.hideLoading(context);
+      evento.titulo = tituloController.value.text;
+      evento.descripcion = descripcionController.value.text;
 
-      // NAVEGAR AL TARGET
+      evento.localizacion = localizacionController.value.text;
+      evento.hosts = hostsController.value.text;
+      evento.contacto = contactoController.value.text;
+      widget.handleSave(evento);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MuiDataScreen(
-      pageTitle: "Creando evento",
+      pageTitle: widget.pageTitle,
       child: Form(
         key: _formKey,
         child: Column(
@@ -111,52 +149,41 @@ class _EventoCrearInnerState extends State<_EventoCrear> {
               controller: descripcionController,
               label: "Descripción",
             ),
-            spacerS,
-            const Divider(),
-            spacerS,
+            formDivider,
             Align(
                 alignment: Alignment.centerLeft,
                 child: MuiSelectTags(
                   label: "Skills",
                   list: widget.skills,
-                  selected: const [],
+                  selected: evento.skills,
                   onConfirm: (newList) {
-                    // ACTUALIZAR LISTA
+                    evento.skills = newList;
                     nextState();
                   },
                 )),
-            spacerS,
-            const Divider(),
-            spacerS,
+            formDivider,
             MuiInput(
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
-              controller: tituloController,
+              controller: localizacionController,
               label: "Localización",
             ),
             spacerS,
             MuiInput(
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
-              controller: descripcionController,
-              label: "Empleador",
+              controller: hostsController,
+              label: "Organizadores",
             ),
-            spacerS,
-            MuiInput(
-              validator: Validators.validateIsEmpty,
-              color: MuiInputColor.DARK,
-              controller: tituloController,
-              label: "Título",
-            ),
-            spacerS,
+            formDivider,
             MuiInput(
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
-              controller: descripcionController,
-              label: "Descripción",
+              controller: contactoController,
+              label: "Contacto",
             ),
             spacerXL,
-            MuiButton(onPressed: handleSave, text: "Crear evento"),
+            MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
             spacerXL,
           ],
         ),

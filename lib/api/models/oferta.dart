@@ -33,7 +33,7 @@ extension PresencialidadExtension on Presencialidad {
       case Presencialidad.presencial:
         return 'presencial';
       case Presencialidad.teletrabajo:
-        return 'teletrabjo';
+        return 'teletrabajo';
       case Presencialidad.mixta:
         return 'mixta';
       case Presencialidad.flexible:
@@ -60,13 +60,14 @@ String getLabelByPresencialidad(String estado) {
   return "-";
 }
 
-class Oferta {
-  String id;
-  User autor;
+const listaPresencialidad = ["presencial", "teletrabajo", "mixta", "flexible"];
+
+const listaJornadas = ["partida", "completa"];
+
+class OfertaBase {
   String titulo;
   String descripcion;
   List<String> skillsRequeridos;
-  int fechaPublicacion;
   String localizacion;
   String empleador;
   String salario;
@@ -74,20 +75,92 @@ class Oferta {
   String presencialidad;
   String experienciaMinima;
   String contacto;
+  OfertaBase(
+      {required this.contacto,
+      required this.descripcion,
+      required this.empleador,
+      required this.experienciaMinima,
+      required this.localizacion,
+      required this.presencialidad,
+      required this.salario,
+      required this.skillsRequeridos,
+      required this.tipoJornada,
+      required this.titulo});
+
+  factory OfertaBase.fromJson(Map<String, dynamic> map) {
+    return OfertaBase(
+        titulo: map["titulo"],
+        descripcion: map["descripcion"],
+        skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
+            .map((e) => e.toString())
+            .toList(),
+        localizacion: map["localizacion"],
+        empleador: map["empleador"],
+        experienciaMinima: map["experienciaMinima"],
+        contacto: map["contacto"],
+        presencialidad: map["presencialidad"],
+        salario: map["salario"],
+        tipoJornada: map["tipoJornada"]);
+  }
+  factory OfertaBase.fromCopy(OfertaBase oferta) {
+    return OfertaBase(
+        titulo: oferta.titulo,
+        descripcion: oferta.descripcion,
+        skillsRequeridos: oferta.skillsRequeridos.toList(),
+        localizacion: oferta.localizacion,
+        empleador: oferta.empleador,
+        experienciaMinima: oferta.experienciaMinima,
+        contacto: oferta.contacto,
+        presencialidad: oferta.presencialidad,
+        salario: oferta.salario,
+        tipoJornada: oferta.tipoJornada);
+  }
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      "titulo": titulo,
+      "descripcion": descripcion,
+      "skillsRequeridos": skillsRequeridos.toList(),
+      "localizacion": localizacion,
+      "empleador": empleador,
+      "experienciaMinima": experienciaMinima,
+      "contacto": contacto,
+      "presencialidad": presencialidad,
+      "salario": salario,
+      "tipoJornada": tipoJornada
+    };
+    return map;
+  }
+}
+
+class Oferta extends OfertaBase {
+  String id;
+  User autor;
+  int fechaPublicacion;
   Oferta(
       {required this.id,
       required this.autor,
-      required this.titulo,
-      required this.descripcion,
-      required this.skillsRequeridos,
       required this.fechaPublicacion,
-      required this.localizacion,
-      required this.empleador,
-      required this.experienciaMinima,
-      required this.contacto,
-      required this.presencialidad,
-      required this.salario,
-      required this.tipoJornada});
+      required String titulo,
+      required String descripcion,
+      required List<String> skillsRequeridos,
+      required String localizacion,
+      required String empleador,
+      required String experienciaMinima,
+      required String contacto,
+      required String presencialidad,
+      required String salario,
+      required String tipoJornada})
+      : super(
+            contacto: contacto,
+            titulo: titulo,
+            descripcion: descripcion,
+            skillsRequeridos: skillsRequeridos,
+            salario: salario,
+            empleador: empleador,
+            localizacion: localizacion,
+            experienciaMinima: experienciaMinima,
+            presencialidad: presencialidad,
+            tipoJornada: tipoJornada);
   factory Oferta.fromJson(Map<String, dynamic> map) {
     return Oferta(
         id: map["_id"],
@@ -122,21 +195,136 @@ class Oferta {
         salario: oferta.salario,
         tipoJornada: oferta.tipoJornada);
   }
+  @override
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = {
+      ...super.toJson(),
       "_id": id,
       "autor": autor.id,
-      "titulo": titulo,
-      "descripcion": descripcion,
-      "skillsRequeridos": skillsRequeridos.toList(),
       "fechaPublicacion": fechaPublicacion,
-      "localizacion": localizacion,
-      "empleador": empleador,
-      "experienciaMinima": experienciaMinima,
-      "contacto": contacto,
-      "presencialidad": presencialidad,
-      "salario": salario,
-      "tipoJornada": tipoJornada
+    };
+    return map;
+  }
+}
+
+class OfertaCreating extends OfertaBase {
+  OfertaCreating({
+    required String titulo,
+    required String descripcion,
+    required List<String> skillsRequeridos,
+    required String localizacion,
+    required String empleador,
+    required String salario,
+    required String tipoJornada,
+    required String presencialidad,
+    required String experienciaMinima,
+    required String contacto,
+  }) : super(
+            contacto: contacto,
+            descripcion: descripcion,
+            empleador: empleador,
+            experienciaMinima: experienciaMinima,
+            localizacion: localizacion,
+            presencialidad: presencialidad,
+            salario: salario,
+            skillsRequeridos: skillsRequeridos,
+            tipoJornada: tipoJornada,
+            titulo: titulo);
+  factory OfertaCreating.fromJson(Map<String, dynamic> map) {
+    return OfertaCreating(
+        titulo: map["titulo"],
+        descripcion: map["descripcion"],
+        skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
+            .map((e) => e.toString())
+            .toList(),
+        localizacion: map["localizacion"],
+        empleador: map["empleador"],
+        experienciaMinima: map["experienciaMinima"],
+        contacto: map["contacto"],
+        presencialidad: map["presencialidad"],
+        salario: map["salario"],
+        tipoJornada: map["tipoJornada"]);
+  }
+  factory OfertaCreating.fromCopy(OfertaCreating oferta) {
+    return OfertaCreating(
+        titulo: oferta.titulo,
+        descripcion: oferta.descripcion,
+        skillsRequeridos: oferta.skillsRequeridos.toList(),
+        localizacion: oferta.localizacion,
+        empleador: oferta.empleador,
+        experienciaMinima: oferta.experienciaMinima,
+        contacto: oferta.contacto,
+        presencialidad: oferta.presencialidad,
+        salario: oferta.salario,
+        tipoJornada: oferta.tipoJornada);
+  }
+  @override
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {...super.toJson()};
+    return map;
+  }
+}
+
+class OfertaEditing extends OfertaBase {
+  String id;
+  OfertaEditing(
+      {required this.id,
+      required String contacto,
+      required String descripcion,
+      required String empleador,
+      required String experienciaMinima,
+      required String localizacion,
+      required String presencialidad,
+      required String salario,
+      required List<String> skillsRequeridos,
+      required String tipoJornada,
+      required String titulo})
+      : super(
+            contacto: contacto,
+            descripcion: descripcion,
+            empleador: empleador,
+            experienciaMinima: experienciaMinima,
+            localizacion: localizacion,
+            presencialidad: presencialidad,
+            salario: salario,
+            skillsRequeridos: skillsRequeridos,
+            tipoJornada: tipoJornada,
+            titulo: titulo);
+  factory OfertaEditing.fromJson(Map<String, dynamic> map) {
+    return OfertaEditing(
+        id: map["_id"],
+        titulo: map["titulo"],
+        descripcion: map["descripcion"],
+        skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
+            .map((e) => e.toString())
+            .toList(),
+        localizacion: map["localizacion"],
+        empleador: map["empleador"],
+        experienciaMinima: map["experienciaMinima"],
+        contacto: map["contacto"],
+        presencialidad: map["presencialidad"],
+        salario: map["salario"],
+        tipoJornada: map["tipoJornada"]);
+  }
+  factory OfertaEditing.fromCopy(OfertaEditing oferta) {
+    return OfertaEditing(
+        id: oferta.id,
+        titulo: oferta.titulo,
+        descripcion: oferta.descripcion,
+        skillsRequeridos: oferta.skillsRequeridos.toList(),
+        localizacion: oferta.localizacion,
+        empleador: oferta.empleador,
+        experienciaMinima: oferta.experienciaMinima,
+        contacto: oferta.contacto,
+        presencialidad: oferta.presencialidad,
+        salario: oferta.salario,
+        tipoJornada: oferta.tipoJornada);
+  }
+  @override
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> map = {
+      ...super.toJson(),
+      "_id": id,
     };
     return map;
   }

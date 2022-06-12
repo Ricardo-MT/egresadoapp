@@ -7,6 +7,7 @@ import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/utils/permissions.dart';
+import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/filters/filter_model.dart';
@@ -66,14 +67,14 @@ class _OfertasPageState extends State<OfertasPage> {
                   onType: Provider.of<OfertasProvider>(context, listen: false)
                       .setSearch),
               spacerExpanded,
-              Visibility(
-                  visible: puedeCrearOferta(context),
+              MuiConditionalWidget(
                   child: MuiButton(
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(NavigatorRoutes.offerCreate);
                       },
-                      text: "Crear oferta"))
+                      text: "Crear oferta"),
+                  permision: puedeCrearOferta(context))
             ],
           ),
           const SliverToBoxAdapter(

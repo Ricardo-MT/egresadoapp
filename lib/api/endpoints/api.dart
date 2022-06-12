@@ -12,6 +12,10 @@ final allHeaders = {
   "Access-Control-Allow-Origin": "http://localhost:8000",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD"
 };
+final allHeadersWithContentType = {
+  ...allHeaders,
+  "Content-Type": "application/json",
+};
 
 class Api {
   static String URL = current;
@@ -55,8 +59,8 @@ class Api {
   static dynamic POST_REQUEST(String url, [Object? body]) async {
     final parsedUrl = Uri.parse(url);
 
-    final response =
-        await _getHttpClient().post(parsedUrl, headers: allHeaders, body: body);
+    final response = await _getHttpClient().post(parsedUrl,
+        headers: allHeadersWithContentType, body: jsonEncode(body));
 
     final code = response.statusCode;
 
@@ -86,7 +90,7 @@ class Api {
     }
 
     final response = await _getHttpClient().put(parsedUrl,
-        headers: {"Content-Type": "application/json"}, body: jsonEncode(body));
+        headers: allHeadersWithContentType, body: jsonEncode(body));
 
     final code = response.statusCode;
     final rawJsonString = response.body;
@@ -95,6 +99,7 @@ class Api {
 
     if (code >= 400) {
       String message = res["message"] ?? defaultErrorMessage;
+
       LoadingHandler.showToastWithoutContext(message, isError: true);
       throw ApiException(code: code, message: message);
     } else {
@@ -169,9 +174,6 @@ class Api {
     return res;
   }
 }
-
-// print("PETO MI API");
-// print(res["validationError"]);
 
 // const LOCAL_URL = Platform.OS=="ios"? 'http://localhost:5000/api' : 'http://10.0.2.2:5000/api';
 

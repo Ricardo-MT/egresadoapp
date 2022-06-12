@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
 
 // OFERTAS LABORALES
-bool puedeCrearOferta(BuildContext? context) {
+Future<bool> puedeCrearOferta(BuildContext? context) async {
   return true;
 }
 
-bool puedeEditarOferta(BuildContext? context) {
+Future<bool> puedeEditarOferta(BuildContext? context) async {
   return true;
 }
 
-bool puedeEliminarOferta(BuildContext? context) {
+Future<bool> puedeEliminarOferta(BuildContext? context) async {
   return true;
 }
 
 // EVENTOS
-bool puedeCrearEvento(BuildContext? context) {
+Future<bool> puedeCrearEvento(BuildContext? context) async {
   return true;
 }
 
-bool puedeEditarEvento(BuildContext? context) {
+Future<bool> puedeEditarEvento(BuildContext? context) async {
   return true;
 }
 
-bool puedeEliminarEvento(BuildContext? context) {
+Future<bool> puedeEliminarEvento(BuildContext? context) async {
   return true;
 }
 
 // COLABORACIONES
-bool puedeCrearColaboracion(BuildContext? context) {
+Future<bool> puedeCrearColaboracion(BuildContext? context) async {
   return true;
 }
 
-bool puedeEditarColaboracion(BuildContext? context) {
+Future<bool> puedeEditarColaboracion(BuildContext? context) async {
   return true;
 }
 
-bool puedeEliminarColaboracion(BuildContext? context) {
+Future<bool> puedeEliminarColaboracion(BuildContext? context) async {
   return true;
 }

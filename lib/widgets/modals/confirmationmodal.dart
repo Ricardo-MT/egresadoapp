@@ -1,22 +1,14 @@
-import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/modals/basemodal.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../spacer/spacer.dart';
 
 class ConfirmationModal extends StatefulWidget {
   final String title;
   final String text;
-  final AsyncCallback callback;
-  const ConfirmationModal(
-      {Key? key,
-      required this.title,
-      required this.text,
-      required this.callback})
+  const ConfirmationModal({Key? key, required this.title, required this.text})
       : super(key: key);
 
   @override
@@ -55,13 +47,8 @@ class _ConfirmationModalState extends State<ConfirmationModal> {
                         text: "Cancelar"),
                     spacerM,
                     MuiButton(
-                      onPressed: () async {
-                        try {
-                          Provider.of<UsuarioProvider>(context, listen: false)
-                              .set(null);
-                          Navigator.of(context).pop(true);
-                          await widget.callback();
-                        } catch (e) {}
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
                       },
                       text: "Confirmar",
                       variant: MuiButtonVariant.LINK,

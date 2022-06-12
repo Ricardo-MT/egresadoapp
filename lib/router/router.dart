@@ -155,17 +155,43 @@ class MuiHandlers {
   }));
   static final Handler _offerCreate =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeCrearOferta(context)) {
-      return const Text("NO TIENES PERMISOS PARA CREAR OFERTAS");
-    }
-    return const OfertaCrear();
+    // if (!puedeCrearOferta(context)) {
+    //   return const Text("NO TIENES PERMISOS PARA CREAR OFERTAS");
+    // }
+    return const OfertaCrearPage();
   }));
   static final Handler _offerEdit =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeEditarOferta(context)) {
-      return const Text("NO TIENES PERMISOS PARA CREAR OFERTAS");
-    }
-    return const OfertaEditar();
+    String id = parameters["id"]!.first;
+    Oferta? oferta;
+    bool allowed = false;
+    return FutureBuilder(
+        future: Future.wait([
+          ApiOfertas.fetchById(id).then((value) {
+            oferta = value;
+          }),
+          puedeEditarOferta(context).then((value) {
+            allowed = value;
+          })
+        ]),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          if (oferta == null) {
+            return const Text("Esa oferta laboral no existe");
+          }
+          if (!allowed) {
+            return const Text(
+                "No tienes permiso para editar esta oferta laboral");
+          }
+          return OfertaEditarPage(
+            original: oferta!,
+          );
+        }));
   }));
   static final Handler _offerDetail =
       Handler(handlerFunc: ((context, parameters) {
@@ -192,17 +218,42 @@ class MuiHandlers {
   }));
   static final Handler _eventCreate =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeCrearEvento(context)) {
-      return const Text("NO TIENES PERMISOS PARA CREAR EVENTOS");
-    }
-    return const EventoCrear();
+    // if (!puedeCrearEvento(context)) {
+    //   return const Text("NO TIENES PERMISOS PARA CREAR EVENTOS");
+    // }
+    return const EventoCrearPage();
   }));
   static final Handler _eventEdit =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeEditarEvento(context)) {
-      return const Text("NO TIENES PERMISOS PARA EDITAR EVENTOS");
-    }
-    return const EventoEditar();
+    String id = parameters["id"]!.first;
+    Evento? evento;
+    bool allowed = false;
+    return FutureBuilder(
+        future: Future.wait([
+          ApiEventos.fetchById(id).then((value) {
+            evento = value;
+          }),
+          puedeEditarEvento(context).then((value) {
+            allowed = value;
+          })
+        ]),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          if (evento == null) {
+            return const Text("Ese evento no existe");
+          }
+          if (!allowed) {
+            return const Text("No tienes permiso para editar este evento");
+          }
+          return EventoEditarPage(
+            original: evento!,
+          );
+        }));
   }));
   static final Handler _eventDetail =
       Handler(handlerFunc: ((context, parameters) {
@@ -230,17 +281,40 @@ class MuiHandlers {
   }));
   static final Handler _collaborationCreate =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeCrearColaboracion(context)) {
-      return const Text("NO TIENES PERMISOS PARA CREAR COLABORACIONES");
-    }
-    return const ColaboracionCrear();
+    return const ColaboracionCrearPage();
   }));
   static final Handler _collaborationEdit =
       Handler(handlerFunc: ((context, parameters) {
-    if (!puedeEditarColaboracion(context)) {
-      return const Text("NO TIENES PERMISOS PARA EDITAR COLABORACIONES");
-    }
-    return const ColaboracionEditar();
+    String id = parameters["id"]!.first;
+    Colaboracion? colaboracion;
+    bool allowed = false;
+    return FutureBuilder(
+        future: Future.wait([
+          ApiColaboracion.fetchById(id).then((value) {
+            colaboracion = value;
+          }),
+          puedeEditarColaboracion(context).then((value) {
+            allowed = value;
+          })
+        ]),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();
+          }
+          if (snapshot.hasError) {
+            return const MuiErrorWidget();
+          }
+          if (colaboracion == null) {
+            return const Text("Esa colaboración no existe");
+          }
+          if (!allowed) {
+            return const Text(
+                "No tienes permiso para editar esta colaboración");
+          }
+          return ColaboracionEditarPage(
+            original: colaboracion!,
+          );
+        }));
   }));
   static final Handler _collaborationDetail =
       Handler(handlerFunc: ((context, parameters) {

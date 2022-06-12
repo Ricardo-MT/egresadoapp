@@ -1,16 +1,23 @@
+import 'package:egresadoapp/api/endpoints/api_ofertas.dart';
 import 'package:egresadoapp/api/models/oferta.dart';
+import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/dimensions.dart';
+import 'package:egresadoapp/utils/palette.dart';
+import 'package:egresadoapp/utils/permissions.dart';
+import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
 import 'package:egresadoapp/widgets/button/touchable.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
+import 'package:egresadoapp/widgets/modals/confirmationmodal.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/skills/skill_tag.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:egresadoapp/widgets/tupla/tupla.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OfertaDetalle extends StatelessWidget {
   Oferta oferta;
@@ -26,7 +33,67 @@ class OfertaDetalle extends StatelessWidget {
           child: Center(
               child: Column(
             children: [
-              const MuiPageTitle(label: "Oferta laboral"),
+              Consumer<UsuarioProvider>(
+                builder: (context, provider, child) {
+                  return ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 700),
+                    child: Row(
+                      children: [
+                        FutureBuilder(
+                            future: puedeEliminarColaboracion(context),
+                            builder: ((context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return spacerExpanded;
+                              }
+                              return IconButton(
+                                tooltip: "Eliminar oferta laboral",
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: MuiPalette.BROWN,
+                                ),
+                                onPressed: () async {
+                                  bool? res = await showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return const ConfirmationModal(
+                                          title: "Eliminando oferta laboral",
+                                          text:
+                                              "Estás a punto de eliminar esta oferta laboral. ¿Continuar?",
+                                        );
+                                      });
+
+                                  if (res == true) {
+                                    try {
+                                      await ApiOfertas.delete(oferta);
+                                    } catch (e) {}
+                                    Navigator.of(context)
+                                        .pushReplacementNamed(Routes.offers);
+                                  }
+                                },
+                              );
+                            })),
+                        spacerExpanded,
+                        const MuiPageTitle(label: "Oferta laboral"),
+                        spacerExpanded,
+                        MuiConditionalWidget(
+                            child: IconButton(
+                              tooltip: "Editar oferta laboral",
+                              icon: Icon(
+                                Icons.border_color,
+                                color: MuiPalette.BROWN,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                    NavigatorRoutes.offerEdit(oferta.id));
+                              },
+                            ),
+                            permision: puedeEditarOferta(context))
+                      ],
+                    ),
+                  );
+                },
+              ),
               spacerS,
               MuiCard(
                   width: 700,

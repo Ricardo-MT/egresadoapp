@@ -1,6 +1,5 @@
 import 'package:egresadoapp/api/models/colaboracion.dart';
 import 'package:egresadoapp/api/models/filters.dart';
-import 'package:egresadoapp/api/models/user.dart';
 
 import 'api.dart';
 
@@ -45,9 +44,21 @@ class ApiColaboracion {
     return Colaboracion.fromJson(res["colaboracion"]);
   }
 
-  static Future<User> edit(User user) async {
-    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
+  static Future<Colaboracion> create(ColaboracionCreating colaboracion) async {
+    dynamic res =
+        await Api.POST_REQUEST(Api.COLABORACIONES, colaboracion.toJson());
 
-    return User.fromJson(res["usuario"]);
+    return Colaboracion.fromJson(res["colaboracion"]);
+  }
+
+  static Future<Colaboracion> edit(ColaboracionEditing user) async {
+    dynamic res =
+        await Api.PUT_REQUEST(Api.COLABORACIONES, body: user.toJson());
+
+    return Colaboracion.fromJson(res["colaboracion"]);
+  }
+
+  static Future<void> delete(Colaboracion colaboracion) async {
+    await Api.DELETE_REQUEST(Api.COLABORACIONES + "/${colaboracion.id}");
   }
 }

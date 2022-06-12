@@ -1,5 +1,9 @@
+import 'package:egresadoapp/api/endpoints/api_colaboracion.dart';
 import 'package:egresadoapp/api/endpoints/api_skills.dart';
+import 'package:egresadoapp/api/models/colaboracion.dart';
+import 'package:egresadoapp/pages/ofertas/oferta_crear.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
 import 'package:egresadoapp/utils/validators.dart';
 import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
@@ -12,14 +16,14 @@ import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ColaboracionCrear extends StatefulWidget {
-  const ColaboracionCrear({Key? key}) : super(key: key);
+class ColaboracionCrearPage extends StatefulWidget {
+  const ColaboracionCrearPage({Key? key}) : super(key: key);
 
   @override
-  State<ColaboracionCrear> createState() => _ColaboracionCrearState();
+  State<ColaboracionCrearPage> createState() => _ColaboracionCrearPageState();
 }
 
-class _ColaboracionCrearState extends State<ColaboracionCrear> {
+class _ColaboracionCrearPageState extends State<ColaboracionCrearPage> {
   @override
   Widget build(BuildContext context) {
     return MuiScreen(
@@ -36,10 +40,32 @@ class _ColaboracionCrearState extends State<ColaboracionCrear> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingPage();
                 }
+                ColaboracionCreating colaboracion = ColaboracionCreating(
+                    titulo: "",
+                    descripcion: "",
+                    skillsRequeridos: [],
+                    contacto: "");
                 return FadeInWrapper(
                     index: 2,
-                    child: _ColaboracionCrear(
+                    child: ColaboracionCrear(
+                      pageTitle: "Creando colaboración",
                       skills: skills,
+                      colaboracionOriginal: colaboracion,
+                      handleSave:
+                          (ColaboracionCreating nuevaColaboracion) async {
+                        LoadingHandler.showLoading(context);
+                        String? target;
+                        try {
+                          Colaboracion colaboracionCreated =
+                              await ApiColaboracion.create(nuevaColaboracion);
+                          target = NavigatorRoutes.collaborationDetail(
+                              colaboracionCreated.id);
+                        } catch (e) {}
+                        LoadingHandler.hideLoading(context);
+                        if (target != null) {
+                          Navigator.of(context).pushReplacementNamed(target);
+                        }
+                      },
                     ));
               }));
         },
@@ -48,33 +74,41 @@ class _ColaboracionCrearState extends State<ColaboracionCrear> {
   }
 }
 
-class _ColaboracionCrear extends StatefulWidget {
+class ColaboracionCrear extends StatefulWidget {
+  final String pageTitle;
   final List<String> skills;
-  const _ColaboracionCrear({Key? key, required this.skills}) : super(key: key);
+  final Function(ColaboracionCreating nuevaColaboracion) handleSave;
+  final ColaboracionCreating colaboracionOriginal;
+  const ColaboracionCrear(
+      {Key? key,
+      required this.skills,
+      required this.handleSave,
+      required this.colaboracionOriginal,
+      required this.pageTitle})
+      : super(key: key);
 
   @override
-  State<_ColaboracionCrear> createState() => _ColaboracionCrearInnerState();
+  State<ColaboracionCrear> createState() => ColaboracionCrearInnerState();
 }
 
-class _ColaboracionCrearInnerState extends State<_ColaboracionCrear> {
+class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
   late final _formKey;
+  late ColaboracionCreating colaboracion;
   late TextEditingController tituloController;
   late TextEditingController descripcionController;
-  late TextEditingController presencialidadController;
-  late TextEditingController localizacionController;
-  late TextEditingController empleadorController;
-  late TextEditingController expController;
+
+  late TextEditingController contactoController;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    tituloController = TextEditingController();
-    descripcionController = TextEditingController();
-    presencialidadController = TextEditingController();
-    localizacionController = TextEditingController();
-    empleadorController = TextEditingController();
-    expController = TextEditingController();
+    colaboracion = ColaboracionCreating.fromCopy(widget.colaboracionOriginal);
+    tituloController = TextEditingController(text: colaboracion.titulo);
+    descripcionController =
+        TextEditingController(text: colaboracion.descripcion);
+
+    contactoController = TextEditingController(text: colaboracion.contacto);
   }
 
   void nextState() {
@@ -83,22 +117,18 @@ class _ColaboracionCrearInnerState extends State<_ColaboracionCrear> {
 
   Future<void> handleSave() async {
     if (_formKey.currentState!.validate()) {
-      LoadingHandler.showLoading(context);
-      String? target;
-      try {
-        // API CALL, ACTUALIZAR TARGET
-        target = "";
-      } catch (e) {}
-      LoadingHandler.hideLoading(context);
+      colaboracion.titulo = tituloController.value.text;
+      colaboracion.descripcion = descripcionController.value.text;
+      colaboracion.contacto = contactoController.value.text;
 
-      // NAVEGAR AL TARGET
+      widget.handleSave(colaboracion);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MuiDataScreen(
-      pageTitle: "Creando colaboración",
+      pageTitle: widget.pageTitle,
       child: Form(
         key: _formKey,
         child: Column(
@@ -124,44 +154,21 @@ class _ColaboracionCrearInnerState extends State<_ColaboracionCrear> {
                 child: MuiSelectTags(
                   label: "Skills",
                   list: widget.skills,
-                  selected: const [],
+                  selected: colaboracion.skillsRequeridos,
                   onConfirm: (newList) {
-                    // ACTUALIZAR LISTA
+                    colaboracion.skillsRequeridos = newList;
                     nextState();
                   },
                 )),
-            spacerS,
-            const Divider(),
-            spacerS,
-            MuiInput(
-              validator: Validators.validateIsEmpty,
-              color: MuiInputColor.DARK,
-              controller: tituloController,
-              label: "Localización",
-            ),
-            spacerS,
+            formDivider,
             MuiInput(
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
-              controller: descripcionController,
-              label: "Empleador",
-            ),
-            spacerS,
-            MuiInput(
-              validator: Validators.validateIsEmpty,
-              color: MuiInputColor.DARK,
-              controller: tituloController,
-              label: "Título",
-            ),
-            spacerS,
-            MuiInput(
-              color: MuiInputColor.DARK,
-              validator: Validators.validateIsEmpty,
-              controller: descripcionController,
-              label: "Descripción",
+              controller: contactoController,
+              label: "Contacto",
             ),
             spacerXL,
-            MuiButton(onPressed: handleSave, text: "Crear colaboración"),
+            MuiButton(onPressed: handleSave, text: "Guardar cambios"),
             spacerXL,
           ],
         ),

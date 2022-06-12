@@ -1,5 +1,8 @@
+import 'package:egresadoapp/api/endpoints/api_ofertas.dart';
 import 'package:egresadoapp/api/endpoints/api_skills.dart';
+import 'package:egresadoapp/api/models/oferta.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
+import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
 import 'package:egresadoapp/utils/validators.dart';
 import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
@@ -12,14 +15,14 @@ import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OfertaCrear extends StatefulWidget {
-  const OfertaCrear({Key? key}) : super(key: key);
+class OfertaCrearPage extends StatefulWidget {
+  const OfertaCrearPage({Key? key}) : super(key: key);
 
   @override
-  State<OfertaCrear> createState() => _OfertaCrearState();
+  State<OfertaCrearPage> createState() => _OfertaCrearPageState();
 }
 
-class _OfertaCrearState extends State<OfertaCrear> {
+class _OfertaCrearPageState extends State<OfertaCrearPage> {
   @override
   Widget build(BuildContext context) {
     return MuiScreen(
@@ -36,10 +39,37 @@ class _OfertaCrearState extends State<OfertaCrear> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LoadingPage();
                 }
+                OfertaCreating oferta = OfertaCreating(
+                    titulo: "",
+                    descripcion: "",
+                    skillsRequeridos: [],
+                    experienciaMinima: "",
+                    empleador: "",
+                    localizacion: "",
+                    presencialidad: "",
+                    tipoJornada: "",
+                    salario: "",
+                    contacto: "");
                 return FadeInWrapper(
                     index: 2,
-                    child: _OfertaCrear(
+                    child: OfertaCrear(
+                      pageTitle: "Creando oferta laboral",
                       skills: skills,
+                      ofertaOriginal: oferta,
+                      handleSave: (OfertaCreating nuevaOferta) async {
+                        LoadingHandler.showLoading(context);
+                        String? target;
+                        try {
+                          Oferta ofertaCreated =
+                              await ApiOfertas.create(nuevaOferta);
+                          target =
+                              NavigatorRoutes.offerDetail(ofertaCreated.id);
+                        } catch (e) {}
+                        LoadingHandler.hideLoading(context);
+                        if (target != null) {
+                          Navigator.of(context).pushReplacementNamed(target);
+                        }
+                      },
                     ));
               }));
         },
@@ -48,57 +78,82 @@ class _OfertaCrearState extends State<OfertaCrear> {
   }
 }
 
-class _OfertaCrear extends StatefulWidget {
+class OfertaCrear extends StatefulWidget {
+  final String pageTitle;
   final List<String> skills;
-  const _OfertaCrear({Key? key, required this.skills}) : super(key: key);
+  final Function(OfertaCreating nuevaOferta) handleSave;
+  final OfertaCreating ofertaOriginal;
+  const OfertaCrear(
+      {Key? key,
+      required this.pageTitle,
+      required this.skills,
+      required this.ofertaOriginal,
+      required this.handleSave})
+      : super(key: key);
 
   @override
-  State<_OfertaCrear> createState() => _OfertaCrearInnerState();
+  State<OfertaCrear> createState() => OfertaCrearInnerState();
 }
 
-class _OfertaCrearInnerState extends State<_OfertaCrear> {
-  late final _formKey;
+class OfertaCrearInnerState extends State<OfertaCrear> {
+  late final GlobalKey<FormState> _formKey;
+  late OfertaCreating oferta;
   late TextEditingController tituloController;
   late TextEditingController descripcionController;
-  late TextEditingController presencialidadController;
+
   late TextEditingController localizacionController;
   late TextEditingController empleadorController;
-  late TextEditingController expController;
+  late TextEditingController salarioController;
+  late TextEditingController jornadaController;
+  late TextEditingController presencialidadController;
+  late TextEditingController experienciaController;
+  late TextEditingController contactoController;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
-    tituloController = TextEditingController();
-    descripcionController = TextEditingController();
-    presencialidadController = TextEditingController();
-    localizacionController = TextEditingController();
-    empleadorController = TextEditingController();
-    expController = TextEditingController();
+
+    oferta = OfertaCreating.fromCopy(widget.ofertaOriginal);
+
+    tituloController = TextEditingController(text: oferta.titulo);
+    descripcionController = TextEditingController(text: oferta.descripcion);
+
+    localizacionController = TextEditingController(text: oferta.localizacion);
+    empleadorController = TextEditingController(text: oferta.empleador);
+    salarioController = TextEditingController(text: oferta.salario);
+    jornadaController = TextEditingController(text: oferta.tipoJornada);
+    presencialidadController =
+        TextEditingController(text: oferta.presencialidad);
+    experienciaController =
+        TextEditingController(text: oferta.experienciaMinima);
+    contactoController = TextEditingController(text: oferta.contacto);
   }
 
   void nextState() {
     setState(() {});
   }
 
-  Future<void> handleSave() async {
+  handleSave() {
     if (_formKey.currentState!.validate()) {
-      LoadingHandler.showLoading(context);
-      String? target;
-      try {
-        // API CALL, ACTUALIZAR TARGET
-        target = "";
-      } catch (e) {}
-      LoadingHandler.hideLoading(context);
+      oferta.titulo = tituloController.value.text;
+      oferta.descripcion = descripcionController.value.text;
 
-      // NAVEGAR AL TARGET
+      oferta.localizacion = localizacionController.value.text;
+      oferta.empleador = empleadorController.value.text;
+      oferta.salario = salarioController.value.text;
+      oferta.tipoJornada = jornadaController.value.text;
+      oferta.presencialidad = presencialidadController.value.text;
+      oferta.experienciaMinima = experienciaController.value.text;
+      oferta.contacto = contactoController.value.text;
+      widget.handleSave(oferta);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return MuiDataScreen(
-      pageTitle: "Creando oferta laboral",
+      pageTitle: widget.pageTitle,
       child: Form(
         key: _formKey,
         child: Column(
@@ -116,52 +171,84 @@ class _OfertaCrearInnerState extends State<_OfertaCrear> {
               controller: descripcionController,
               label: "Descripción",
             ),
-            spacerS,
-            const Divider(),
-            spacerS,
+            formDivider,
             Align(
                 alignment: Alignment.centerLeft,
                 child: MuiSelectTags(
                   label: "Skills",
                   list: widget.skills,
-                  selected: const [],
+                  selected: oferta.skillsRequeridos,
                   onConfirm: (newList) {
-                    // ACTUALIZAR LISTA
+                    oferta.skillsRequeridos = newList;
                     nextState();
                   },
                 )),
             spacerS,
-            const Divider(),
-            spacerS,
             MuiInput(
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
-              controller: tituloController,
-              label: "Localización",
+              controller: experienciaController,
+              label: "Experiencia mínima",
             ),
-            spacerS,
+            formDivider,
             MuiInput(
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
-              controller: descripcionController,
+              controller: empleadorController,
               label: "Empleador",
             ),
             spacerS,
             MuiInput(
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
-              controller: tituloController,
-              label: "Título",
+              controller: localizacionController,
+              label: "Localización",
+            ),
+            spacerS,
+            MuiSelect(
+              label: "Presencialidad",
+              transformer: getLabelByPresencialidad,
+              validator: Validators.validateIsEmpty,
+              hint: "Presencial, Teletrabajo ...",
+              values: listaPresencialidad,
+              value:
+                  oferta.presencialidad.isEmpty ? null : oferta.presencialidad,
+              onChanged: (v) {
+                if (v != null) {
+                  presencialidadController.text = v;
+                }
+              },
+            ),
+            spacerS,
+            MuiSelect(
+              label: "Tipo de jornada",
+              transformer: getLabelByTipoJornada,
+              validator: Validators.validateIsEmpty,
+              hint: "Completa/Partida",
+              values: listaJornadas,
+              value: oferta.tipoJornada.isEmpty ? null : oferta.tipoJornada,
+              onChanged: (v) {
+                if (v != null) {
+                  jornadaController.text = v;
+                }
+              },
             ),
             spacerS,
             MuiInput(
+              validator: Validators.validateIsEmpty,
+              color: MuiInputColor.DARK,
+              controller: salarioController,
+              label: "Salario",
+            ),
+            formDivider,
+            MuiInput(
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
-              controller: descripcionController,
-              label: "Descripción",
+              controller: contactoController,
+              label: "Contacto",
             ),
             spacerXL,
-            MuiButton(onPressed: handleSave, text: "Crear oferta laboral"),
+            MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
             spacerXL,
           ],
         ),
@@ -169,3 +256,8 @@ class _OfertaCrearInnerState extends State<_OfertaCrear> {
     );
   }
 }
+
+const formDivider = Padding(
+  padding: EdgeInsets.symmetric(vertical: 12),
+  child: Divider(),
+);
