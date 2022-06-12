@@ -47,6 +47,7 @@ class AvatarImage extends StatelessWidget {
             : Image.network(
                 url!,
                 headers: const {
+                  "Origin": "https://egresadoapp.web.app/",
                   "Accept": "*/*",
                   "Access-Control-Allow-Origin": "*",
                   "Access-Control-Allow-Methods":
