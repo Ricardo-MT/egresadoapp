@@ -46,15 +46,14 @@ class AvatarImage extends StatelessWidget {
               )
             : Image.network(
                 url!,
-                headers: const {
-                  "Origin": "https://egresadoapp.web.app/",
-                  "Accept": "*/*",
-                  "Access-Control-Allow-Origin": "*",
-                  "Access-Control-Allow-Methods":
-                      "GET, POST, PUT, DELETE, OPTIONS, HEAD",
-                  "Access-Control-Allow-Headers":
-                      "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Methods"
-                },
+                // headers: const {
+                //   "Accept": "*/*",
+                //   "Access-Control-Allow-Origin": "*",
+                //   "Access-Control-Allow-Methods":
+                //       "GET, POST, PUT, DELETE, OPTIONS, HEAD",
+                //   "Access-Control-Allow-Headers":
+                //       "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin, Access-Control-Allow-Methods"
+                // },
                 errorBuilder: (context, object, tr) {
                   return Image.asset(
                     "assets/images/user.png",
