@@ -51,7 +51,7 @@ class AvatarImage extends StatelessWidget {
                   "Access-Control-Allow-Methods":
                       "GET, POST, PUT, DELETE, OPTIONS, HEAD",
                   "Access-Control-Allow-Headers":
-                      "Origin, X-Requested-With, Content-Type, Accept"
+                      "Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin"
                 },
                 errorBuilder: (context, object, tr) {
                   return Image.asset(
