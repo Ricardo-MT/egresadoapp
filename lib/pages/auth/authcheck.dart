@@ -21,9 +21,6 @@ class AuthCheckPage extends StatelessWidget {
         Navigator.of(context).pushNamed(NavigatorRoutes.home);
       }
     } catch (e) {
-      print("HAY USER");
-      print(e);
-
       if (shouldRedirect) {
         Navigator.of(context).pushNamed(NavigatorRoutes.home);
       }
@@ -51,5 +48,6 @@ Future<void> preconfigureApp(BuildContext context) async {
     precacheImage(const AssetImage("assets/images/cookies.png"), context),
     precacheImage(const AssetImage("assets/images/privacidad.png"), context),
     precacheImage(const AssetImage("assets/images/terminos.png"), context),
+    precacheImage(const AssetImage("assets/images/user.png"), context),
   ]);
 }

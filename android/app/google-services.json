@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "673256565508",
+    "project_id": "egresadoapp",
+    "storage_bucket": "egresadoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673256565508:android:7953a9e8b2eea6a548be51",
+        "android_client_info": {
+          "package_name": "com.saladillo.egresadoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673256565508-buv8jqo6l7325qfn3cv0kjmjdreffg1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC35AudAaDESwO1tYAj5WxKNvgxEmkL2Cg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673256565508-buv8jqo6l7325qfn3cv0kjmjdreffg1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

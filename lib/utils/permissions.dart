@@ -10,8 +10,7 @@ Future<bool> puedeEditarRol(BuildContext? context) async {
   try {
     allowed = await ApiUsuario.canEditRol();
   } catch (e) {}
-  // return allowed;
-  return true;
+  return allowed;
 }
 
 // OFERTAS LABORALES

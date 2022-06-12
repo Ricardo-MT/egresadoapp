@@ -3,6 +3,7 @@ class User {
   String email;
   String nombre;
   String? telefono;
+  String? avatar;
   bool publico;
   String rol;
   String estado;
@@ -15,6 +16,7 @@ class User {
       required this.nombre,
       required this.email,
       this.telefono,
+      this.avatar,
       required this.rol,
       required this.estado,
       required this.publico,
@@ -27,6 +29,7 @@ class User {
         id: map["_id"],
         nombre: map["nombre"],
         email: map["email"],
+        avatar: map["avatar"],
         telefono: map["telefono"],
         rol: map["rol"],
         estado: map["estado"],
@@ -46,6 +49,7 @@ class User {
     return User(
         id: user.id,
         nombre: user.nombre,
+        avatar: user.avatar,
         email: user.email,
         telefono: user.telefono,
         rol: user.rol,
@@ -61,6 +65,7 @@ class User {
       "_id": id,
       "nombre": nombre,
       "email": email,
+      "avatar": avatar,
       "telefono": telefono,
       "rol": rol,
       "estado": estado,
@@ -114,9 +119,6 @@ extension RolExtension on Rol {
 }
 
 String getLabelByRol(String rol) {
-  print("LLEGA");
-  print(rol);
-
   if (rol == Rol.egresado.value) {
     return "Egresad@";
   }

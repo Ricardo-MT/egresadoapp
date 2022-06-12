@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:egresadoapp/api/endpoints/api_idioma.dart';
 import 'package:egresadoapp/api/endpoints/api_skills.dart';
 import 'package:egresadoapp/api/endpoints/api_usuario.dart';
@@ -10,6 +12,7 @@ import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/utils/validators.dart';
 import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
+import 'package:egresadoapp/widgets/images/avatar_image.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
@@ -18,6 +21,7 @@ import 'package:egresadoapp/widgets/muiselect/muiselect.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:egresadoapp/widgets/tupla/tupla.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class UsuarioEditar extends StatefulWidget {
@@ -77,7 +81,8 @@ class _UsuarioEditar extends StatefulWidget {
 }
 
 class __UsuarioEditar extends State<_UsuarioEditar> {
-  late final _formKey;
+  XFile? photo;
+  late final GlobalKey<FormState> _formKey;
   late User edited;
   late TextEditingController nameController;
   late TextEditingController descripcionController;
@@ -149,7 +154,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
       LoadingHandler.showLoading(context);
       String? target;
       try {
-        User newUser = await ApiUsuario.edit(edited);
+        User newUser = await ApiUsuario.edit(edited, photo);
         Provider.of<UsuarioProvider>(context, listen: false).set(newUser);
         target = newUser.id;
       } catch (e) {}
@@ -170,10 +175,69 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
           child: Column(
             children: [
               Center(
-                child: Icon(
-                  Icons.account_circle_rounded,
-                  size: 200,
-                  color: MuiPalette.BROWN,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(_imgSize / 2),
+                  clipBehavior: Clip.hardEdge,
+                  child: SizedBox(
+                    height: _imgSize,
+                    width: _imgSize,
+                    child: Stack(
+                      clipBehavior: Clip.hardEdge,
+                      fit: StackFit.expand,
+                      children: [
+                        photo == null
+                            ? AvatarImage(
+                                url: edited.avatar,
+                                customSize: _imgSize,
+                              )
+                            : FutureBuilder(
+                                future: photo!.readAsBytes(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const Loading();
+                                  }
+                                  return Image.memory(
+                                    snapshot.data as Uint8List,
+                                    fit: BoxFit.cover,
+                                  );
+                                })),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          left: 0,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.3)),
+                            child: MuiButton(
+                              customInset:
+                                  const EdgeInsets.symmetric(vertical: 6),
+                              onPressed: () async {
+                                // var picked =
+                                //     await FilePicker.platform.pickFiles(
+                                //   type: FileType.image,
+                                //   withData: true,
+                                // );
+                                XFile? pickedFile = await ImagePicker()
+                                    .pickImage(
+                                        source: ImageSource.gallery,
+                                        maxHeight: 300,
+                                        maxWidth: 300);
+                                if (pickedFile != null) {
+                                  // nextFoto(picked);
+                                  setState(() {
+                                    photo = pickedFile;
+                                  });
+                                }
+                              },
+                              text: "editar",
+                              variant: MuiButtonVariant.LIGHT_LINK,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Center(child: RolTag(rol: edited.rol)),
@@ -359,3 +423,5 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
         ));
   }
 }
+
+const _imgSize = 200.0;

@@ -1,3 +1,4 @@
+import 'package:egresadoapp/firebase_options.dart';
 import 'package:egresadoapp/providers/colaboraciones_provider.dart';
 import 'package:egresadoapp/providers/eventos_provider.dart';
 import 'package:egresadoapp/providers/ofertas_provider.dart';
@@ -6,6 +7,7 @@ import 'package:egresadoapp/providers/usuario_provider.dart';
 import 'package:egresadoapp/router/router.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/palette.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -13,7 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   MuiRouter.configureRoutes();
@@ -75,5 +78,6 @@ Future<void> preconfigureApp(BuildContext context) async {
     precacheImage(const AssetImage("assets/images/cookies.png"), context),
     precacheImage(const AssetImage("assets/images/privacidad.png"), context),
     precacheImage(const AssetImage("assets/images/terminos.png"), context),
+    precacheImage(const AssetImage("assets/images/user.png"), context),
   ]);
 }

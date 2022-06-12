@@ -9,6 +9,7 @@ import 'package:egresadoapp/utils/permissions.dart';
 import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
+import 'package:egresadoapp/widgets/images/avatar_image.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
 import 'package:egresadoapp/widgets/modals/confirmationmodal.dart';
@@ -96,10 +97,9 @@ class UsuarioDetalle extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
-                            child: Icon(
-                              Icons.account_circle_rounded,
-                              size: 200,
-                              color: MuiPalette.BROWN,
+                            child: AvatarImage(
+                              customSize: 200,
+                              url: usuario.avatar,
                             ),
                           ),
                           Center(

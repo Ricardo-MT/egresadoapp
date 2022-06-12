@@ -1,6 +1,8 @@
 import 'package:egresadoapp/api/models/auth.dart';
 import 'package:egresadoapp/api/models/filters.dart';
 import 'package:egresadoapp/api/models/user.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:image_picker/image_picker.dart';
 
 import 'api.dart';
 
@@ -41,8 +43,13 @@ class ApiUsuario {
     return User.fromJson(res["usuario"]);
   }
 
-  static Future<User> edit(User user) async {
-    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: user.toJson());
+  static Future<User> edit(User usuario, XFile? photo) async {
+    String? url;
+    if (photo != null) {
+      url = await _uploadImage(usuario, photo);
+    }
+    usuario.avatar = url;
+    dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: usuario.toJson());
     return User.fromJson(res["usuario"]);
   }
 
@@ -55,5 +62,18 @@ class ApiUsuario {
   static Future<bool> canEditRol() async {
     dynamic res = await Api.GET_REQUEST(Api.USUARIOS + "/puede_editar_rol");
     return res["allowed"].runtimeType == bool && res["allowed"];
+  }
+
+  static Future<String> _uploadImage(User usuario, XFile photo) async {
+    // File file = File(photo.bytes!.toList(), "fileName");
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    final path = "files/images/avatars/${usuario.id}";
+    final ref = storage.ref().child(path);
+
+    await ref.putData(await photo.readAsBytes(),
+        firebase_storage.SettableMetadata(contentType: photo.mimeType));
+    String url = await ref.getDownloadURL();
+    return url;
   }
 }

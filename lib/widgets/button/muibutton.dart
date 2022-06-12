@@ -8,11 +8,13 @@ class MuiButton extends StatelessWidget {
   VoidCallback onPressed;
   MuiButtonVariant variant;
   double fontSize;
+  EdgeInsets? customInset;
   MuiButton(
       {Key? key,
       required this.onPressed,
       required this.text,
       this.fontSize = 16,
+      this.customInset,
       this.variant = MuiButtonVariant.CONTAINED})
       : super(key: key);
 
@@ -37,6 +39,7 @@ class MuiButton extends StatelessWidget {
         style = contained;
         break;
     }
+    inset = customInset ?? inset;
 
     return TextButton(
         onPressed: onPressed,
