@@ -47,6 +47,7 @@ class AvatarImage extends StatelessWidget {
             : Image.network(
                 url!,
                 headers: const {
+                  "Accept": "*/*",
                   "Access-Control-Allow-Origin": "*",
                   "Access-Control-Allow-Methods":
                       "GET, POST, PUT, DELETE, OPTIONS, HEAD",
