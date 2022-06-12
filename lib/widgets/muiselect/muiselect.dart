@@ -37,7 +37,7 @@ class MuiSelect extends StatelessWidget {
         Text.rich(
           TextSpan(
               text: label,
-              style: labelStyles,
+              style: labelStyles.copyWith(color: MuiPalette.BLACK),
               children: required
                   ? [
                       TextSpan(
@@ -260,7 +260,7 @@ class MuiSelectTags extends StatelessWidget {
   }
 }
 
-const _iconSize = 20.0;
+const _iconSize = 22.0;
 
 final _iconWidget = Icon(
   Icons.keyboard_arrow_down_rounded,

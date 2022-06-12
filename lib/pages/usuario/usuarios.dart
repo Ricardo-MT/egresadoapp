@@ -66,6 +66,9 @@ class _UsuariosPageState extends State<UsuariosPage> {
               spacerExpanded,
             ],
           ),
+          const SliverToBoxAdapter(
+            child: Center(child: MuiPageTitle(label: "Usuarios")),
+          ),
           FutureBuilder(
               future: Provider.of<UsuariosProvider>(context, listen: false)
                   .setFiltersAsyncronously(),

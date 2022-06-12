@@ -103,10 +103,7 @@ class _MuiInputState extends State<MuiInput> {
           initialValue: widget.initialValue,
           onFieldSubmitted: widget.onFieldSubmitted,
           autofillHints: widget.autofillHints,
-          style: TextStyle(
-              color: MuiPalette.FONT,
-              fontSize: 16,
-              fontWeight: FontWeight.bold),
+          style: inputFormFieldStyles,
           autocorrect: false,
           cursorColor: MuiPalette.FONT,
           onChanged: (value) {
@@ -195,3 +192,7 @@ final inputFormFieldStyles = TextStyle(
     color: MuiPalette.BLACK,
     fontSize: Dimensions.labelFontSize + 2,
     fontWeight: FontWeight.normal);
+// TextStyle(
+//               color: MuiPalette.FONT,
+//               fontSize: 16,
+//               fontWeight: FontWeight.bold)
