@@ -11,7 +11,7 @@ class CarrouselLanding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage(img), fit: BoxFit.contain)),
+          image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover)),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,

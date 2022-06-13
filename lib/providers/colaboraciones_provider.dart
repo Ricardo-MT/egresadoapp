@@ -56,6 +56,21 @@ class ColaboracionesProvider extends ChangeNotifier {
     return _filtro;
   }
 
+  void setStartDate(DateTime t) async {
+    int unix = t.millisecondsSinceEpoch;
+    _filtro.fechaPublicacionInicio = unix;
+    if (_filtro.fechaPublicacionFin != null &&
+        _filtro.fechaPublicacionFin! < unix) {
+      _filtro.fechaPublicacionFin = unix;
+    }
+    searchDebouncer.run(refresh);
+  }
+
+  Future<void> setEndDate(DateTime t) async {
+    _filtro.fechaPublicacionFin = t.millisecondsSinceEpoch;
+    searchDebouncer.run(refresh);
+  }
+
   void toggleSkill(String p) {
     int index = _filtro.skillsRequeridos.indexOf(p);
     if (index != -1) {

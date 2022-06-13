@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.authCheck,
       onGenerateRoute: MuiRouter.router.generator,
       theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
           primaryColor: Colors.green,
           textTheme: GoogleFonts.notoSansTextTheme(),
           switchTheme: SwitchThemeData(

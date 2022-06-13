@@ -1,6 +1,6 @@
 DateTime? dateTime;
 
-formatUnixDateTimeToString(int timestamp) {
+String formatUnixDateTimeToString(int timestamp) {
   dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
   String d = dateTime!.day.toString();
   String m = dateTime!.month.toString();
@@ -12,7 +12,7 @@ formatUnixDateTimeToString(int timestamp) {
   return "$d/$m/$y - $H:$M";
 }
 
-formatUnixDateToString(int timestamp) {
+String formatUnixDateToString(int timestamp) {
   dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
   String d = (dateTime!.day < 10 ? "0" : "") + dateTime!.day.toString();
   String m = (dateTime!.month < 10 ? "0" : "") + dateTime!.month.toString();

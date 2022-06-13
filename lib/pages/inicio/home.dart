@@ -8,7 +8,6 @@ import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/debouncer.dart';
 import 'package:egresadoapp/utils/palette.dart';
-import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/carrousel/landing_carrousel.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
@@ -63,12 +62,9 @@ class _HomePageState extends State<HomePage> {
                 },
                 controller: controller,
                 children: const [
-                  FadeInWrapper(
-                    index: 3,
-                    child: CarrouselLanding(
-                        img: "assets/images/leader.png",
-                        text: "Conecta con otros profesionales del sector"),
-                  ),
+                  CarrouselLanding(
+                      img: "assets/images/leader.png",
+                      text: "Conecta con otros profesionales del sector"),
                   CarrouselLanding(
                       img: "assets/images/team.png",
                       text: "Asiste a eventos de interés de la comunidad"),

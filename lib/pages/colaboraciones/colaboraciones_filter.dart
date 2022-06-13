@@ -12,6 +12,8 @@ class ColaboracionesFilter extends StatelessWidget {
       builder: (context, provider, child) {
         var baseSkillsRequeridos = provider.getFilters().baseSkillsRequeridos;
         var skillsRequeridos = provider.getFilters().skillsRequeridos;
+        var fechaInicio = provider.getFilters().fechaPublicacionInicio;
+        var fechaFin = provider.getFilters().fechaPublicacionFin;
 
         return MuiFilterDrawer(
           subtitle: "Colaboraciones",
@@ -23,6 +25,12 @@ class ColaboracionesFilter extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                MuiFilterDateMultipleExpansionTile(
+                    fechaInicio: fechaInicio,
+                    fechaFin: fechaFin,
+                    onPickInicio: provider.setStartDate,
+                    onPickFin: provider.setEndDate,
+                    title: "Fecha de publicación"),
                 MuiFilterExpansionTile(
                   title: "Skills requeridos",
                   selected: skillsRequeridos,

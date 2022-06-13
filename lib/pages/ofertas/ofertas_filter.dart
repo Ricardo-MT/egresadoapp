@@ -17,6 +17,8 @@ class OfertasFilter extends StatelessWidget {
         var skillsRequeridos = provider.getFilters().skillsRequeridos;
         var baseTipoJornada = provider.getFilters().baseTipoJornada;
         var tipoJornada = provider.getFilters().tipoJornada;
+        var fechaInicio = provider.getFilters().fechaPublicacionInicio;
+        var fechaFin = provider.getFilters().fechaPublicacionFin;
 
         return MuiFilterDrawer(
           subtitle: "Ofertas laborales",
@@ -28,6 +30,12 @@ class OfertasFilter extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                MuiFilterDateMultipleExpansionTile(
+                    fechaInicio: fechaInicio,
+                    fechaFin: fechaFin,
+                    onPickInicio: provider.setStartDate,
+                    onPickFin: provider.setEndDate,
+                    title: "Fecha de publicación"),
                 MuiFilterExpansionTile(
                   title: "Tipo de jornada",
                   selected: tipoJornada,

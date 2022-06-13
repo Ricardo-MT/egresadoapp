@@ -56,6 +56,20 @@ class EventosProvider extends ChangeNotifier {
     return _filtro;
   }
 
+  void setStartDate(DateTime t) async {
+    int unix = t.millisecondsSinceEpoch;
+    _filtro.fechaInicio = unix;
+    if (_filtro.fechaFin != null && _filtro.fechaFin! < unix) {
+      _filtro.fechaFin = unix;
+    }
+    searchDebouncer.run(refresh);
+  }
+
+  Future<void> setEndDate(DateTime t) async {
+    _filtro.fechaFin = t.millisecondsSinceEpoch;
+    searchDebouncer.run(refresh);
+  }
+
   void toggleSkill(String p) {
     int index = _filtro.skills.indexOf(p);
     if (index != -1) {

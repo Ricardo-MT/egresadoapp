@@ -12,6 +12,8 @@ class EventosFilter extends StatelessWidget {
       builder: (context, provider, child) {
         var baseSkills = provider.getFilters().baseSkills;
         var skills = provider.getFilters().skills;
+        var fechaInicio = provider.getFilters().fechaInicio;
+        var fechaFin = provider.getFilters().fechaFin;
 
         return MuiFilterDrawer(
           subtitle: "Eventos",
@@ -23,6 +25,12 @@ class EventosFilter extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                MuiFilterDateMultipleExpansionTile(
+                    fechaInicio: fechaInicio,
+                    fechaFin: fechaFin,
+                    onPickInicio: provider.setStartDate,
+                    onPickFin: provider.setEndDate,
+                    title: "Fecha del evento"),
                 MuiFilterExpansionTile(
                   title: "Skills",
                   selected: skills,

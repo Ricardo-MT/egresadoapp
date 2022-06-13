@@ -71,8 +71,8 @@ class FiltroUsuarios {
 }
 
 class FiltroOfertas {
-  String? fechaPublicacionInicio;
-  String? fechaPublicacionFin;
+  int? fechaPublicacionInicio;
+  int? fechaPublicacionFin;
   late final List<String> baseTipoJornada;
   late List<String> tipoJornada = [];
   late final List<String> baseSkillsRequeridos;
@@ -124,8 +124,8 @@ class FiltroOfertas {
 }
 
 class FiltroEventos {
-  String? fechaInicio;
-  String? fechaFin;
+  int? fechaInicio;
+  int? fechaFin;
   late final List<String> baseSkills;
   late List<String> skills = [];
 
@@ -159,8 +159,8 @@ class FiltroEventos {
 }
 
 class FiltroColaboracion {
-  String? fechaPublicacionInicio;
-  String? fechaPublicacionFin;
+  int? fechaPublicacionInicio;
+  int? fechaPublicacionFin;
   late final List<String> baseSkillsRequeridos;
   late List<String> skillsRequeridos = [];
 

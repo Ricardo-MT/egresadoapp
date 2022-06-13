@@ -64,6 +64,21 @@ class OfertasProvider extends ChangeNotifier {
     return _filtro;
   }
 
+  void setStartDate(DateTime t) async {
+    int unix = t.millisecondsSinceEpoch;
+    _filtro.fechaPublicacionInicio = unix;
+    if (_filtro.fechaPublicacionFin != null &&
+        _filtro.fechaPublicacionFin! < unix) {
+      _filtro.fechaPublicacionFin = unix;
+    }
+    searchDebouncer.run(refresh);
+  }
+
+  Future<void> setEndDate(DateTime t) async {
+    _filtro.fechaPublicacionFin = t.millisecondsSinceEpoch;
+    searchDebouncer.run(refresh);
+  }
+
   void toggleTipoJornada(String p) {
     int index = _filtro.tipoJornada.indexOf(p);
     if (index != -1) {

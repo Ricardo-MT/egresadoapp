@@ -49,10 +49,10 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
             children: [
               Padding(
                 padding:
-                    EdgeInsets.zero.copyWith(left: Dimensions.pageInsetGap),
+                    EdgeInsets.zero.copyWith(right: Dimensions.pageInsetGap),
                 child: IconButton(
                     onPressed: () {
-                      filter.scaffoldKey.currentState?.openEndDrawer();
+                      filter.scaffoldKey.currentState?.openDrawer();
                     },
                     icon: Icon(
                       Icons.filter_alt_outlined,

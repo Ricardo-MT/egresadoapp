@@ -1,6 +1,7 @@
 import 'package:egresadoapp/utils/converters.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
+import 'package:egresadoapp/widgets/pickers/date_pickers.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/dimensions.dart';
@@ -92,7 +93,7 @@ class MuiFilterExpansionTile extends StatelessWidget {
         style: filterItemTitleStyle,
       ),
       subtitle: Padding(
-        padding: const EdgeInsets.only(top: 4),
+        padding: subtitleInset,
         child: Text(
           selected.isEmpty
               ? ""
@@ -115,6 +116,60 @@ class MuiFilterExpansionTile extends StatelessWidget {
   }
 }
 
+class MuiFilterDateMultipleExpansionTile extends StatelessWidget {
+  String title;
+  int? fechaInicio;
+  int? fechaFin;
+  Function(DateTime) onPickInicio;
+  Function(DateTime) onPickFin;
+  MuiFilterDateMultipleExpansionTile(
+      {Key? key,
+      required this.fechaInicio,
+      required this.fechaFin,
+      required this.title,
+      required this.onPickFin,
+      required this.onPickInicio})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      tilePadding: filterInsetHorizontal,
+      title: Text(
+        title,
+        style: filterItemTitleStyle,
+      ),
+      subtitle: Padding(
+        padding: subtitleInset,
+        child: Text(
+          _buildDates(inicio: fechaInicio, fin: fechaFin),
+          style: filterItemSubtitleStyle,
+        ),
+      ),
+      children: [
+        MuiDatePicker(
+          firstDate: 0,
+          initialDate: fechaInicio,
+          lastDate: DateTime.now().add(const Duration(days: 730)),
+          title:
+              "Desde ${fechaInicio == null ? "DD/MM/YYYY" : formatUnixDateToString(fechaInicio ?? 0)}",
+          helpText: "Desde",
+          onPick: onPickInicio,
+        ),
+        MuiDatePicker(
+          firstDate: fechaInicio ?? 0,
+          initialDate: fechaFin,
+          lastDate: DateTime.now().add(const Duration(days: 730)),
+          title:
+              "Hasta ${fechaFin == null ? "DD/MM/YYYY" : formatUnixDateToString(fechaFin ?? 0)}",
+          helpText: "Hasta",
+          onPick: onPickFin,
+        )
+      ],
+    );
+  }
+}
+
 final _titleStyles = TextStyle(
     fontSize: Dimensions.labelFontSize + 8,
     color: MuiPalette.DARK_GREY,
@@ -126,6 +181,7 @@ final _subtitleStyles = TextStyle(
 );
 
 final filterInset = EdgeInsets.all(Dimensions.pageInsetGap);
+const subtitleInset = EdgeInsets.only(top: 4);
 final filterInsetHorizontal =
     EdgeInsets.symmetric(horizontal: filterInset.right);
 
@@ -137,3 +193,15 @@ final filterItemSubtitleStyle = TextStyle(
     fontWeight: FontWeight.normal,
     color: MuiPalette.MID_GREY,
     fontSize: Dimensions.labelFontSize);
+
+String _buildDates({int? inicio, int? fin}) {
+  String res = "";
+  if (inicio != null) {
+    res += formatUnixDateToString(inicio);
+  }
+  if (fin != null) {
+    String finDate = formatUnixDateToString(fin);
+    res = res == "" ? "Hasta $finDate" : "$res - $finDate";
+  }
+  return res;
+}
