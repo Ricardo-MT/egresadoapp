@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool mobileView = MediaQuery.of(context).size.aspectRatio < 1;
     return MuiScreen(
       child: PageView(
         scrollDirection: Axis.vertical,
@@ -61,15 +62,18 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
                 controller: controller,
-                children: const [
+                children: [
                   CarrouselLanding(
-                      img: "assets/images/leader.png",
+                      img:
+                          "assets/images/leader${mobileView ? "_mobile" : ""}.png",
                       text: "Conecta con otros profesionales del sector"),
                   CarrouselLanding(
-                      img: "assets/images/team.png",
+                      img:
+                          "assets/images/team${mobileView ? "_mobile" : ""}.png",
                       text: "Asiste a eventos de interés de la comunidad"),
                   CarrouselLanding(
-                      img: "assets/images/people.png",
+                      img:
+                          "assets/images/people${mobileView ? "_mobile" : ""}.png",
                       text:
                           "Consulta ofertas de trabajo, colaboraciones, y mucho más ..."),
                 ],
