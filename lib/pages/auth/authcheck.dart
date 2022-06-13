@@ -1,5 +1,6 @@
 import 'package:egresadoapp/api/endpoints/api_auth.dart';
 import 'package:egresadoapp/api/models/user.dart';
+import 'package:egresadoapp/main.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
@@ -12,6 +13,7 @@ class AuthCheckPage extends StatelessWidget {
 
   handleAuthCheck(BuildContext context) async {
     try {
+      await preconfigureApp(context);
       User user = await ApiAuth.checkUser();
 
       Provider.of<UsuarioProvider>(context, listen: false).set(user);
