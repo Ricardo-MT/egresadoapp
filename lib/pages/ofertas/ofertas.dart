@@ -66,19 +66,27 @@ class _OfertasPageState extends State<OfertasPage> {
                       .setSearch,
                   onType: Provider.of<OfertasProvider>(context, listen: false)
                       .setSearch),
-              spacerExpanded,
-              MuiConditionalWidget(
-                  child: MuiButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(NavigatorRoutes.offerCreate);
-                      },
-                      text: "Crear oferta"),
-                  permision: puedeCrearOferta(context))
             ],
           ),
-          const SliverToBoxAdapter(
-            child: Center(child: MuiPageTitle(label: "Ofertas laborales")),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              child: Row(
+                children: [
+                  const MuiPageTitle(label: "Ofertas laborales"),
+                  spacerExpanded,
+                  MuiConditionalWidget(
+                      child: MuiButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(NavigatorRoutes.offerCreate);
+                          },
+                          text: "Nueva"),
+                      permision: puedeCrearOferta(context))
+                ],
+              ),
+            ),
           ),
           FutureBuilder(
               future: Provider.of<OfertasProvider>(context, listen: false)

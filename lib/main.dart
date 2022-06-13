@@ -27,6 +27,7 @@ class MyProviders extends StatelessWidget {
   const MyProviders({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    preconfigureApp(context);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UsuarioProvider()),

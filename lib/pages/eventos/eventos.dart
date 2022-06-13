@@ -47,8 +47,8 @@ class _EventosPageState extends State<EventosPage> {
           SliverLayoutHeader(
             children: [
               Padding(
-                padding:
-                    EdgeInsets.zero.copyWith(right: Dimensions.pageInsetGap),
+                padding: EdgeInsets.zero
+                    .copyWith(right: Dimensions.pageInsetGap / 2),
                 child: IconButton(
                     onPressed: () {
                       filter.scaffoldKey.currentState?.openDrawer();
@@ -66,19 +66,27 @@ class _EventosPageState extends State<EventosPage> {
                       .setSearch,
                   onType: Provider.of<EventosProvider>(context, listen: false)
                       .setSearch),
-              spacerExpanded,
-              MuiConditionalWidget(
-                  child: MuiButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(NavigatorRoutes.eventCreate);
-                      },
-                      text: "Crear evento"),
-                  permision: puedeCrearEvento(context))
             ],
           ),
-          const SliverToBoxAdapter(
-            child: Center(child: MuiPageTitle(label: "Eventos")),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              child: Row(
+                children: [
+                  const MuiPageTitle(label: "Eventos"),
+                  spacerExpanded,
+                  MuiConditionalWidget(
+                      child: MuiButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(NavigatorRoutes.eventCreate);
+                          },
+                          text: "Nuevo"),
+                      permision: puedeCrearEvento(context))
+                ],
+              ),
+            ),
           ),
           FutureBuilder(
               future: Provider.of<EventosProvider>(context, listen: false)

@@ -12,7 +12,6 @@ import 'package:egresadoapp/widgets/layout/sliverlayoutbody.dart';
 import 'package:egresadoapp/widgets/layout/sliverlayoutheader.dart';
 import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:egresadoapp/widgets/searchbar/searchbar.dart';
-import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -63,11 +62,14 @@ class _UsuariosPageState extends State<UsuariosPage> {
                           .setSearch,
                   onType: Provider.of<UsuariosProvider>(context, listen: false)
                       .setSearch),
-              spacerExpanded,
             ],
           ),
-          const SliverToBoxAdapter(
-            child: Center(child: MuiPageTitle(label: "Usuarios")),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              child: const MuiPageTitle(label: "Usuarios"),
+            ),
           ),
           FutureBuilder(
               future: Provider.of<UsuariosProvider>(context, listen: false)

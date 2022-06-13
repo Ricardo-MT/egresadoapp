@@ -46,6 +46,8 @@ class _SearchBarState extends State<SearchBar> {
     return Container(
       padding: const EdgeInsets.only(left: 14, right: 20),
       height: Dimensions.controllerHeight,
+      constraints:
+          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
       width: 380,
       decoration: _decoration,
       child: Row(

@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class MuiConditionalWidget extends StatelessWidget {
   Future<bool> permision;
   Widget child;
-  MuiConditionalWidget({Key? key, required this.permision, required this.child})
+  bool maintainSpace;
+  MuiConditionalWidget(
+      {Key? key,
+      required this.permision,
+      this.maintainSpace = true,
+      required this.child})
       : super(key: key);
 
   @override
@@ -13,12 +18,16 @@ class MuiConditionalWidget extends StatelessWidget {
         future: permision,
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return spacerS;
+            return maintainSpace
+                ? spacerS
+                : const Visibility(visible: true, child: spacerS);
           }
           if (snapshot.hasError ||
               !snapshot.hasData ||
               (snapshot.data as bool) == false) {
-            return spacerS;
+            return maintainSpace
+                ? spacerS
+                : const Visibility(visible: false, child: spacerS);
           }
           return child;
         }));

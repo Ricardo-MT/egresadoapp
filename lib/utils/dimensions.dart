@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Dimensions {
   static double borderWidth = 1.6;
   static double borderRadiusControllers = 12;
@@ -11,4 +13,8 @@ class Dimensions {
   static double cardTitleFontSize = labelFontSize + 3;
   static double pageInsetGap = 30;
   static int animationDuration = 200;
+}
+
+bool isMobileView(BuildContext context) {
+  return MediaQuery.of(context).size.width < 780;
 }

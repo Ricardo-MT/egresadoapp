@@ -69,19 +69,27 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                   onType: Provider.of<ColaboracionesProvider>(context,
                           listen: false)
                       .setSearch),
-              spacerExpanded,
-              MuiConditionalWidget(
-                  child: MuiButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed(NavigatorRoutes.collaborationCreate);
-                      },
-                      text: "Crear colaboración"),
-                  permision: puedeCrearColaboracion(context))
             ],
           ),
-          const SliverToBoxAdapter(
-            child: Center(child: MuiPageTitle(label: "Colaboraciones")),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              child: Row(
+                children: [
+                  const MuiPageTitle(label: "Colaboraciones"),
+                  spacerExpanded,
+                  MuiConditionalWidget(
+                      child: MuiButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(NavigatorRoutes.collaborationCreate);
+                          },
+                          text: "Nueva"),
+                      permision: puedeCrearColaboracion(context))
+                ],
+              ),
+            ),
           ),
           FutureBuilder(
               future:
