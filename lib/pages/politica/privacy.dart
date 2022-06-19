@@ -1,3 +1,4 @@
+import 'package:egresadoapp/pages/politica/default_styled_info_text.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPage extends StatelessWidget {
@@ -5,14 +6,8 @@ class PrivacyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/privacidad.png"),
-                fit: BoxFit.cover)),
-        child: Container(),
-      ),
-    );
+    return const MuiMarkedInfoPage(
+        backgroundImage: "assets/images/privacidad.png",
+        markdownTextFile: "assets/markdown_files/privacy.md");
   }
 }
