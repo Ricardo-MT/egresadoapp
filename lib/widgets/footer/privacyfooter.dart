@@ -1,4 +1,5 @@
 import 'package:egresadoapp/router/routes.dart';
+import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/logo/logo.dart';
@@ -18,22 +19,22 @@ class PrivacyFooter extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed(Routes.terms);
             },
-            text: "Términos y condiciones",
-            fontSize: 14,
+            text: "Términos",
+            fontSize: Dimensions.labelFontSize,
             variant: MuiButtonVariant.LIGHT_LINK),
         MuiButton(
             onPressed: () {
               Navigator.of(context).pushNamed(Routes.privacy);
             },
             text: "Política de privacidad",
-            fontSize: 14,
+            fontSize: Dimensions.labelFontSize,
             variant: MuiButtonVariant.LIGHT_LINK),
         MuiButton(
             onPressed: () {
               Navigator.of(context).pushNamed(Routes.cookies);
             },
             text: "Cookies",
-            fontSize: 14,
+            fontSize: Dimensions.labelFontSize,
             variant: MuiButtonVariant.LIGHT_LINK),
       ],
     );

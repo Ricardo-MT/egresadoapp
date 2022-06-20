@@ -7,6 +7,7 @@ import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
 import 'package:egresadoapp/utils/validators.dart';
+import 'package:egresadoapp/widgets/tap_to_hide_keyboard/tapToHideKeyboard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +30,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     credentials = RegisterUser();
     _formKey = GlobalKey<FormState>();
@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
         LoadingHandler.showLoading(context);
         User user = await ApiUsuario.register(credentials);
         Provider.of<UsuarioProvider>(context, listen: false).set(user);
-        Navigator.of(context).pushNamed(Routes.userProfileEdit);
+        Navigator.of(context).pushReplacementNamed(Routes.userProfileEdit);
       } catch (e) {
         LoadingHandler.hideLoading(context);
       }
@@ -50,28 +50,27 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/register.png"),
-                fit: BoxFit.cover)),
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints.tightFor(
-                height: max(700, MediaQuery.of(context).size.height)),
-            child: SizedBox(
-              width: 500,
+    return TapToHideKeyboard(
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            height: max(MediaQuery.of(context).size.height, 800),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/register.png"),
+                    fit: BoxFit.cover)),
+            child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 320,
+                      width: min(MediaQuery.of(context).size.width - 40, 320),
                       child: AutofillGroup(
                         child: Form(
                           key: _formKey,
@@ -82,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "ÚNETE A LA COMUNIDAD",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 35,
+                                    fontSize: 25,
                                     color: MuiPalette.WHITE,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -139,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 inputType: TextInputType.text,
                               ),
-                              spacerXL,
+                              spacerM,
                               MuiButton(
                                 onPressed: () async {
                                   _handleRegister(context);
@@ -147,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: "REGÍSTRATE",
                                 variant: MuiButtonVariant.CONTAINED,
                               ),
-                              spacerXL,
+                              spacerM,
                               MuiButton(
                                 onPressed: () {
                                   Navigator.of(context).pushNamed(Routes.login);
@@ -155,13 +154,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: "¿Ya tienes cuenta?",
                                 variant: MuiButtonVariant.LIGHT_LINK,
                               ),
-                              spacerS,
                             ],
                           ),
                         ),
                       ),
                     ),
-                    const Center(child: PrivacyFooter())
+                    const PrivacyFooter()
                   ],
                 ),
               ),

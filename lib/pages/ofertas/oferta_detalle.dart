@@ -108,38 +108,31 @@ class OfertaDetalle extends StatelessWidget {
                             spacerS,
                             const Divider(),
                             spacerS,
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MuiTouchable(
-                                      onPress: () {
-                                        Navigator.of(context).pushNamed(
-                                            NavigatorRoutes.userProfile(
-                                                oferta.autor.id));
-                                      },
-                                      child: TuplaImage(
-                                          url: oferta.autor.avatar,
-                                          selectable: false,
-                                          withHero: true,
-                                          text: oferta.autor.nombre),
-                                    ),
-                                    Tupla(
-                                        icon: Icons.location_on,
-                                        text: oferta.localizacion),
-                                  ],
-                                ),
-                                Tupla(
-                                    icon: Icons.calendar_today_rounded,
-                                    text: formatUnixDateToString(
-                                        oferta.fechaPublicacion)),
-                              ],
+                            MuiTouchable(
+                              onPress: () {
+                                Navigator.of(context).pushNamed(
+                                    NavigatorRoutes.userProfile(
+                                        oferta.autor.id));
+                              },
+                              child: TuplaImage(
+                                  url: oferta.autor.avatar,
+                                  expandable: true,
+                                  textOverflow: TextOverflow.visible,
+                                  selectable: false,
+                                  withHero: true,
+                                  text: oferta.autor.nombre),
                             ),
+                            spacerS,
+                            Tupla(
+                                icon: Icons.calendar_today_rounded,
+                                textOverflow: TextOverflow.visible,
+                                text: formatUnixDateToString(
+                                    oferta.fechaPublicacion)),
+                            spacerS,
+                            Tupla(
+                                icon: Icons.location_on,
+                                textOverflow: TextOverflow.visible,
+                                text: oferta.localizacion),
                             spacerS,
                             MuiLabeledText(
                                 label: "Empleador", text: oferta.empleador),
@@ -171,13 +164,19 @@ class OfertaDetalle extends StatelessWidget {
                               text: "",
                               child: oferta.skillsRequeridos.isEmpty
                                   ? const EmptyList()
-                                  : Wrap(spacing: 20, children: [
-                                      for (var i = 0;
-                                          i < oferta.skillsRequeridos.length;
-                                          i++)
-                                        SkillTag(
-                                            skill: oferta.skillsRequeridos[i])
-                                    ]),
+                                  : Wrap(
+                                      spacing: 20,
+                                      runSpacing: 10,
+                                      children: [
+                                          for (var i = 0;
+                                              i <
+                                                  oferta
+                                                      .skillsRequeridos.length;
+                                              i++)
+                                            SkillTag(
+                                                skill:
+                                                    oferta.skillsRequeridos[i])
+                                        ]),
                             ),
                             spacerS,
                             const Divider(),

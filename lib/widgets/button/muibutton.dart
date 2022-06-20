@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names
+import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 import 'styles/muibuttonstyles.dart';
@@ -13,7 +14,7 @@ class MuiButton extends StatelessWidget {
       {Key? key,
       required this.onPressed,
       required this.text,
-      this.fontSize = 16,
+      this.fontSize = Dimensions.labelFontSize,
       this.customInset,
       this.variant = MuiButtonVariant.CONTAINED})
       : super(key: key);
@@ -64,5 +65,5 @@ final contained = ContainedButtonStyles();
 final link = LinkButtonStyles();
 final light_link = LightLinkButtonStyles();
 
-const _padding = EdgeInsets.symmetric(horizontal: 32, vertical: 16);
+const _padding = EdgeInsets.symmetric(horizontal: 20, vertical: 8);
 const _minimalPadding = EdgeInsets.symmetric(horizontal: 2, vertical: 2);

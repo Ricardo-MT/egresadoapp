@@ -46,18 +46,14 @@ class _EventosPageState extends State<EventosPage> {
         slivers: [
           SliverLayoutHeader(
             children: [
-              Padding(
-                padding: EdgeInsets.zero
-                    .copyWith(right: Dimensions.pageInsetGap / 2),
-                child: IconButton(
-                    onPressed: () {
-                      filter.scaffoldKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.filter_alt_outlined,
-                      color: MuiPalette.BROWN,
-                    )),
-              ),
+              IconButton(
+                  onPressed: () {
+                    filter.scaffoldKey.currentState?.openDrawer();
+                  },
+                  icon: Icon(
+                    Icons.filter_alt_outlined,
+                    color: MuiPalette.BROWN,
+                  )),
               SearchBar(
                   initialValue:
                       Provider.of<EventosProvider>(context, listen: false)
@@ -70,8 +66,8 @@ class _EventosPageState extends State<EventosPage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.pageInsetGap),
               child: Row(
                 children: [
                   const MuiPageTitle(label: "Eventos"),

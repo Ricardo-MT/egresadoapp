@@ -47,18 +47,14 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
         slivers: [
           SliverLayoutHeader(
             children: [
-              Padding(
-                padding:
-                    EdgeInsets.zero.copyWith(right: Dimensions.pageInsetGap),
-                child: IconButton(
-                    onPressed: () {
-                      filter.scaffoldKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.filter_alt_outlined,
-                      color: MuiPalette.BROWN,
-                    )),
-              ),
+              IconButton(
+                  onPressed: () {
+                    filter.scaffoldKey.currentState?.openDrawer();
+                  },
+                  icon: Icon(
+                    Icons.filter_alt_outlined,
+                    color: MuiPalette.BROWN,
+                  )),
               SearchBar(
                   initialValue: Provider.of<ColaboracionesProvider>(context,
                           listen: false)
@@ -73,8 +69,8 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.pageInsetGap),
               child: Row(
                 children: [
                   const MuiPageTitle(label: "Colaboraciones"),

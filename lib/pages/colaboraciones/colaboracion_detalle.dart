@@ -108,35 +108,26 @@ class ColaboracionDetalle extends StatelessWidget {
                             spacerS,
                             const Divider(),
                             spacerS,
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MuiTouchable(
-                                      onPress: () {
-                                        Navigator.of(context).pushNamed(
-                                            NavigatorRoutes.userProfile(
-                                                colaboracion.autor.id));
-                                      },
-                                      child: TuplaImage(
-                                          url: colaboracion.autor.avatar,
-                                          selectable: false,
-                                          withHero: true,
-                                          text: colaboracion.autor.nombre),
-                                    ),
-                                  ],
-                                ),
-                                Tupla(
-                                    icon: Icons.calendar_today_rounded,
-                                    text: formatUnixDateToString(
-                                        colaboracion.fechaPublicacion)),
-                              ],
+                            MuiTouchable(
+                              onPress: () {
+                                Navigator.of(context).pushNamed(
+                                    NavigatorRoutes.userProfile(
+                                        colaboracion.autor.id));
+                              },
+                              child: TuplaImage(
+                                  url: colaboracion.autor.avatar,
+                                  selectable: false,
+                                  expandable: true,
+                                  textOverflow: TextOverflow.visible,
+                                  withHero: true,
+                                  text: colaboracion.autor.nombre),
                             ),
+                            spacerS,
+                            Tupla(
+                                icon: Icons.calendar_today_rounded,
+                                textOverflow: TextOverflow.ellipsis,
+                                text: formatUnixDateToString(
+                                    colaboracion.fechaPublicacion)),
                             spacerS,
                             const Divider(),
                             spacerS,
@@ -149,16 +140,19 @@ class ColaboracionDetalle extends StatelessWidget {
                               text: "",
                               child: colaboracion.skillsRequeridos.isEmpty
                                   ? const EmptyList()
-                                  : Wrap(spacing: 20, children: [
-                                      for (var i = 0;
-                                          i <
-                                              colaboracion
-                                                  .skillsRequeridos.length;
-                                          i++)
-                                        SkillTag(
-                                            skill: colaboracion
-                                                .skillsRequeridos[i])
-                                    ]),
+                                  : Wrap(
+                                      spacing: 20,
+                                      runSpacing: 10,
+                                      children: [
+                                          for (var i = 0;
+                                              i <
+                                                  colaboracion
+                                                      .skillsRequeridos.length;
+                                              i++)
+                                            SkillTag(
+                                                skill: colaboracion
+                                                    .skillsRequeridos[i])
+                                        ]),
                             ),
                             spacerS,
                             const Divider(),

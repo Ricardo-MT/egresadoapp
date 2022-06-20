@@ -32,7 +32,7 @@ class UsuarioDetalle extends StatelessWidget {
       child: SingleChildScrollView(
         controller: ScrollController(),
         child: Padding(
-          padding: EdgeInsets.all(Dimensions.pageInsetGap),
+          padding: const EdgeInsets.all(Dimensions.pageInsetGap),
           child: Center(
               child: Column(
             children: [
@@ -188,12 +188,14 @@ class UsuarioDetalle extends StatelessWidget {
                           spacerXL,
                           Tupla(
                             icon: Icons.email,
+                            textOverflow: TextOverflow.visible,
                             text: usuario.email,
                             size: MuiTuplaSize.m,
                           ),
                           spacerS,
                           Tupla(
                             icon: Icons.phone,
+                            textOverflow: TextOverflow.visible,
                             text: usuario.telefono ?? "-",
                             size: MuiTuplaSize.m,
                           ),

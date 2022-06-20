@@ -51,6 +51,7 @@ class _SearchBarState extends State<SearchBar> {
       width: 380,
       decoration: _decoration,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
               onPressed: () {
@@ -61,28 +62,31 @@ class _SearchBarState extends State<SearchBar> {
               padding: EdgeInsets.zero,
               icon: _searchIcon),
           Expanded(
-            child: TextFormField(
-              // initialValue: widget.initialValue,
-              controller: controller,
-              onFieldSubmitted: widget.onSubmit,
-              textInputAction: TextInputAction.go,
-              textAlignVertical: TextAlignVertical.center,
-              autocorrect: false,
-              onChanged: widget.onType,
-              style: TextStyle(fontSize: Dimensions.labelFontSize),
-              // scrollPadding: EdgeInsets.all(4),
-              // enabled: false,
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                hintText: "Buscar",
-                hintStyle: TextStyle(color: MuiPalette.MID_GREY),
-                isCollapsed: true,
-                isDense: true,
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.only(top: 4),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextFormField(
+                // initialValue: widget.initialValue,
+                controller: controller,
+                onFieldSubmitted: widget.onSubmit,
+                textInputAction: TextInputAction.go,
+                textAlignVertical: TextAlignVertical.center,
+                autocorrect: false,
+                onChanged: widget.onType,
+                style: TextStyle(fontSize: Dimensions.labelFontSize + 2),
+                // scrollPadding: EdgeInsets.all(4),
+                // enabled: false,
+                keyboardType: TextInputType.name,
+                decoration: InputDecoration(
+                  hintText: "Buscar",
+                  hintStyle: TextStyle(color: MuiPalette.MID_GREY),
+                  isCollapsed: true,
+                  isDense: true,
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.only(top: 4),
+                ),
+                enableSuggestions: true,
+                // onFieldSubmitted: widget.submitText,
               ),
-              enableSuggestions: true,
-              // onFieldSubmitted: widget.submitText,
             ),
           ),
           Visibility(

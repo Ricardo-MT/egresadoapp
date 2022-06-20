@@ -183,8 +183,7 @@ class MuiLabeledText extends StatelessWidget {
 }
 
 final labelStyles = TextStyle(
-    fontSize: Dimensions.labelFontSize + 2,
-    letterSpacing: 1.1,
+    fontSize: Dimensions.labelFontSize,
     fontWeight: FontWeight.bold,
     color: MuiPalette.BROWN);
 

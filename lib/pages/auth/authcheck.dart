@@ -18,11 +18,11 @@ class AuthCheckPage extends StatelessWidget {
 
       Provider.of<UsuarioProvider>(context, listen: false).set(user);
       if (shouldRedirect) {
-        Navigator.of(context).pushNamed(NavigatorRoutes.home);
+        Navigator.of(context).pushReplacementNamed(NavigatorRoutes.home);
       }
     } catch (e) {
       if (shouldRedirect) {
-        Navigator.of(context).pushNamed(NavigatorRoutes.home);
+        Navigator.of(context).pushReplacementNamed(NavigatorRoutes.home);
       }
     }
   }

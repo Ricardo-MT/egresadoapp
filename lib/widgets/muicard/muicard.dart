@@ -64,29 +64,26 @@ class MuiDefaultCard extends StatelessWidget {
                 maxLines: 4,
               ),
             ),
-            spacerS,
+            TuplaImage(
+                url: entidad.autor.avatar,
+                selectable: false,
+                withHero: false,
+                expandable: true,
+                textOverflow: TextOverflow.ellipsis,
+                text: entidad.autor.nombre),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TuplaImage(
-                        url: entidad.autor.avatar,
-                        selectable: false,
-                        withHero: false,
-                        text: entidad.autor.nombre),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Tupla(
-                        icon: Icons.calendar_today_rounded,
-                        text: entidad.fecha,
-                        size: MuiTuplaSize.m,
-                      ),
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Tupla(
+                    icon: Icons.calendar_today_rounded,
+                    text: entidad.fecha,
+                    textOverflow: TextOverflow.ellipsis,
+                    size: MuiTuplaSize.m,
+                  ),
                 ),
                 spacerExpanded,
                 const Text("Ver detalles")

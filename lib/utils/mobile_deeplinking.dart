@@ -1,14 +1,11 @@
-import 'web_deeplinking.dart' if (dart.library.io) "mobile_deeplinking.dart"
-    as html;
-
 import 'package:egresadoapp/utils/loading.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-void openExternally(String url) {
+void platfomOpenExternally(String url) {
   try {
     // html.window.open(url, "_blank");
-    html.platfomOpenExternally(url);
+    launchUrlString(url);
   } catch (e) {
-    print(e);
     LoadingHandler.showToastWithoutContext(
         "No se pudo abrir el enlace, el formato es inválido",
         isError: true);

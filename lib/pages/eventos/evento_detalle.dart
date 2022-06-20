@@ -107,41 +107,30 @@ class EventoDetalle extends StatelessWidget {
                             spacerS,
                             const Divider(),
                             spacerS,
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: MuiTouchable(
-                                    onPress: () {
-                                      Navigator.of(context).pushNamed(
-                                          NavigatorRoutes.userProfile(
-                                              evento.autor.id));
-                                    },
-                                    child: TuplaImage(
-                                        url: evento.autor.avatar,
-                                        selectable: false,
-                                        withHero: true,
-                                        text: evento.autor.nombre),
-                                  ),
-                                ),
-                                Tupla(
-                                    icon: Icons.calendar_today_rounded,
-                                    text: formatUnixDateTimeToString(
-                                        evento.fecha)),
-                              ],
+                            MuiTouchable(
+                              onPress: () {
+                                Navigator.of(context).pushNamed(
+                                    NavigatorRoutes.userProfile(
+                                        evento.autor.id));
+                              },
+                              child: TuplaImage(
+                                  url: evento.autor.avatar,
+                                  expandable: true,
+                                  selectable: false,
+                                  withHero: true,
+                                  textOverflow: TextOverflow.visible,
+                                  text: evento.autor.nombre),
                             ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Tupla(
-                                    icon: Icons.location_on,
-                                    text: evento.localizacion),
-                              ],
-                            ),
+                            spacerS,
+                            Tupla(
+                                icon: Icons.calendar_today_rounded,
+                                textOverflow: TextOverflow.visible,
+                                text: formatUnixDateTimeToString(evento.fecha)),
+                            spacerS,
+                            Tupla(
+                                icon: Icons.location_on,
+                                textOverflow: TextOverflow.visible,
+                                text: evento.localizacion),
                             spacerS,
                             MuiLabeledText(
                                 label: "Organizadores",
@@ -157,12 +146,15 @@ class EventoDetalle extends StatelessWidget {
                               text: "",
                               child: evento.skills.isEmpty
                                   ? const EmptyList()
-                                  : Wrap(spacing: 20, children: [
-                                      for (var i = 0;
-                                          i < evento.skills.length;
-                                          i++)
-                                        SkillTag(skill: evento.skills[i])
-                                    ]),
+                                  : Wrap(
+                                      spacing: 20,
+                                      runSpacing: 10,
+                                      children: [
+                                          for (var i = 0;
+                                              i < evento.skills.length;
+                                              i++)
+                                            SkillTag(skill: evento.skills[i])
+                                        ]),
                             ),
                             spacerS,
                             const Divider(),

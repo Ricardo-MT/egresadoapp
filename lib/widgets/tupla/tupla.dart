@@ -12,10 +12,12 @@ class Tupla extends StatelessWidget {
   final MuiTuplaSize size;
   final bool bold;
   final bool selectable;
+  final TextOverflow textOverflow;
   const Tupla(
       {Key? key,
       required this.icon,
       this.size = MuiTuplaSize.l,
+      required this.textOverflow,
       required this.text,
       this.selectable = true,
       this.bold = false})
@@ -54,12 +56,14 @@ class Tupla extends StatelessWidget {
                 text,
                 style: _textStyles.copyWith(
                     fontSize: fontSize,
+                    overflow: textOverflow,
                     fontWeight: bold ? FontWeight.bold : FontWeight.normal),
               )
             : Text(
                 text,
                 style: _textStyles.copyWith(
                     fontSize: fontSize,
+                    overflow: textOverflow,
                     fontWeight: bold ? FontWeight.bold : FontWeight.normal),
               )
       ],
@@ -77,11 +81,15 @@ class TuplaImage extends StatelessWidget {
   final bool bold;
   final bool withHero;
   final bool selectable;
+  final bool expandable;
+  final TextOverflow textOverflow;
   const TuplaImage(
       {Key? key,
       required this.url,
       this.size = MuiTuplaSize.l,
       required this.text,
+      required this.expandable,
+      required this.textOverflow,
       this.selectable = true,
       this.withHero = false,
       this.bold = false})
@@ -104,6 +112,22 @@ class TuplaImage extends StatelessWidget {
         iconSize = 28;
         fontSize = 14;
     }
+    Widget child = selectable
+        ? SelectableText(
+            text,
+            style: _textStyles.copyWith(
+                fontSize: fontSize,
+                overflow: textOverflow,
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+          )
+        : Text(
+            text,
+            softWrap: true,
+            style: _textStyles.copyWith(
+                fontSize: fontSize,
+                overflow: textOverflow,
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+          );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -119,19 +143,7 @@ class TuplaImage extends StatelessWidget {
             ),
           ),
         ),
-        selectable
-            ? SelectableText(
-                text,
-                style: _textStyles.copyWith(
-                    fontSize: fontSize,
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-              )
-            : Text(
-                text,
-                style: _textStyles.copyWith(
-                    fontSize: fontSize,
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-              )
+        if (expandable) Expanded(child: child) else child
       ],
     );
   }

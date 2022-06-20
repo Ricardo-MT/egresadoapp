@@ -47,10 +47,12 @@ class UsuarioCard extends StatelessWidget {
               Tupla(
                 icon: Icons.email_outlined,
                 text: usuario.email,
+                textOverflow: TextOverflow.ellipsis,
                 size: MuiTuplaSize.m,
               ),
               Tupla(
                 icon: Icons.phone_rounded,
+                textOverflow: TextOverflow.ellipsis,
                 text: usuario.telefono ?? "-",
                 size: MuiTuplaSize.m,
               )

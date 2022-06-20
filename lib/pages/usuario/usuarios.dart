@@ -41,18 +41,14 @@ class _UsuariosPageState extends State<UsuariosPage> {
         slivers: [
           SliverLayoutHeader(
             children: [
-              Padding(
-                padding:
-                    EdgeInsets.zero.copyWith(right: Dimensions.pageInsetGap),
-                child: IconButton(
-                    onPressed: () {
-                      filter.scaffoldKey.currentState?.openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.filter_alt_outlined,
-                      color: MuiPalette.BROWN,
-                    )),
-              ),
+              IconButton(
+                  onPressed: () {
+                    filter.scaffoldKey.currentState?.openDrawer();
+                  },
+                  icon: Icon(
+                    Icons.filter_alt_outlined,
+                    color: MuiPalette.BROWN,
+                  )),
               SearchBar(
                   initialValue:
                       Provider.of<UsuariosProvider>(context, listen: false)
@@ -64,11 +60,11 @@ class _UsuariosPageState extends State<UsuariosPage> {
                       .setSearch),
             ],
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: Dimensions.pageInsetGap),
-              child: const MuiPageTitle(label: "Usuarios"),
+              child: MuiPageTitle(label: "Usuarios"),
             ),
           ),
           FutureBuilder(

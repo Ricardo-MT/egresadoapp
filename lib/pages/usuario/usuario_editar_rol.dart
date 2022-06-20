@@ -3,10 +3,10 @@ import 'package:egresadoapp/api/models/user.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/loading.dart';
-import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/utils/validators.dart';
 import 'package:egresadoapp/widgets/bring_in_widgets/fade_in_wrapper.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
+import 'package:egresadoapp/widgets/images/avatar_image.dart';
 import 'package:egresadoapp/widgets/layout/screen.dart';
 import 'package:egresadoapp/widgets/muiselect/muiselect.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
@@ -92,10 +92,9 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
           child: Column(
             children: [
               Center(
-                child: Icon(
-                  Icons.account_circle_rounded,
-                  size: 200,
-                  color: MuiPalette.BROWN,
+                child: AvatarImage(
+                  customSize: 200,
+                  url: edited.avatar,
                 ),
               ),
               Center(child: RolTag(rol: edited.rol)),

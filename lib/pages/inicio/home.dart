@@ -46,53 +46,64 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool mobileView = MediaQuery.of(context).size.aspectRatio < 1;
     return MuiScreen(
-      child: PageView(
+      child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        controller: PageController(),
-        children: [
-          Stack(
-            children: [
-              PageView(
-                onPageChanged: (value) {
-                  automaticScrollerDebouncer.run(() {
-                    navigateTo(value == 2 ? 0 : value + 1);
-                  });
-                },
-                controller: controller,
+        controller: ScrollController(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          // scrollDirection: Axis.vertical,
+          // controller: PageController(),
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height - 2 * kToolbarHeight,
+              child: Stack(
                 children: [
-                  CarrouselLanding(
-                      img:
-                          "assets/images/leader${mobileView ? "_mobile" : ""}.png",
-                      text: "Conecta con otros profesionales del sector"),
-                  CarrouselLanding(
-                      img:
-                          "assets/images/team${mobileView ? "_mobile" : ""}.png",
-                      text: "Asiste a eventos de interés de la comunidad"),
-                  CarrouselLanding(
-                      img:
-                          "assets/images/people${mobileView ? "_mobile" : ""}.png",
-                      text:
-                          "Consulta ofertas de trabajo, colaboraciones, y mucho más ..."),
+                  PageView(
+                    onPageChanged: (value) {
+                      automaticScrollerDebouncer.run(() {
+                        navigateTo(value == 2 ? 0 : value + 1);
+                      });
+                    },
+                    controller: controller,
+                    children: [
+                      CarrouselLanding(
+                          img:
+                              "assets/images/leader${mobileView ? "_mobile" : ""}.png",
+                          text: "Conecta con otros profesionales del sector"),
+                      CarrouselLanding(
+                          img:
+                              "assets/images/team${mobileView ? "_mobile" : ""}.png",
+                          text: "Asiste a eventos de interés de la comunidad"),
+                      CarrouselLanding(
+                          img:
+                              "assets/images/people${mobileView ? "_mobile" : ""}.png",
+                          text:
+                              "Consulta ofertas de trabajo, colaboraciones, y mucho más ..."),
+                    ],
+                  ),
+                  Positioned(
+                      top: 0,
+                      right: 0,
+                      left: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CarrouselIndicator(
+                          controller: controller,
+                        ),
+                      ))
                 ],
               ),
-              Positioned(
-                  top: 0,
-                  right: 0,
-                  left: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CarrouselIndicator(
-                      controller: controller,
-                    ),
-                  ))
-            ],
-          ),
-          SingleChildScrollView(
-            controller: ScrollController(),
-            child: Column(
+            ),
+            Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 spacerXL,
@@ -195,9 +206,9 @@ class _HomePageState extends State<HomePage> {
                     })),
                 const FullFooter()
               ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -290,7 +301,7 @@ class CardCarousel extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

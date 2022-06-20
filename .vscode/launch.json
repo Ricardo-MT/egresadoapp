@@ -16,6 +16,36 @@
                 "--dart-define",
                 "target=http://localhost:5000"
             ],
+        },
+        {
+            "program": "lib/main.dart",
+            "name": "Flutter (android)",
+            "flutterMode": "debug",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "emulator-5554",
+                "--web-port",
+                "8000",
+                "--dart-define",
+                "target=http://10.0.2.2:5000"
+            ],
+        },
+        {
+            "program": "lib/main.dart",
+            "name": "Flutter (ios)",
+            "flutterMode": "debug",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "F47F8069-29F4-4FEC-84EF-A61013C1B790",
+                "--web-port",
+                "8000",
+                "--dart-define",
+                "target=http://localhost:5000"
+            ],
         }
     ]
 }

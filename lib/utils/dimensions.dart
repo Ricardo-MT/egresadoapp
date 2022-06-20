@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class Dimensions {
-  static double borderWidth = 1.6;
-  static double borderRadiusControllers = 12;
-  static double controllerHeight = 48;
-  static double innerGap = 18;
-  static double cardSmallSpacing = 10;
-  static double cardLargeSpacing = cardSmallSpacing * 2.5;
-  static double defaultCardWidth = 520;
-  static double defaultCardHeight = 420;
-  static double labelFontSize = 12;
-  static double cardTitleFontSize = labelFontSize + 3;
-  static double pageInsetGap = 30;
-  static int animationDuration = 200;
+  static const double borderWidth = 1.6;
+  static const double borderRadiusControllers = 12;
+  static const double controllerHeight = 48;
+  static const double innerGap = 18;
+  static const double cardSmallSpacing = 10;
+  static const double cardLargeSpacing = cardSmallSpacing * 2.5;
+  static const double defaultCardWidth = 520;
+  static const double defaultCardHeight = 420;
+  static const double labelFontSize = 12;
+  static const double cardTitleFontSize = labelFontSize + 3;
+  static const double pageInsetGap = 30;
+  static const int animationDuration = 200;
 }
 
 bool isMobileView(BuildContext context) {

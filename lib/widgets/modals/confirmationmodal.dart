@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/widgets/button/muibutton.dart';
+import 'package:egresadoapp/widgets/input/muiinput.dart';
 import 'package:egresadoapp/widgets/modals/basemodal.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +24,13 @@ class _ConfirmationModalState extends State<ConfirmationModal> {
   Widget build(BuildContext context) {
     return Center(
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 400),
+        constraints: BoxConstraints(
+            maxWidth: min(420, MediaQuery.of(context).size.width * 0.9)),
         child: MuiBaseModal(
-          title: Text(widget.title),
+          title: Text(
+            widget.title,
+            style: labelStyles.copyWith(fontSize: Dimensions.cardTitleFontSize),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -32,7 +40,7 @@ class _ConfirmationModalState extends State<ConfirmationModal> {
                 spacerXL,
                 Text(
                   widget.text,
-                  style: TextStyle(fontSize: 20, color: MuiPalette.DARK_GREY),
+                  style: labelStyles.copyWith(color: MuiPalette.DARK_GREY),
                   textAlign: TextAlign.center,
                 ),
                 spacerXL,

@@ -23,46 +23,48 @@ class MuiFilterDrawer extends StatelessWidget {
     return SizedBox(
       width: 360,
       child: Drawer(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: filterInset,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        Text(
-                          "Filtros",
-                          style: _titleStyles,
-                        ),
-                        Text(subtitle, style: _subtitleStyles),
-                      ])),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.close))
-                ],
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: filterInset,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Text(
+                            "Filtros",
+                            style: _titleStyles,
+                          ),
+                          Text(subtitle, style: _subtitleStyles),
+                        ])),
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(Icons.close))
+                  ],
+                ),
               ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: filterInset.copyWith(top: 0),
-                child: MuiButton(
-                    onPressed: onCleanFilter,
-                    variant: MuiButtonVariant.LINK,
-                    text: "Limpiar filtros"),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: filterInset.copyWith(top: 0),
+                  child: MuiButton(
+                      onPressed: onCleanFilter,
+                      variant: MuiButtonVariant.LINK,
+                      text: "Limpiar filtros"),
+                ),
               ),
-            ),
-            Expanded(child: child)
-          ],
+              Expanded(child: child)
+            ],
+          ),
         ),
       ),
     );

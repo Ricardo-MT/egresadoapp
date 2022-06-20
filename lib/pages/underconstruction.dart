@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 
 class UnderConstruction extends StatelessWidget {
   const UnderConstruction({Key? key}) : super(key: key);
@@ -20,9 +19,6 @@ class UnderConstruction extends StatelessWidget {
                   color: Color(0xFF72757A)),
             ),
           ),
-          Expanded(
-              child: Center(
-                  child: Lottie.asset('assets/79632-under-maintanance.json'))),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

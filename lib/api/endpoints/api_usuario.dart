@@ -48,7 +48,7 @@ class ApiUsuario {
     if (photo != null) {
       url = await _uploadImage(usuario, photo);
     }
-    usuario.avatar = url;
+    usuario.avatar = url ?? usuario.avatar;
     dynamic res = await Api.PUT_REQUEST(Api.USUARIOS, body: usuario.toJson());
     return User.fromJson(res["usuario"]);
   }
@@ -65,7 +65,6 @@ class ApiUsuario {
   }
 
   static Future<String> _uploadImage(User usuario, XFile photo) async {
-    // File file = File(photo.bytes!.toList(), "fileName");
     firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
     final path = "files/images/avatars/${usuario.id}";

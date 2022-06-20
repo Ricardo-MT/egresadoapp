@@ -5,7 +5,7 @@ import 'package:egresadoapp/widgets/header/app_header.dart';
 import 'package:egresadoapp/widgets/layout/navigation_drawer.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
-import 'package:flutter/foundation.dart';
+import 'package:egresadoapp/widgets/tap_to_hide_keyboard/tapToHideKeyboard.dart';
 import 'package:flutter/material.dart';
 
 class MuiScreen extends StatefulWidget {
@@ -20,18 +20,25 @@ class MuiScreen extends StatefulWidget {
 class _MuiScreenState extends State<MuiScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: widget.filter?.scaffoldKey,
-      drawer: widget.filter?.child,
-      endDrawerEnableOpenDragGesture: false,
-      endDrawer: const NavigationDrawer(),
-      appBar: AppBar(
-        automaticallyImplyLeading: !kIsWeb,
-        title: const MuiAppHeader(),
-        actions:
-            MediaQuery.of(context).size.width < 700 ? null : const [spacerZero],
+    return TapToHideKeyboard(
+      child: Scaffold(
+        key: widget.filter?.scaffoldKey,
+        drawer: widget.filter?.child,
+        resizeToAvoidBottomInset: true,
+        endDrawerEnableOpenDragGesture: false,
+        drawerEnableOpenDragGesture: false,
+        endDrawer: const NavigationDrawer(),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: Navigator.of(context).canPop() ? const BackButton() : null,
+          title: const MuiAppHeader(),
+          centerTitle: true,
+          actions: MediaQuery.of(context).size.width < 700
+              ? null
+              : const [spacerZero],
+        ),
+        body: widget.child,
       ),
-      body: widget.child,
     );
   }
 }
@@ -46,7 +53,7 @@ class MuiPageTitle extends StatelessWidget {
         style: TextStyle(
             fontWeight: FontWeight.bold,
             color: MuiPalette.BLACK,
-            fontSize: 26));
+            fontSize: 20));
   }
 }
 
@@ -61,7 +68,7 @@ class MuiDataScreen extends StatelessWidget {
     return SingleChildScrollView(
       controller: ScrollController(),
       child: Padding(
-        padding: EdgeInsets.all(Dimensions.pageInsetGap),
+        padding: const EdgeInsets.all(Dimensions.pageInsetGap),
         child: Center(
             child: Column(
           children: [

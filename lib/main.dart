@@ -5,7 +5,6 @@ import 'package:egresadoapp/providers/ofertas_provider.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/providers/usuario_provider.dart';
 import 'package:egresadoapp/router/router.dart';
-import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +15,10 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   MuiRouter.configureRoutes();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const OverlaySupport.global(child: MyProviders()));
 }
 
@@ -55,7 +54,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [Locale("es", ""), Locale("en", "")],
       title: 'Egresad@',
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.authCheck,
+      initialRoute: Uri.base.path,
       onGenerateRoute: MuiRouter.router.generator,
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),

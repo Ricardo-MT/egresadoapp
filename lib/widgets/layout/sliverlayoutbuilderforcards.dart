@@ -24,9 +24,14 @@ class SliverLayoutBuilderForCards extends StatelessWidget {
     return SliverLayoutBuilder(builder: ((context, constraints) {
       double crossAxisCountDouble =
           (constraints.crossAxisExtent - _gap) / itemExtent;
-      int crossAxisCount = min(crossAxisCountDouble.toInt(), length);
-      double p =
-          (constraints.crossAxisExtent - itemExtent * crossAxisCount) / 2;
+      print(crossAxisCountDouble);
+
+      int crossAxisCount = max(1, min(crossAxisCountDouble.toInt(), length));
+      print(crossAxisCount);
+      print(list.length);
+
+      double p = max(
+          2, (constraints.crossAxisExtent - itemExtent * crossAxisCount) / 2);
 
       return SliverPadding(
         padding: EdgeInsets.symmetric(horizontal: p, vertical: _gap),
@@ -51,4 +56,4 @@ class SliverLayoutBuilderForCards extends StatelessWidget {
   }
 }
 
-final _gap = Dimensions.pageInsetGap - 10;
+const _gap = Dimensions.pageInsetGap - 5;

@@ -27,7 +27,7 @@ class MuiBaseModal extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(child: title == null ? spacerZero : title!),
                       IconButton(

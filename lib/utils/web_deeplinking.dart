@@ -1,12 +1,9 @@
-import 'web_deeplinking.dart' if (dart.library.io) "mobile_deeplinking.dart"
-    as html;
-
+import "dart:html" as html;
 import 'package:egresadoapp/utils/loading.dart';
 
-void openExternally(String url) {
+void platfomOpenExternally(String url) {
   try {
-    // html.window.open(url, "_blank");
-    html.platfomOpenExternally(url);
+    html.window.open(url, "_blank");
   } catch (e) {
     print(e);
     LoadingHandler.showToastWithoutContext(
