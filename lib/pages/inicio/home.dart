@@ -109,10 +109,10 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 Center(
-                  child: Text("Entérate de qué se cuece",
+                  child: Text("Entérate de las últimas novedades",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 34,
                           fontWeight: FontWeight.bold,
                           color: MuiPalette.BROWN)),
                 ),

@@ -18,10 +18,12 @@ import 'package:egresadoapp/pages/eventos/evento_detalle.dart';
 import 'package:egresadoapp/pages/eventos/evento_editar.dart';
 import 'package:egresadoapp/pages/eventos/eventos.dart';
 import 'package:egresadoapp/pages/inicio/home.dart';
+import 'package:egresadoapp/pages/notFound.dart';
 import 'package:egresadoapp/pages/ofertas/oferta_crear.dart';
 import 'package:egresadoapp/pages/ofertas/oferta_detalle.dart';
 import 'package:egresadoapp/pages/ofertas/oferta_editar.dart';
 import 'package:egresadoapp/pages/ofertas/ofertas.dart';
+import 'package:egresadoapp/pages/politica/conocenos.dart';
 import 'package:egresadoapp/pages/politica/cookies.dart';
 import 'package:egresadoapp/pages/politica/privacy.dart';
 import 'package:egresadoapp/pages/politica/terms.dart';
@@ -411,12 +413,12 @@ class MuiHandlers {
 
   // ACERCA DE
   static final Handler _about = Handler(handlerFunc: ((context, parameters) {
-    return Container();
+    return const ConocenosPage();
   }));
 
   // NOT FOUND
   static final Handler notFound = Handler(handlerFunc: ((context, parameters) {
-    return const MuiErrorWidget();
+    return const NotFoundPage();
   }));
 }
 

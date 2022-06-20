@@ -56,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            height: max(MediaQuery.of(context).size.height, 800),
+            height: max(MediaQuery.of(context).size.height, 820),
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/register.png"),
@@ -87,6 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               spacerXL,
                               MuiInput(
+                                required: true,
                                 color: MuiInputColor.LIGHT,
                                 validator: Validators.validateIsEmpty,
                                 autofillHints: const [AutofillHints.name],
@@ -97,8 +98,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 inputType: TextInputType.text,
                               ),
-                              spacerS,
                               MuiInput(
+                                required: true,
                                 color: MuiInputColor.LIGHT,
                                 autofillHints: const [AutofillHints.email],
                                 label: "EMAIL",
@@ -109,8 +110,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 inputType: TextInputType.text,
                               ),
-                              spacerS,
                               MuiInput(
+                                required: true,
                                 color: MuiInputColor.LIGHT,
                                 label: "CONTRASEÑA",
                                 autofillHints: const [
@@ -123,9 +124,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 },
                                 inputType: TextInputType.text,
                               ),
-                              spacerS,
                               MuiInput(
                                 color: MuiInputColor.LIGHT,
+                                required: true,
                                 label: "CONFIRMA TU CONTRASEÑA",
                                 validator: Validators.validateRepeatedPassword(
                                     credentials.password),

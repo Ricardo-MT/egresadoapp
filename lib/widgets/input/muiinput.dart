@@ -27,11 +27,13 @@ class MuiInput extends StatefulWidget {
   List<String>? autofillHints;
   String? Function(String?)? validator;
   bool finishAutofillContext;
+  bool required;
   MuiInput(
       {Key? key,
       this.hideInput = false,
       this.onPressed,
       required this.label,
+      this.required = false,
       this.onChanged,
       this.onFieldSubmitted,
       this.autofillHints,
@@ -89,10 +91,21 @@ class _MuiInputState extends State<MuiInput> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: labelStyles.copyWith(color: _color),
+        Text.rich(
+          TextSpan(
+              text: widget.label,
+              style: labelStyles.copyWith(color: _color),
+              children: widget.required
+                  ? [
+                      const TextSpan(
+                          text: " *", style: TextStyle(color: Colors.red))
+                    ]
+                  : []),
         ),
+        // Text(
+        //   widget.label,
+        //   style: labelStyles.copyWith(color: _color),
+        // ),
         spacerS,
         TextFormField(
           validator: widget.validator,

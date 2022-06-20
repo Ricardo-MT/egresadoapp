@@ -137,6 +137,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
         child: Column(
           children: [
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: tituloController,
@@ -145,6 +146,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
             spacerS,
             MuiInput(
               color: MuiInputColor.DARK,
+              required: true,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
               label: "Descripción",
@@ -163,6 +165,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
                 )),
             formDivider,
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: localizacionController,
@@ -170,6 +173,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
             ),
             spacerS,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: hostsController,
@@ -177,6 +181,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
             ),
             formDivider,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: contactoController,

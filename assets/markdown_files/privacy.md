@@ -6,14 +6,16 @@ El Titular se compromete a cumplir con la normativa en materia de Protección de
 ## Responsable del Tratamiento.
 
 IES Saladillo
+
 Avda, C. Duque de Rivas, s/n 11207 Algeciras, Cádiz
+
 (+34) 956-60-49-47
 
 ## Finalidades y legitimación.
 
-**Atención de consultas**: Atender las consultas del Usuario que se ponga en contacto a través de los Formularios o herramientas de comunicación con el Usuario en el Sitio Web. La base legítima del tratamiento es el consentimiento del Usuario, conforme al art. 6.1.a) del RGPD.
+**Atención de consultas**: Atender las consultas del Usuario que se ponga en contacto a través de los Formularios o herramientas de comunicación con el Usuario en el Sitio Web. La base legítima del tratamiento es el consentimiento del Usuario, conforme al art. 6.1.a del RGPD.
 
-**Comunicaciones comerciales**: Para el Usuario que voluntariamente acepte esta opción, se les remitirán ofertas laborales, noticias, invitación a eventos y cualquier tipo de información comercial del Titular. La base legítima del tratamiento es el consentimiento del Usuario, conforme al art. 6.1.a) del RGPD.
+**Comunicaciones comerciales**: Para el Usuario que voluntariamente acepte esta opción, se les remitirán ofertas laborales, noticias, invitación a eventos y cualquier tipo de información comercial del Titular. La base legítima del tratamiento es el consentimiento del Usuario, conforme al art. 6.1.a del RGPD.
 
 ## Plazo de conservación.
 

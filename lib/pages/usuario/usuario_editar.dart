@@ -245,6 +245,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
               Center(child: RolTag(rol: edited.rol)),
               spacerS,
               MuiInput(
+                required: true,
                 validator: Validators.validateIsEmpty,
                 color: MuiInputColor.DARK,
                 controller: nameController,
@@ -277,6 +278,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
               formDivider,
               MuiSelect(
                 label: "Estado",
+                required: true,
                 transformer: getLabelByEstado,
                 validator: Validators.validateIsEmpty,
                 hint: "Desactivado, Abierto a colaborar ...",
@@ -290,6 +292,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
               ),
               spacerS,
               MuiInput(
+                required: true,
                 validator: Validators.validateEmail,
                 controller: emailController,
                 color: MuiInputColor.DARK,

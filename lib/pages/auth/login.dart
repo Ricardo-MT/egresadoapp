@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                               spacerXL,
                               MuiInput(
                                 color: MuiInputColor.LIGHT,
+                                required: true,
                                 finishAutofillContext: true,
                                 autofillHints: const [AutofillHints.email],
                                 label: "EMAIL",
@@ -102,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               spacerS,
                               MuiInput(
+                                required: true,
                                 color: MuiInputColor.LIGHT,
                                 autofillHints: const [
                                   AutofillHints.password,

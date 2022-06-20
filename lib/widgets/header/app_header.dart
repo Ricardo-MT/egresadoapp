@@ -74,6 +74,13 @@ class _MuiAppHeader extends State<MuiAppHeader> {
             text: "Usuarios",
             variant: MuiButtonVariant.LIGHT_LINK,
           ),
+          MuiButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.about);
+            },
+            text: "Conócenos",
+            variant: MuiButtonVariant.LIGHT_LINK,
+          ),
           spacerM,
           Consumer<UsuarioProvider>(
             builder: (context, provider, child) {

@@ -134,6 +134,7 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
         child: Column(
           children: [
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: tituloController,
@@ -141,6 +142,7 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
             ),
             spacerS,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
@@ -162,6 +164,7 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
                 )),
             formDivider,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: contactoController,

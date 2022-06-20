@@ -159,6 +159,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
         child: Column(
           children: [
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: tituloController,
@@ -166,6 +167,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             ),
             spacerS,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
@@ -185,6 +187,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
                 )),
             spacerS,
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: experienciaController,
@@ -192,6 +195,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             ),
             formDivider,
             MuiInput(
+              required: true,
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: empleadorController,
@@ -199,6 +203,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             ),
             spacerS,
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: localizacionController,
@@ -207,6 +212,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             spacerS,
             MuiSelect(
               label: "Presencialidad",
+              required: true,
               transformer: getLabelByPresencialidad,
               validator: Validators.validateIsEmpty,
               hint: "Presencial, Teletrabajo ...",
@@ -222,6 +228,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             spacerS,
             MuiSelect(
               label: "Tipo de jornada",
+              required: true,
               transformer: getLabelByTipoJornada,
               validator: Validators.validateIsEmpty,
               hint: "Completa/Partida",
@@ -235,6 +242,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             ),
             spacerS,
             MuiInput(
+              required: true,
               validator: Validators.validateIsEmpty,
               color: MuiInputColor.DARK,
               controller: salarioController,
@@ -243,6 +251,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
             formDivider,
             MuiInput(
               color: MuiInputColor.DARK,
+              required: true,
               validator: Validators.validateIsEmpty,
               controller: contactoController,
               label: "Contacto",

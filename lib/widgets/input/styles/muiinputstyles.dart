@@ -19,6 +19,10 @@ class OutLinedInputStyles extends MuiInputStyles {
         filled: filled,
         fillColor: MuiPalette.GREY,
         hoverColor: MuiPalette.GREY,
+        helperText: "",
+        errorBorder: const OutlineInputBorder(
+            borderSide:
+                BorderSide(color: Colors.red, width: Dimensions.borderWidth)),
         focusedBorder: OutlineInputBorder(
             borderSide:
                 BorderSide(color: color, width: Dimensions.borderWidth)),

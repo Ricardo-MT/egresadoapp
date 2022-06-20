@@ -106,6 +106,14 @@ class NavigationDrawer extends StatelessWidget {
                     text: "Usuarios",
                     fontSize: 24,
                     variant: MuiButtonVariant.LINK,
+                  ),
+                  MuiButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(Routes.about);
+                    },
+                    text: "Conócenos",
+                    fontSize: 24,
+                    variant: MuiButtonVariant.LINK,
                   )
                 ],
               ),
