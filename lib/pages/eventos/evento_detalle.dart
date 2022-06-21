@@ -29,7 +29,7 @@ class EventoDetalle extends StatelessWidget {
       child: SingleChildScrollView(
         controller: ScrollController(),
         child: Padding(
-          padding: EdgeInsets.all(Dimensions.pageInsetGap),
+          padding: const EdgeInsets.all(Dimensions.pageInsetGap),
           child: Center(
               child: Column(
             children: [
@@ -71,7 +71,7 @@ class EventoDetalle extends StatelessWidget {
                         spacerExpanded,
                         MuiConditionalWidget(
                             child: IconButton(
-                              tooltip: "Editar oferta laboral",
+                              tooltip: "Editar evento",
                               icon: Icon(
                                 Icons.border_color,
                                 color: MuiPalette.BROWN,

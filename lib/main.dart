@@ -79,6 +79,7 @@ Future<void> preconfigureApp(BuildContext context) async {
     precacheImage(const AssetImage("assets/images/leader_mobile.png"), context),
     precacheImage(const AssetImage("assets/images/people_mobile.png"), context),
     precacheImage(const AssetImage("assets/images/team_mobile.png"), context),
+    precacheImage(const AssetImage("assets/images/conocenos.png"), context),
     precacheImage(const AssetImage("assets/images/cookies.png"), context),
     precacheImage(const AssetImage("assets/images/privacidad.png"), context),
     precacheImage(const AssetImage("assets/images/terminos.png"), context),
