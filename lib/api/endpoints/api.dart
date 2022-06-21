@@ -9,6 +9,7 @@ import 'api.web.dart' if (dart.library.io) "api.mobile.dart" as cliente;
 import '../../utils/errors.dart';
 
 const current = String.fromEnvironment("target");
+// const current = "https://egresado-production.up.railway.app";
 final allHeaders = {
   "Accept": "*/*",
   "Access-Control-Allow-Origin": "*",
@@ -88,8 +89,6 @@ class Api {
     final code = response.statusCode;
 
     final rawJsonString = response.body;
-    print(rawJsonString);
-
     dynamic res = jsonDecode(rawJsonString);
 
     if (code >= 400) {

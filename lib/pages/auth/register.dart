@@ -56,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
         body: SingleChildScrollView(
           child: Container(
             width: double.infinity,
-            height: max(MediaQuery.of(context).size.height, 820),
+            height: max(MediaQuery.of(context).size.height, 660),
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/register.png"),
@@ -160,7 +160,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                     ),
-                    const PrivacyFooter()
+                    spacerExpanded,
+                    const PrivacyFooter(),
+                    spacerS
                   ],
                 ),
               ),

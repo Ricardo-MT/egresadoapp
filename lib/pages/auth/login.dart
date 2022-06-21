@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 image: DecorationImage(
                     image: AssetImage("assets/images/login.png"),
                     fit: BoxFit.cover)),
-            height: max(MediaQuery.of(context).size.height, 600),
+            height: max(MediaQuery.of(context).size.height, 520),
             width: double.infinity,
             child: SafeArea(
               child: Padding(
@@ -142,7 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    const PrivacyFooter()
+                    spacerExpanded,
+                    const PrivacyFooter(),
+                    spacerS
                   ],
                 ),
               ),

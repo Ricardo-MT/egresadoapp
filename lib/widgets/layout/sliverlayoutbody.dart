@@ -1,6 +1,7 @@
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/errorwidget/error_widget.dart';
 import 'package:egresadoapp/widgets/layout/sliverlayoutbuilderforcards.dart';
+import 'package:egresadoapp/widgets/loading/loading.dart';
 import 'package:flutter/material.dart';
 
 class SliverLayoutBody extends StatefulWidget {
@@ -29,7 +30,7 @@ class _SliverLayoutBodyState extends State<SliverLayoutBody> {
   @override
   void initState() {
     super.initState();
-    list = [];
+    list = [const Loading()];
     page = 1;
     _fetchPage(page);
     widget.controller.addListener(myListener);
@@ -48,12 +49,17 @@ class _SliverLayoutBodyState extends State<SliverLayoutBody> {
       final isLastPage = newItems.isEmpty;
       if (!isLastPage) {
         page = pageKey;
+        if (list[0].runtimeType == Loading) {
+          list = [];
+        }
         list.addAll(widget.gridGenerator(newItems));
         setState(() {});
+      } else {
+        if (list.isEmpty) {
+          list = [const EmptyList()];
+        }
       }
     } catch (error) {
-      // _pagingController.error = error;
-
       list = [const MuiErrorWidget()];
       setState(() {});
     }
@@ -69,5 +75,5 @@ class _SliverLayoutBodyState extends State<SliverLayoutBody> {
   Widget build(BuildContext context) => SliverLayoutBuilderForCards(
       cardWidth: widget.cardWidth,
       cardAspectRatio: widget.cardAspectRatio,
-      list: list.isEmpty ? const [EmptyList()] : list);
+      list: list);
 }
