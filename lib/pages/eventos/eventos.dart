@@ -30,6 +30,8 @@ class EventosPage extends StatefulWidget {
 
 class _EventosPageState extends State<EventosPage> {
   late MuiFilterModel filter;
+  final ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +44,7 @@ class _EventosPageState extends State<EventosPage> {
     return MuiScreen(
       filter: filter,
       child: CustomScrollView(
-        controller: ScrollController(),
+        controller: _controller,
         slivers: [
           SliverLayoutHeader(
             children: [
@@ -100,6 +102,8 @@ class _EventosPageState extends State<EventosPage> {
                 return Consumer<EventosProvider>(
                   builder: (context, provider, child) {
                     return SliverLayoutBody(
+                        key: provider.key,
+                        controller: _controller,
                         gridGenerator: (items) =>
                             List.generate(items.length, (index) {
                               Evento evento = items[index];
@@ -116,7 +120,8 @@ class _EventosPageState extends State<EventosPage> {
                                       fecha: formatUnixDateToString(
                                           evento.fecha)));
                             }),
-                        future: ApiEventos.fetchEventos(
+                        future: (page) => ApiEventos.fetchEventos(
+                            page: page,
                             searchText: provider.getSearch(),
                             filtros: provider.getFilters()),
                         cardWidth: defaultCardWidth,

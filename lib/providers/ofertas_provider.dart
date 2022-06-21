@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class OfertasProvider extends ChangeNotifier {
   String _search = "";
+  late Key key;
 
   late FiltroOfertas _filtro;
 
   OfertasProvider() {
+    key = UniqueKey();
     _filtro = _getDefaultFilter();
   }
 
@@ -23,6 +25,7 @@ class OfertasProvider extends ChangeNotifier {
   }
 
   void refresh() {
+    key = UniqueKey();
     notifyListeners();
   }
 

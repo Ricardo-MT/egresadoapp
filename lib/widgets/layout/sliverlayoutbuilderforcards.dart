@@ -24,12 +24,7 @@ class SliverLayoutBuilderForCards extends StatelessWidget {
     return SliverLayoutBuilder(builder: ((context, constraints) {
       double crossAxisCountDouble =
           (constraints.crossAxisExtent - _gap) / itemExtent;
-      print(crossAxisCountDouble);
-
       int crossAxisCount = max(1, min(crossAxisCountDouble.toInt(), length));
-      print(crossAxisCount);
-      print(list.length);
-
       double p = max(
           2, (constraints.crossAxisExtent - itemExtent * crossAxisCount) / 2);
 

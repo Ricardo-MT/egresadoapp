@@ -5,10 +5,10 @@ import 'api.dart';
 
 class ApiOfertas {
   static Future<List<Oferta>> fetchOfertas(
-      {String? searchText, FiltroOfertas? filtros}) async {
+      {String? searchText, FiltroOfertas? filtros, required int page}) async {
     Map<String, dynamic> queryParameters = {};
     if (filtros != null) {
-      queryParameters.addAll(filtros.toJson());
+      queryParameters.addAll({...filtros.toJson(), "page": page.toString()});
     }
     if (searchText != null) {
       queryParameters["searchText"] = searchText;

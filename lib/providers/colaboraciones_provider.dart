@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class ColaboracionesProvider extends ChangeNotifier {
   String _search = "";
+  late Key key;
 
   late FiltroColaboracion _filtro;
 
   ColaboracionesProvider() {
+    key = UniqueKey();
     _filtro = _getDefaultFilter();
   }
 
@@ -20,6 +22,7 @@ class ColaboracionesProvider extends ChangeNotifier {
   }
 
   void refresh() {
+    key = UniqueKey();
     notifyListeners();
   }
 

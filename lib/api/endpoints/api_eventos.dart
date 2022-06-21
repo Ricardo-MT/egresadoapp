@@ -5,8 +5,8 @@ import 'api.dart';
 
 class ApiEventos {
   static Future<List<Evento>> fetchEventos(
-      {String? searchText, FiltroEventos? filtros}) async {
-    Map<String, dynamic> queryParameters = {};
+      {String? searchText, FiltroEventos? filtros, required int page}) async {
+    Map<String, dynamic> queryParameters = {"page": page.toString()};
 
     if (filtros != null) {
       queryParameters.addAll(filtros.toJson());

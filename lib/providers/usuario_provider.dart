@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 
 class UsuariosProvider extends ChangeNotifier {
   String _search = "";
+  late Key key;
 
   late FiltroUsuarios _filtro;
 
   UsuariosProvider() {
+    key = UniqueKey();
     _filtro = _getDefaultFilter();
   }
 
@@ -27,6 +29,7 @@ class UsuariosProvider extends ChangeNotifier {
   }
 
   void refresh() {
+    key = UniqueKey();
     notifyListeners();
   }
 

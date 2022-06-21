@@ -30,6 +30,7 @@ class ColaboracionesPage extends StatefulWidget {
 
 class _ColaboracionesPageState extends State<ColaboracionesPage> {
   late MuiFilterModel filter;
+  final ScrollController _controller = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -43,7 +44,7 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
     return MuiScreen(
       filter: filter,
       child: CustomScrollView(
-        controller: ScrollController(),
+        controller: _controller,
         slivers: [
           SliverLayoutHeader(
             children: [
@@ -104,6 +105,8 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                 return Consumer<ColaboracionesProvider>(
                   builder: (context, provider, child) {
                     return SliverLayoutBody(
+                        key: provider.key,
+                        controller: _controller,
                         gridGenerator: (items) =>
                             List.generate(items.length, (index) {
                               Colaboracion colaboracion = items[index];
@@ -120,7 +123,8 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                                       fecha: formatUnixDateToString(
                                           colaboracion.fechaPublicacion)));
                             }),
-                        future: ApiColaboracion.fetchColaboraciones(
+                        future: (page) => ApiColaboracion.fetchColaboraciones(
+                            page: page,
                             searchText: provider.getSearch(),
                             filtros: provider.getFilters()),
                         cardWidth: defaultCardWidth,

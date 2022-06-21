@@ -168,8 +168,6 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
 
   @override
   Widget build(BuildContext context) {
-    print(edited.avatar);
-
     return MuiDataScreen(
         pageTitle: "Editando perfil",
         child: Form(

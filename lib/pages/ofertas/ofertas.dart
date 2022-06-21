@@ -30,6 +30,8 @@ class OfertasPage extends StatefulWidget {
 
 class _OfertasPageState extends State<OfertasPage> {
   late MuiFilterModel filter;
+  final ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +44,7 @@ class _OfertasPageState extends State<OfertasPage> {
     return MuiScreen(
       filter: filter,
       child: CustomScrollView(
-        controller: ScrollController(),
+        controller: _controller,
         slivers: [
           SliverLayoutHeader(
             children: [
@@ -100,6 +102,8 @@ class _OfertasPageState extends State<OfertasPage> {
                 return Consumer<OfertasProvider>(
                   builder: (context, provider, child) {
                     return SliverLayoutBody(
+                        key: provider.key,
+                        controller: _controller,
                         gridGenerator: (items) =>
                             List.generate(items.length, (index) {
                               Oferta oferta = items[index];
@@ -116,7 +120,8 @@ class _OfertasPageState extends State<OfertasPage> {
                                       fecha: formatUnixDateToString(
                                           oferta.fechaPublicacion)));
                             }),
-                        future: ApiOfertas.fetchOfertas(
+                        future: (page) => ApiOfertas.fetchOfertas(
+                            page: page,
                             searchText: provider.getSearch(),
                             filtros: provider.getFilters()),
                         cardWidth: defaultCardWidth,

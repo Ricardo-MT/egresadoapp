@@ -5,8 +5,10 @@ import 'api.dart';
 
 class ApiColaboracion {
   static Future<List<Colaboracion>> fetchColaboraciones(
-      {String? searchText, FiltroColaboracion? filtros}) async {
-    Map<String, dynamic> queryParameters = {};
+      {String? searchText,
+      FiltroColaboracion? filtros,
+      required int page}) async {
+    Map<String, dynamic> queryParameters = {"page": page.toString()};
 
     if (filtros != null) {
       queryParameters.addAll(filtros.toJson());

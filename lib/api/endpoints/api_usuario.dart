@@ -8,8 +8,13 @@ import 'api.dart';
 
 class ApiUsuario {
   static Future<List<User>> fetchUsers(
-      {String? searchText, required FiltroUsuarios filtros}) async {
-    Map<String, dynamic> queryParameters = filtros.toJson();
+      {String? searchText,
+      required FiltroUsuarios filtros,
+      required int page}) async {
+    Map<String, dynamic> queryParameters = {
+      ...filtros.toJson(),
+      "page": page.toString()
+    };
 
     if (searchText != null) {
       queryParameters["searchText"] = searchText;

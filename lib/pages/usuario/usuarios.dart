@@ -24,6 +24,7 @@ class UsuariosPage extends StatefulWidget {
 
 class _UsuariosPageState extends State<UsuariosPage> {
   late MuiFilterModel filter;
+  final ScrollController _controller = ScrollController();
 
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
     return MuiScreen(
       filter: filter,
       child: CustomScrollView(
-        controller: ScrollController(),
+        controller: _controller,
         slivers: [
           SliverLayoutHeader(
             children: [
@@ -83,11 +84,14 @@ class _UsuariosPageState extends State<UsuariosPage> {
                 return Consumer<UsuariosProvider>(
                   builder: (context, provider, child) {
                     return SliverLayoutBody(
+                        key: provider.key,
+                        controller: _controller,
                         gridGenerator: (items) => List.generate(
                             items.length,
                             (index) =>
                                 UsuarioCard(usuario: items[index] as User)),
-                        future: ApiUsuario.fetchUsers(
+                        future: (page) => ApiUsuario.fetchUsers(
+                            page: page,
                             searchText: provider.getSearch(),
                             filtros: provider.getFilters()),
                         cardWidth: userCardWidth,

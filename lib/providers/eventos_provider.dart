@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 
 class EventosProvider extends ChangeNotifier {
   String _search = "";
+  late Key key;
 
   late FiltroEventos _filtro;
 
   EventosProvider() {
+    key = UniqueKey();
     _filtro = _getDefaultFilter();
   }
 
@@ -20,6 +22,7 @@ class EventosProvider extends ChangeNotifier {
   }
 
   void refresh() {
+    key = UniqueKey();
     notifyListeners();
   }
 
