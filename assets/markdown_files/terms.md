@@ -3,7 +3,7 @@
 
 ## 1. Titularidad
 
-https://solucontax.com/ es un dominio en Internet propiedad de SOLUCONTAX S.C. con NIF: J72362684 con domicilio en C/ Miguel Perez Leal 3, local 1A. 11540. Sanlúcar de Barrameda, Cádiz (en adelante el Titular). SOLUCONTAX es una empresa con una gran experiencia especializada en el asesoramiento fiscal y contable.
+https://egresadosaladillo.es/ es un dominio en Internet propiedad de IES Saladillo con ubicación en Avda, C. Duque de Rivas, s/n 11207 Algeciras, Cádiz, (+34) 956-60-49-47 (en adelante el Titular).
 
 ## 2. Condiciones Generales de Usos
 
@@ -19,7 +19,7 @@ El Titular se reserva el derecho de modificar, en cualquier momento, la presenta
 
 ## 5. Descripción de los servicios
 
-https://solucontax.com/ es el Sitio Web del Titular y sirve de herramienta de información de los servicios ofrecidos.
+https://egresadosaladillo.es/ es el Sitio Web del Titular y sirve de herramienta de información de los servicios ofrecidos.
 
 ## 6. Terminación
 

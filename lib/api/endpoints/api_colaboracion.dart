@@ -77,4 +77,9 @@ class ApiColaboracion {
     dynamic res = await Api.GET_REQUEST(Api.COLABORACIONES + "/puede_eliminar");
     return res["allowed"].runtimeType == bool && res["allowed"];
   }
+
+  static Future<void> showInterest(Colaboracion colaboracion) async {
+    await Api.POST_REQUEST(
+        Api.COLABORACIONES + "/mostrarInteres/${colaboracion.id}");
+  }
 }

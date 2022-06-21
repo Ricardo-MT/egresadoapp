@@ -4,12 +4,10 @@ class ColaboracionBase {
   String titulo;
   String descripcion;
   List<String> skillsRequeridos;
-  String contacto;
   ColaboracionBase({
     required this.titulo,
     required this.descripcion,
     required this.skillsRequeridos,
-    required this.contacto,
   });
   factory ColaboracionBase.fromJson(Map<String, dynamic> map) {
     return ColaboracionBase(
@@ -18,7 +16,6 @@ class ColaboracionBase {
       skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
           .map((e) => e.toString())
           .toList(),
-      contacto: map["contacto"],
     );
   }
   factory ColaboracionBase.fromCopy(ColaboracionBase colaboracion) {
@@ -26,7 +23,6 @@ class ColaboracionBase {
       titulo: colaboracion.titulo,
       descripcion: colaboracion.descripcion,
       skillsRequeridos: colaboracion.skillsRequeridos.toList(),
-      contacto: colaboracion.contacto,
     );
   }
   Map<String, dynamic> toJson() {
@@ -34,7 +30,6 @@ class ColaboracionBase {
       "titulo": titulo,
       "descripcion": descripcion,
       "skillsRequeridos": skillsRequeridos.toList(),
-      "contacto": contacto,
     };
     return map;
   }
@@ -51,9 +46,7 @@ class Colaboracion extends ColaboracionBase {
     required String descripcion,
     required List<String> skillsRequeridos,
     required this.fechaPublicacion,
-    required String contacto,
   }) : super(
-            contacto: contacto,
             titulo: titulo,
             descripcion: descripcion,
             skillsRequeridos: skillsRequeridos);
@@ -67,7 +60,6 @@ class Colaboracion extends ColaboracionBase {
           .map((e) => e.toString())
           .toList(),
       fechaPublicacion: map["fechaPublicacion"],
-      contacto: map["contacto"],
     );
   }
   factory Colaboracion.fromCopy(Colaboracion colaboracion) {
@@ -78,7 +70,6 @@ class Colaboracion extends ColaboracionBase {
       descripcion: colaboracion.descripcion,
       skillsRequeridos: colaboracion.skillsRequeridos.toList(),
       fechaPublicacion: colaboracion.fechaPublicacion,
-      contacto: colaboracion.contacto,
     );
   }
   @override
@@ -98,9 +89,7 @@ class ColaboracionCreating extends ColaboracionBase {
     required String titulo,
     required String descripcion,
     required List<String> skillsRequeridos,
-    required String contacto,
   }) : super(
-            contacto: contacto,
             titulo: titulo,
             descripcion: descripcion,
             skillsRequeridos: skillsRequeridos);
@@ -111,7 +100,6 @@ class ColaboracionCreating extends ColaboracionBase {
       skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
           .map((e) => e.toString())
           .toList(),
-      contacto: map["contacto"],
     );
   }
   factory ColaboracionCreating.fromCopy(ColaboracionCreating colaboracion) {
@@ -119,7 +107,6 @@ class ColaboracionCreating extends ColaboracionBase {
       titulo: colaboracion.titulo,
       descripcion: colaboracion.descripcion,
       skillsRequeridos: colaboracion.skillsRequeridos.toList(),
-      contacto: colaboracion.contacto,
     );
   }
   @override
@@ -138,9 +125,7 @@ class ColaboracionEditing extends ColaboracionBase {
     required String titulo,
     required String descripcion,
     required List<String> skillsRequeridos,
-    required String contacto,
   }) : super(
-            contacto: contacto,
             titulo: titulo,
             descripcion: descripcion,
             skillsRequeridos: skillsRequeridos);
@@ -152,7 +137,6 @@ class ColaboracionEditing extends ColaboracionBase {
       skillsRequeridos: ((map["skillsRequeridos"] ?? []) as List<dynamic>)
           .map((e) => e.toString())
           .toList(),
-      contacto: map["contacto"],
     );
   }
   factory ColaboracionEditing.fromCopy(ColaboracionEditing colaboracion) {
@@ -161,7 +145,6 @@ class ColaboracionEditing extends ColaboracionBase {
       titulo: colaboracion.titulo,
       descripcion: colaboracion.descripcion,
       skillsRequeridos: colaboracion.skillsRequeridos.toList(),
-      contacto: colaboracion.contacto,
     );
   }
   @override

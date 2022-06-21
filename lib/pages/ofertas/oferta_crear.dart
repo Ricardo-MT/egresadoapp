@@ -40,16 +40,16 @@ class _OfertaCrearPageState extends State<OfertaCrearPage> {
                   return const LoadingPage();
                 }
                 OfertaCreating oferta = OfertaCreating(
-                    titulo: "",
-                    descripcion: "",
-                    skillsRequeridos: [],
-                    experienciaMinima: "",
-                    empleador: "",
-                    localizacion: "",
-                    presencialidad: "",
-                    tipoJornada: "",
-                    salario: "",
-                    contacto: "");
+                  titulo: "",
+                  descripcion: "",
+                  skillsRequeridos: [],
+                  experienciaMinima: "",
+                  empleador: "",
+                  localizacion: "",
+                  presencialidad: "",
+                  tipoJornada: "",
+                  salario: "",
+                );
                 return FadeInWrapper(
                     index: 2,
                     child: OfertaCrear(
@@ -107,7 +107,6 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
   late TextEditingController jornadaController;
   late TextEditingController presencialidadController;
   late TextEditingController experienciaController;
-  late TextEditingController contactoController;
 
   @override
   void initState() {
@@ -127,7 +126,6 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
         TextEditingController(text: oferta.presencialidad);
     experienciaController =
         TextEditingController(text: oferta.experienciaMinima);
-    contactoController = TextEditingController(text: oferta.contacto);
   }
 
   void nextState() {
@@ -145,7 +143,6 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
       oferta.tipoJornada = jornadaController.value.text;
       oferta.presencialidad = presencialidadController.value.text;
       oferta.experienciaMinima = experienciaController.value.text;
-      oferta.contacto = contactoController.value.text;
       widget.handleSave(oferta);
     }
   }
@@ -249,14 +246,6 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
               label: "Salario",
             ),
             formDivider,
-            MuiInput(
-              color: MuiInputColor.DARK,
-              required: true,
-              validator: Validators.validateIsEmpty,
-              controller: contactoController,
-              label: "Contacto",
-            ),
-            spacerXL,
             MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
             spacerXL,
           ],

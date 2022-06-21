@@ -95,7 +95,6 @@ class EventoCrearInnerState extends State<EventoCrear> {
 
   late TextEditingController localizacionController;
   late TextEditingController hostsController;
-  late TextEditingController contactoController;
 
   @override
   void initState() {
@@ -109,7 +108,6 @@ class EventoCrearInnerState extends State<EventoCrear> {
 
     localizacionController = TextEditingController(text: evento.localizacion);
     hostsController = TextEditingController(text: evento.hosts);
-    contactoController = TextEditingController(text: evento.contacto);
   }
 
   void nextState() {
@@ -123,7 +121,6 @@ class EventoCrearInnerState extends State<EventoCrear> {
 
       evento.localizacion = localizacionController.value.text;
       evento.hosts = hostsController.value.text;
-      evento.contacto = contactoController.value.text;
       widget.handleSave(evento);
     }
   }
@@ -180,14 +177,6 @@ class EventoCrearInnerState extends State<EventoCrear> {
               label: "Organizadores",
             ),
             formDivider,
-            MuiInput(
-              required: true,
-              color: MuiInputColor.DARK,
-              validator: Validators.validateIsEmpty,
-              controller: contactoController,
-              label: "Contacto",
-            ),
-            spacerXL,
             MuiButton(onPressed: handleSave, text: "Guardar los cambios"),
             spacerXL,
           ],

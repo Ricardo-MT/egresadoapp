@@ -1,5 +1,6 @@
 import 'package:egresadoapp/api/endpoints/api_eventos.dart';
 import 'package:egresadoapp/api/models/evento.dart';
+import 'package:egresadoapp/api/models/user.dart';
 import 'package:egresadoapp/providers/user_provider.dart';
 import 'package:egresadoapp/router/routes.dart';
 import 'package:egresadoapp/utils/converters.dart';
@@ -7,6 +8,7 @@ import 'package:egresadoapp/utils/dimensions.dart';
 import 'package:egresadoapp/utils/palette.dart';
 import 'package:egresadoapp/utils/permissions.dart';
 import 'package:egresadoapp/widgets/ask_for_permission_widgets/conditional_widget.dart';
+import 'package:egresadoapp/widgets/button/muibutton.dart';
 import 'package:egresadoapp/widgets/button/touchable.dart';
 import 'package:egresadoapp/widgets/emptylist/emptylist.dart';
 import 'package:egresadoapp/widgets/input/muiinput.dart';
@@ -158,11 +160,42 @@ class EventoDetalle extends StatelessWidget {
                             ),
                             spacerS,
                             const Divider(),
-                            spacerS,
-                            MuiLabeledText(
-                                label: "Contacto",
-                                text: evento.contacto ?? "-"),
-                            spacerXL
+                            spacerXL,
+                            Consumer<UsuarioProvider>(
+                              builder: (context, provider, child) {
+                                User? user = provider.user;
+                                return Center(
+                                  child: user == null
+                                      ? MuiButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pushNamed(
+                                                NavigatorRoutes.login);
+                                          },
+                                          text: "Autentifícate para contactar")
+                                      : MuiButton(
+                                          onPressed: () async {
+                                            bool? res = await showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return const ConfirmationModal(
+                                                    title:
+                                                        "Notificar a responsable",
+                                                    text:
+                                                        "Le enviaremos un email al responsable de este evento comentándole tu interés.",
+                                                  );
+                                                });
+                                            if (res == true) {
+                                              try {
+                                                await ApiEventos.showInterest(
+                                                    evento);
+                                              } catch (e) {}
+                                            }
+                                          },
+                                          text: "Contactar"),
+                                );
+                              },
+                            ),
+                            spacerXL,
                           ],
                         ),
                       ),

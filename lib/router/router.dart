@@ -188,11 +188,12 @@ class MuiHandlers {
             return const MuiErrorWidget();
           }
           if (oferta == null) {
-            return const Text("Esa oferta laboral no existe");
+            return const NotFoundPage();
           }
           if (!allowed) {
-            return const Text(
-                "No tienes permiso para editar esta oferta laboral");
+            return const NotFoundPage();
+            // return const Text(
+            //     "No tienes permiso para editar esta oferta laboral");
           }
           return OfertaEditarPage(
             original: oferta!,
@@ -211,6 +212,9 @@ class MuiHandlers {
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
+          }
+          if (!snapshot.hasData) {
+            return const NotFoundPage();
           }
           return OfertaDetalle(
             oferta: snapshot.data as Oferta,
@@ -251,10 +255,11 @@ class MuiHandlers {
             return const MuiErrorWidget();
           }
           if (evento == null) {
-            return const Text("Ese evento no existe");
+            return const NotFoundPage();
           }
           if (!allowed) {
-            return const Text("No tienes permiso para editar este evento");
+            // return const Text("No tienes permiso para editar este evento");
+            return const NotFoundPage();
           }
           return EventoEditarPage(
             original: evento!,
@@ -273,6 +278,9 @@ class MuiHandlers {
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
+          }
+          if (!snapshot.hasData) {
+            return const NotFoundPage();
           }
           return EventoDetalle(
             evento: snapshot.data as Evento,
@@ -311,11 +319,12 @@ class MuiHandlers {
             return const MuiErrorWidget();
           }
           if (colaboracion == null) {
-            return const Text("Esa colaboración no existe");
+            return const NotFoundPage();
           }
           if (!allowed) {
-            return const Text(
-                "No tienes permiso para editar esta colaboración");
+            return const NotFoundPage();
+            // return const Text(
+            //     "No tienes permiso para editar esta colaboración");
           }
           return ColaboracionEditarPage(
             original: colaboracion!,
@@ -334,6 +343,9 @@ class MuiHandlers {
           }
           if (snapshot.hasError) {
             return const MuiErrorWidget();
+          }
+          if (!snapshot.hasData) {
+            return const NotFoundPage();
           }
           return ColaboracionDetalle(
             colaboracion: snapshot.data as Colaboracion,
@@ -363,7 +375,7 @@ class MuiHandlers {
             User? myUser =
                 Provider.of<UsuarioProvider>(context, listen: false).user;
             if (!user.publico && (myUser == null || myUser.id != user.id)) {
-              return const Text("Este usuario no es público");
+              return const NotFoundPage();
             }
           } catch (e) {
             return const MuiErrorWidget();
@@ -399,7 +411,7 @@ class MuiHandlers {
             return const MuiErrorWidget();
           }
           if (user == null) {
-            return const Text("Ese usuario no existe");
+            return const NotFoundPage();
           }
           if (!allowed) {
             return const Text(

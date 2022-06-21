@@ -72,4 +72,8 @@ class ApiOfertas {
     dynamic res = await Api.GET_REQUEST(Api.OFERTAS + "/puede_eliminar");
     return res["allowed"].runtimeType == bool && res["allowed"];
   }
+
+  static Future<void> showInterest(Oferta oferta) async {
+    await Api.POST_REQUEST(Api.OFERTAS + "/mostrarInteres/${oferta.id}");
+  }
 }

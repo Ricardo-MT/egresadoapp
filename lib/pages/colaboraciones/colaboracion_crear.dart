@@ -41,10 +41,10 @@ class _ColaboracionCrearPageState extends State<ColaboracionCrearPage> {
                   return const LoadingPage();
                 }
                 ColaboracionCreating colaboracion = ColaboracionCreating(
-                    titulo: "",
-                    descripcion: "",
-                    skillsRequeridos: [],
-                    contacto: "");
+                  titulo: "",
+                  descripcion: "",
+                  skillsRequeridos: [],
+                );
                 return FadeInWrapper(
                     index: 2,
                     child: ColaboracionCrear(
@@ -60,7 +60,7 @@ class _ColaboracionCrearPageState extends State<ColaboracionCrearPage> {
                               await ApiColaboracion.create(nuevaColaboracion);
                           target = NavigatorRoutes.collaborationDetail(
                               colaboracionCreated.id);
-                        } catch (e) {}
+                        } catch (_) {}
                         LoadingHandler.hideLoading(context);
                         if (target != null) {
                           Navigator.of(context).pushReplacementNamed(target);
@@ -97,8 +97,6 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
   late TextEditingController tituloController;
   late TextEditingController descripcionController;
 
-  late TextEditingController contactoController;
-
   @override
   void initState() {
     super.initState();
@@ -107,8 +105,6 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
     tituloController = TextEditingController(text: colaboracion.titulo);
     descripcionController =
         TextEditingController(text: colaboracion.descripcion);
-
-    contactoController = TextEditingController(text: colaboracion.contacto);
   }
 
   void nextState() {
@@ -119,7 +115,6 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
     if (_formKey.currentState!.validate()) {
       colaboracion.titulo = tituloController.value.text;
       colaboracion.descripcion = descripcionController.value.text;
-      colaboracion.contacto = contactoController.value.text;
 
       widget.handleSave(colaboracion);
     }
@@ -163,14 +158,6 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
                   },
                 )),
             formDivider,
-            MuiInput(
-              required: true,
-              color: MuiInputColor.DARK,
-              validator: Validators.validateIsEmpty,
-              controller: contactoController,
-              label: "Contacto",
-            ),
-            spacerXL,
             MuiButton(onPressed: handleSave, text: "Guardar cambios"),
             spacerXL,
           ],

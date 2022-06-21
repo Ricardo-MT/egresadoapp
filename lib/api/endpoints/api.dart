@@ -78,7 +78,7 @@ class Api {
           ...allHeadersWithContentType,
           ...token != null ? {"Cookie": token} : {}
         },
-        body: jsonEncode(body));
+        body: jsonEncode(body ?? {}));
     try {
       String? sesion = response.headers["set-cookie"];
       if (sesion != null && sesion.isNotEmpty) {
@@ -88,6 +88,8 @@ class Api {
     final code = response.statusCode;
 
     final rawJsonString = response.body;
+    print(rawJsonString);
+
     dynamic res = jsonDecode(rawJsonString);
 
     if (code >= 400) {

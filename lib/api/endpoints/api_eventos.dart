@@ -74,4 +74,8 @@ class ApiEventos {
     dynamic res = await Api.GET_REQUEST(Api.EVENTOS + "/puede_eliminar");
     return res["allowed"].runtimeType == bool && res["allowed"];
   }
+
+  static Future<void> showInterest(Evento evento) async {
+    await Api.POST_REQUEST(Api.EVENTOS + "/mostrarInteres/${evento.id}");
+  }
 }

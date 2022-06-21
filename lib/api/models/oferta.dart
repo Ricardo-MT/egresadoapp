@@ -74,10 +74,8 @@ class OfertaBase {
   String tipoJornada;
   String presencialidad;
   String experienciaMinima;
-  String contacto;
   OfertaBase(
-      {required this.contacto,
-      required this.descripcion,
+      {required this.descripcion,
       required this.empleador,
       required this.experienciaMinima,
       required this.localizacion,
@@ -97,7 +95,6 @@ class OfertaBase {
         localizacion: map["localizacion"],
         empleador: map["empleador"],
         experienciaMinima: map["experienciaMinima"],
-        contacto: map["contacto"],
         presencialidad: map["presencialidad"],
         salario: map["salario"],
         tipoJornada: map["tipoJornada"]);
@@ -110,7 +107,6 @@ class OfertaBase {
         localizacion: oferta.localizacion,
         empleador: oferta.empleador,
         experienciaMinima: oferta.experienciaMinima,
-        contacto: oferta.contacto,
         presencialidad: oferta.presencialidad,
         salario: oferta.salario,
         tipoJornada: oferta.tipoJornada);
@@ -123,7 +119,6 @@ class OfertaBase {
       "localizacion": localizacion,
       "empleador": empleador,
       "experienciaMinima": experienciaMinima,
-      "contacto": contacto,
       "presencialidad": presencialidad,
       "salario": salario,
       "tipoJornada": tipoJornada
@@ -146,12 +141,10 @@ class Oferta extends OfertaBase {
       required String localizacion,
       required String empleador,
       required String experienciaMinima,
-      required String contacto,
       required String presencialidad,
       required String salario,
       required String tipoJornada})
       : super(
-            contacto: contacto,
             titulo: titulo,
             descripcion: descripcion,
             skillsRequeridos: skillsRequeridos,
@@ -174,7 +167,6 @@ class Oferta extends OfertaBase {
         localizacion: map["localizacion"],
         empleador: map["empleador"],
         experienciaMinima: map["experienciaMinima"],
-        contacto: map["contacto"],
         presencialidad: map["presencialidad"],
         salario: map["salario"],
         tipoJornada: map["tipoJornada"]);
@@ -190,7 +182,6 @@ class Oferta extends OfertaBase {
         localizacion: oferta.localizacion,
         empleador: oferta.empleador,
         experienciaMinima: oferta.experienciaMinima,
-        contacto: oferta.contacto,
         presencialidad: oferta.presencialidad,
         salario: oferta.salario,
         tipoJornada: oferta.tipoJornada);
@@ -218,9 +209,7 @@ class OfertaCreating extends OfertaBase {
     required String tipoJornada,
     required String presencialidad,
     required String experienciaMinima,
-    required String contacto,
   }) : super(
-            contacto: contacto,
             descripcion: descripcion,
             empleador: empleador,
             experienciaMinima: experienciaMinima,
@@ -240,7 +229,6 @@ class OfertaCreating extends OfertaBase {
         localizacion: map["localizacion"],
         empleador: map["empleador"],
         experienciaMinima: map["experienciaMinima"],
-        contacto: map["contacto"],
         presencialidad: map["presencialidad"],
         salario: map["salario"],
         tipoJornada: map["tipoJornada"]);
@@ -253,7 +241,6 @@ class OfertaCreating extends OfertaBase {
         localizacion: oferta.localizacion,
         empleador: oferta.empleador,
         experienciaMinima: oferta.experienciaMinima,
-        contacto: oferta.contacto,
         presencialidad: oferta.presencialidad,
         salario: oferta.salario,
         tipoJornada: oferta.tipoJornada);
@@ -269,7 +256,6 @@ class OfertaEditing extends OfertaBase {
   String id;
   OfertaEditing(
       {required this.id,
-      required String contacto,
       required String descripcion,
       required String empleador,
       required String experienciaMinima,
@@ -280,7 +266,6 @@ class OfertaEditing extends OfertaBase {
       required String tipoJornada,
       required String titulo})
       : super(
-            contacto: contacto,
             descripcion: descripcion,
             empleador: empleador,
             experienciaMinima: experienciaMinima,
@@ -301,7 +286,6 @@ class OfertaEditing extends OfertaBase {
         localizacion: map["localizacion"],
         empleador: map["empleador"],
         experienciaMinima: map["experienciaMinima"],
-        contacto: map["contacto"],
         presencialidad: map["presencialidad"],
         salario: map["salario"],
         tipoJornada: map["tipoJornada"]);
@@ -315,7 +299,6 @@ class OfertaEditing extends OfertaBase {
         localizacion: oferta.localizacion,
         empleador: oferta.empleador,
         experienciaMinima: oferta.experienciaMinima,
-        contacto: oferta.contacto,
         presencialidad: oferta.presencialidad,
         salario: oferta.salario,
         tipoJornada: oferta.tipoJornada);

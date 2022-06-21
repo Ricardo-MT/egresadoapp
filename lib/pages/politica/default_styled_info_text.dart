@@ -58,7 +58,7 @@ class MuiMarkedInfoPage extends StatelessWidget {
                         }
                         return _Header(
                             child: ScaleInWrapper(
-                          index: 2,
+                          index: 5,
                           child: Markdown(
                             data: snapshot.data as String,
                             onTapLink: (v1, v2, v3) {

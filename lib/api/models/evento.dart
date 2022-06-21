@@ -7,15 +7,14 @@ class EventoBase {
   int fecha;
   String localizacion;
   String? hosts;
-  String? contacto;
-  EventoBase(
-      {required this.titulo,
-      required this.descripcion,
-      required this.skills,
-      required this.fecha,
-      required this.localizacion,
-      this.hosts,
-      this.contacto});
+  EventoBase({
+    required this.titulo,
+    required this.descripcion,
+    required this.skills,
+    required this.fecha,
+    required this.localizacion,
+    this.hosts,
+  });
 
   factory EventoBase.fromJson(Map<String, dynamic> map) {
     return EventoBase(
@@ -27,7 +26,6 @@ class EventoBase {
       fecha: map["fecha"],
       localizacion: map["localizacion"],
       hosts: map["hosts"],
-      contacto: map["contacto"],
     );
   }
   factory EventoBase.fromCopy(EventoBase evento) {
@@ -38,7 +36,6 @@ class EventoBase {
       fecha: evento.fecha,
       localizacion: evento.localizacion,
       hosts: evento.hosts,
-      contacto: evento.contacto,
     );
   }
   Map<String, dynamic> toJson() {
@@ -48,7 +45,6 @@ class EventoBase {
       "skills": skills.toList(),
       "fecha": fecha,
       "localizacion": localizacion,
-      "contacto": contacto,
       "hosts": hosts,
     };
     return map;
@@ -58,24 +54,23 @@ class EventoBase {
 class Evento extends EventoBase {
   String id;
   User autor;
-  Evento(
-      {required this.id,
-      required this.autor,
-      required String titulo,
-      required String descripcion,
-      required List<String> skills,
-      required int fecha,
-      required String localizacion,
-      String? hosts,
-      String? contacto})
-      : super(
-            descripcion: descripcion,
-            titulo: titulo,
-            skills: skills,
-            fecha: fecha,
-            localizacion: localizacion,
-            hosts: hosts,
-            contacto: contacto);
+  Evento({
+    required this.id,
+    required this.autor,
+    required String titulo,
+    required String descripcion,
+    required List<String> skills,
+    required int fecha,
+    required String localizacion,
+    String? hosts,
+  }) : super(
+          descripcion: descripcion,
+          titulo: titulo,
+          skills: skills,
+          fecha: fecha,
+          localizacion: localizacion,
+          hosts: hosts,
+        );
   factory Evento.fromJson(Map<String, dynamic> map) {
     return Evento(
       id: map["_id"],
@@ -88,7 +83,6 @@ class Evento extends EventoBase {
       fecha: map["fecha"],
       localizacion: map["localizacion"],
       hosts: map["hosts"],
-      contacto: map["contacto"],
     );
   }
   factory Evento.fromCopy(Evento evento) {
@@ -101,7 +95,6 @@ class Evento extends EventoBase {
       fecha: evento.fecha,
       localizacion: evento.localizacion,
       hosts: evento.hosts,
-      contacto: evento.contacto,
     );
   }
   @override
@@ -116,22 +109,21 @@ class Evento extends EventoBase {
 }
 
 class EventoCreating extends EventoBase {
-  EventoCreating(
-      {required String titulo,
-      required String descripcion,
-      required List<String> skills,
-      required int fecha,
-      required String localizacion,
-      String? hosts,
-      String? contacto})
-      : super(
-            descripcion: descripcion,
-            titulo: titulo,
-            skills: skills,
-            fecha: fecha,
-            localizacion: localizacion,
-            hosts: hosts,
-            contacto: contacto);
+  EventoCreating({
+    required String titulo,
+    required String descripcion,
+    required List<String> skills,
+    required int fecha,
+    required String localizacion,
+    String? hosts,
+  }) : super(
+          descripcion: descripcion,
+          titulo: titulo,
+          skills: skills,
+          fecha: fecha,
+          localizacion: localizacion,
+          hosts: hosts,
+        );
   factory EventoCreating.fromJson(Map<String, dynamic> map) {
     return EventoCreating(
       titulo: map["titulo"],
@@ -142,7 +134,6 @@ class EventoCreating extends EventoBase {
       fecha: map["fecha"],
       localizacion: map["localizacion"],
       hosts: map["hosts"],
-      contacto: map["contacto"],
     );
   }
   factory EventoCreating.fromCopy(EventoCreating evento) {
@@ -153,7 +144,6 @@ class EventoCreating extends EventoBase {
       fecha: evento.fecha,
       localizacion: evento.localizacion,
       hosts: evento.hosts,
-      contacto: evento.contacto,
     );
   }
   @override
@@ -165,23 +155,22 @@ class EventoCreating extends EventoBase {
 
 class EventoEditing extends EventoBase {
   String id;
-  EventoEditing(
-      {required this.id,
-      required String titulo,
-      required String descripcion,
-      required List<String> skills,
-      required int fecha,
-      required String localizacion,
-      String? hosts,
-      String? contacto})
-      : super(
-            descripcion: descripcion,
-            titulo: titulo,
-            skills: skills,
-            fecha: fecha,
-            localizacion: localizacion,
-            hosts: hosts,
-            contacto: contacto);
+  EventoEditing({
+    required this.id,
+    required String titulo,
+    required String descripcion,
+    required List<String> skills,
+    required int fecha,
+    required String localizacion,
+    String? hosts,
+  }) : super(
+          descripcion: descripcion,
+          titulo: titulo,
+          skills: skills,
+          fecha: fecha,
+          localizacion: localizacion,
+          hosts: hosts,
+        );
   factory EventoEditing.fromJson(Map<String, dynamic> map) {
     return EventoEditing(
       id: map["_id"],
@@ -193,7 +182,6 @@ class EventoEditing extends EventoBase {
       fecha: map["fecha"],
       localizacion: map["localizacion"],
       hosts: map["hosts"],
-      contacto: map["contacto"],
     );
   }
   factory EventoEditing.fromCopy(EventoEditing evento) {
@@ -205,7 +193,6 @@ class EventoEditing extends EventoBase {
       fecha: evento.fecha,
       localizacion: evento.localizacion,
       hosts: evento.hosts,
-      contacto: evento.contacto,
     );
   }
   @override
