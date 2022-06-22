@@ -55,8 +55,9 @@ class _SliverLayoutBodyState extends State<SliverLayoutBody> {
         list.addAll(widget.gridGenerator(newItems));
         setState(() {});
       } else {
-        if (list.isEmpty) {
+        if (list.isEmpty || list[0].runtimeType == Loading) {
           list = [const EmptyList()];
+          setState(() {});
         }
       }
     } catch (error) {

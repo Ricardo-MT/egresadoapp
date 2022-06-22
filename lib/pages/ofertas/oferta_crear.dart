@@ -168,6 +168,7 @@ class OfertaCrearInnerState extends State<OfertaCrear> {
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
+              multiline: true,
               label: "Descripción",
             ),
             formDivider,

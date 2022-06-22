@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 enum LogoVariant { original, white, red }
 
@@ -20,7 +19,7 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String path = "assets/svg/egresadologo.svg";
+    String path = "assets/images/logo.png";
     // switch (variant) {
     //   case LogoVariant.white:
     //     path = "assets/svg/logo_white.svg";
@@ -32,13 +31,20 @@ class Logo extends StatelessWidget {
     //     path = "assets/svg/logo_original.svg";
     //     break;
     // }
-    return SvgPicture.asset(
+    return Image.asset(
       path,
       fit: fit,
       alignment: alignment,
-      color: color,
       height: height,
-      semanticsLabel: 'Logo',
+      semanticLabel: "Logo",
     );
+    // return SvgPicture.asset(
+    //   path,
+    //   fit: fit,
+    //   alignment: alignment,
+    //   color: color,
+    //   height: height,
+    //   semanticsLabel: 'Logo',
+    // );
   }
 }

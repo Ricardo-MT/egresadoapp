@@ -60,8 +60,6 @@ class _HomePageState extends State<HomePage> {
         controller: ScrollController(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          // scrollDirection: Axis.vertical,
-          // controller: PageController(),
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height - 2 * kToolbarHeight,
@@ -119,6 +117,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
+                    key: const Key("CARRUSEL_OFERTAS"),
                     future: ApiOfertas.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -148,6 +147,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
+                    key: const Key("CARRUSEL_EVENTOS"),
                     future: ApiEventos.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -176,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                 spacerXL,
                 spacerXL,
                 FutureBuilder(
+                    key: const Key("CARRUSEL_COLABORACIONES"),
                     future: ApiColaboracion.fetchRecientes(),
                     builder: ((context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {

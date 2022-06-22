@@ -141,6 +141,7 @@ class ColaboracionCrearInnerState extends State<ColaboracionCrear> {
               color: MuiInputColor.DARK,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
+              multiline: true,
               label: "Descripción",
             ),
             spacerS,

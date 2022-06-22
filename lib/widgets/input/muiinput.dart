@@ -18,6 +18,7 @@ class MuiInput extends StatefulWidget {
   String? initialValue;
   String label;
   bool hideInput;
+  bool multiline;
   MuiInputVariant variant;
   MuiInputColor color;
   TextInputType inputType;
@@ -31,6 +32,7 @@ class MuiInput extends StatefulWidget {
   MuiInput(
       {Key? key,
       this.hideInput = false,
+      this.multiline = false,
       this.onPressed,
       required this.label,
       this.required = false,
@@ -119,6 +121,7 @@ class _MuiInputState extends State<MuiInput> {
           style: inputFormFieldStyles,
           autocorrect: false,
           cursorColor: MuiPalette.FONT,
+          maxLines: widget.multiline ? 10 : 1,
           onChanged: (value) {
             if (filled != value.isNotEmpty) {
               setState(() {

@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
 
 Future<void> preconfigureApp(BuildContext context) async {
   await Future.wait([
+    precacheImage(const AssetImage("assets/images/logo.png"), context),
     precacheImage(const AssetImage("assets/images/login.png"), context),
     precacheImage(const AssetImage("assets/images/register.png"), context),
     precacheImage(const AssetImage("assets/images/leader.png"), context),

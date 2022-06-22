@@ -12,6 +12,7 @@ class Tupla extends StatelessWidget {
   final MuiTuplaSize size;
   final bool bold;
   final bool selectable;
+  final bool expandable;
   final TextOverflow textOverflow;
   const Tupla(
       {Key? key,
@@ -20,6 +21,7 @@ class Tupla extends StatelessWidget {
       required this.textOverflow,
       required this.text,
       this.selectable = true,
+      this.expandable = false,
       this.bold = false})
       : super(key: key);
 
@@ -40,6 +42,21 @@ class Tupla extends StatelessWidget {
         iconSize = 28;
         fontSize = 14;
     }
+    Widget child = selectable
+        ? SelectableText(
+            text,
+            style: _textStyles.copyWith(
+                fontSize: fontSize,
+                overflow: textOverflow,
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+          )
+        : Text(
+            text,
+            style: _textStyles.copyWith(
+                fontSize: fontSize,
+                overflow: textOverflow,
+                fontWeight: bold ? FontWeight.bold : FontWeight.normal),
+          );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -51,28 +68,14 @@ class Tupla extends StatelessWidget {
             color: MuiPalette.BROWN,
           ),
         ),
-        selectable
-            ? SelectableText(
-                text,
-                style: _textStyles.copyWith(
-                    fontSize: fontSize,
-                    overflow: textOverflow,
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-              )
-            : Text(
-                text,
-                style: _textStyles.copyWith(
-                    fontSize: fontSize,
-                    overflow: textOverflow,
-                    fontWeight: bold ? FontWeight.bold : FontWeight.normal),
-              )
+        expandable ? Expanded(child: child) : child
       ],
     );
   }
 }
 
 final _textStyles = TextStyle(fontSize: 14, color: MuiPalette.DARK_GREY);
-final _padding = EdgeInsets.only(right: Dimensions.cardSmallSpacing / 2);
+const _padding = EdgeInsets.only(right: Dimensions.cardSmallSpacing / 2);
 
 class TuplaImage extends StatelessWidget {
   final String? url;

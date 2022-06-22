@@ -6,6 +6,7 @@ import 'package:egresadoapp/widgets/layout/navigation_drawer.dart';
 import 'package:egresadoapp/widgets/muicard/muicard.dart';
 import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:egresadoapp/widgets/tap_to_hide_keyboard/tapToHideKeyboard.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MuiScreen extends StatefulWidget {
@@ -30,7 +31,9 @@ class _MuiScreenState extends State<MuiScreen> {
         endDrawer: const NavigationDrawer(),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: Navigator.of(context).canPop() ? const BackButton() : null,
+          leading: (!kIsWeb && Navigator.of(context).canPop())
+              ? const BackButton()
+              : null,
           title: const MuiAppHeader(),
           centerTitle: true,
           actions: MediaQuery.of(context).size.width < 700

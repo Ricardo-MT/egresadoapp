@@ -146,6 +146,7 @@ class EventoCrearInnerState extends State<EventoCrear> {
               required: true,
               validator: Validators.validateIsEmpty,
               controller: descripcionController,
+              multiline: true,
               label: "Descripción",
             ),
             formDivider,

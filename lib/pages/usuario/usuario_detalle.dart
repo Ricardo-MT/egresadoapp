@@ -112,7 +112,7 @@ class UsuarioDetalle extends StatelessWidget {
                                 children: [
                                   TextSpan(
                                       text: splitted.length > 1
-                                          ? splitted[1]
+                                          ? splitted.sublist(1).join(" ")
                                           : "",
                                       style: firstCellStyles.copyWith(
                                           fontWeight: FontWeight.normal))

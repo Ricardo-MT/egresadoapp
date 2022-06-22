@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _formKey = GlobalKey<FormState>();
     credentials =
-        AuthUser(email: "rachel22@egresadoapp.com", password: "Rachel Perez");
+        AuthUser(email: "ricardo.mejias@boorpret.com", password: "azucar");
     // credentials = AuthUser(email: "", password: "");
   }
 

@@ -253,6 +253,7 @@ class __UsuarioEditar extends State<_UsuarioEditar> {
               MuiInput(
                 color: MuiInputColor.DARK,
                 controller: descripcionController,
+                multiline: true,
                 label: "Descripción",
               ),
               formDivider,

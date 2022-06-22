@@ -49,11 +49,14 @@ class UsuarioCard extends StatelessWidget {
                 text: usuario.email,
                 textOverflow: TextOverflow.ellipsis,
                 size: MuiTuplaSize.m,
+                selectable: false,
+                expandable: true,
               ),
               Tupla(
                 icon: Icons.phone_rounded,
                 textOverflow: TextOverflow.ellipsis,
                 text: usuario.telefono ?? "-",
+                expandable: true,
                 size: MuiTuplaSize.m,
               )
             ],
@@ -79,7 +82,7 @@ final _userIcon = Padding(
 
 const _apellidosStyles = TextStyle(fontWeight: FontWeight.normal);
 
-final _rolStyles = TextStyle(fontSize: Dimensions.cardTitleFontSize - 2);
+const _rolStyles = TextStyle(fontSize: Dimensions.cardTitleFontSize - 2);
 
 final firstCellStyles = TextStyle(
     fontSize: Dimensions.cardTitleFontSize - 1,
