@@ -47,78 +47,115 @@ class MuiRouter {
   static void configureRoutes() {
     // ACUERDOS LEGALES Y POLÍTICA DE USO
     router.define(Routes.terms,
-        handler: MuiHandlers._terms, transitionType: _getTransitionType());
+        handler: MuiHandlers._terms,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.privacy,
-        handler: MuiHandlers._privacy, transitionType: _getTransitionType());
+        handler: MuiHandlers._privacy,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.cookies,
-        handler: MuiHandlers._cookies, transitionType: _getTransitionType());
+        handler: MuiHandlers._cookies,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // AUTENTICACIÓN
     router.define(Routes.authCheck,
-        handler: MuiHandlers._authCheck, transitionType: _getTransitionType());
+        handler: MuiHandlers._authCheck,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.login,
-        handler: MuiHandlers._login, transitionType: _getTransitionType());
+        handler: MuiHandlers._login,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.register,
-        handler: MuiHandlers._register, transitionType: _getTransitionType());
+        handler: MuiHandlers._register,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // HOME
     router.define(Routes.home,
-        handler: MuiHandlers._home, transitionType: _getTransitionType());
+        handler: MuiHandlers._home,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // OFERTAS LABORALES
     router.define(Routes.offers,
-        handler: MuiHandlers._offers, transitionType: _getTransitionType());
+        handler: MuiHandlers._offers,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.offerCreate,
         handler: MuiHandlers._offerCreate,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.offerEdit,
-        handler: MuiHandlers._offerEdit, transitionType: _getTransitionType());
+        handler: MuiHandlers._offerEdit,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.offerDetail,
         handler: MuiHandlers._offerDetail,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // EVENTOS
     router.define(Routes.events,
-        handler: MuiHandlers._events, transitionType: _getTransitionType());
+        handler: MuiHandlers._events,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.eventCreate,
         handler: MuiHandlers._eventCreate,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.eventEdit,
-        handler: MuiHandlers._eventEdit, transitionType: _getTransitionType());
+        handler: MuiHandlers._eventEdit,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.eventDetail,
         handler: MuiHandlers._eventDetail,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // COLABORACIONES
     router.define(Routes.collaboration,
         handler: MuiHandlers._collaborations,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.collaborationCreate,
         handler: MuiHandlers._collaborationCreate,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.collaborationEdit,
         handler: MuiHandlers._collaborationEdit,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.collaborationDetail,
         handler: MuiHandlers._collaborationDetail,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // USUARIO
     router.define(Routes.users,
-        handler: MuiHandlers._users, transitionType: _getTransitionType());
+        handler: MuiHandlers._users,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.userProfile,
         handler: MuiHandlers._userProfile,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.userProfileEdit,
         handler: MuiHandlers._userProfileEdit,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
     router.define(Routes.userRolEdit,
         handler: MuiHandlers._userRolEdit,
-        transitionType: _getTransitionType());
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     // ACERCA DE
     router.define(Routes.about,
-        handler: MuiHandlers._about, transitionType: _getTransitionType());
+        handler: MuiHandlers._about,
+        transitionType: _getTransitionType(),
+        transitionDuration: const Duration(milliseconds: 500));
 
     router.notFoundHandler = MuiHandlers.notFound;
   }
@@ -435,5 +472,5 @@ class MuiHandlers {
 }
 
 TransitionType _getTransitionType() {
-  return TransitionType.fadeIn;
+  return TransitionType.inFromBottom;
 }
