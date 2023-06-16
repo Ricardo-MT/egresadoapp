@@ -50,7 +50,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
                     Icons.filter_alt_outlined,
                     color: MuiPalette.BROWN,
                   )),
-              SearchBar(
+              MuiSearchBar(
                   initialValue:
                       Provider.of<UsuariosProvider>(context, listen: false)
                           .getSearch(),

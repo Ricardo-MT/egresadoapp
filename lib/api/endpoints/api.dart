@@ -8,8 +8,8 @@ import 'api.web.dart' if (dart.library.io) "api.mobile.dart" as cliente;
 
 import '../../utils/errors.dart';
 
-// const current = String.fromEnvironment("target");
-const current = "https://egresado-production.up.railway.app";
+const current = String.fromEnvironment("target");
+// const current = "https://egresado-production.up.railway.app";
 final allHeaders = {
   "Accept": "*/*",
   "Access-Control-Allow-Origin": "*",

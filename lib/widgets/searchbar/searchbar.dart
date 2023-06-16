@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../../utils/palette.dart';
 
-class SearchBar extends StatefulWidget {
+class MuiSearchBar extends StatefulWidget {
   final Function(String) onSubmit;
   final Function(String) onType;
   final String? initialValue;
-  const SearchBar(
+  const MuiSearchBar(
       {Key? key,
       required this.onSubmit,
       this.initialValue,
@@ -15,10 +15,10 @@ class SearchBar extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<MuiSearchBar> createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<MuiSearchBar> {
   TextEditingController controller = TextEditingController();
   bool showEx = false;
   @override

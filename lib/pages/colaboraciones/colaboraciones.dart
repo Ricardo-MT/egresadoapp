@@ -56,7 +56,7 @@ class _ColaboracionesPageState extends State<ColaboracionesPage> {
                     Icons.filter_alt_outlined,
                     color: MuiPalette.BROWN,
                   )),
-              SearchBar(
+              MuiSearchBar(
                   initialValue: Provider.of<ColaboracionesProvider>(context,
                           listen: false)
                       .getSearch(),

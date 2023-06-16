@@ -56,7 +56,7 @@ class _OfertasPageState extends State<OfertasPage> {
                     Icons.filter_alt_outlined,
                     color: MuiPalette.BROWN,
                   )),
-              SearchBar(
+              MuiSearchBar(
                   initialValue:
                       Provider.of<OfertasProvider>(context, listen: false)
                           .getSearch(),

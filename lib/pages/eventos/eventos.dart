@@ -56,7 +56,7 @@ class _EventosPageState extends State<EventosPage> {
                     Icons.filter_alt_outlined,
                     color: MuiPalette.BROWN,
                   )),
-              SearchBar(
+              MuiSearchBar(
                   initialValue:
                       Provider.of<EventosProvider>(context, listen: false)
                           .getSearch(),

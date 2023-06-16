@@ -8,8 +8,8 @@ import 'package:egresadoapp/widgets/spacer/spacer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+class MuiNavigationDrawer extends StatelessWidget {
+  const MuiNavigationDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

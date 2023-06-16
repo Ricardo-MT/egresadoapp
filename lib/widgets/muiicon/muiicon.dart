@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 enum MuiIconVariant { discord, github, linkedin, telegram, twitter, whatsapp }
+
 enum MuiIconColor { primary, accent, constrast, light, dark, transparent, none }
+
 enum MuiIconSize { xs, s, m, l, xl }
 
 Color? getColorFromProps(MuiIconColor color) {
@@ -57,13 +59,13 @@ class MuiIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _s = customSize ?? _getSizeFromProps(size);
+    final s = customSize ?? _getSizeFromProps(size);
 
     return SvgPicture.asset("assets/icons/${icon.name}.svg",
         fit: BoxFit.contain,
-        height: _s,
-        width: _s,
-        currentColor: getColorFromProps(color),
+        height: s,
+        width: s,
+        // currentColor: getColorFromProps(color),
         color: getColorFromProps(color));
   }
 }

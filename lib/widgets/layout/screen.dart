@@ -28,7 +28,7 @@ class _MuiScreenState extends State<MuiScreen> {
         resizeToAvoidBottomInset: true,
         endDrawerEnableOpenDragGesture: false,
         drawerEnableOpenDragGesture: false,
-        endDrawer: const NavigationDrawer(),
+        endDrawer: const MuiNavigationDrawer(),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: (!kIsWeb && Navigator.of(context).canPop())
